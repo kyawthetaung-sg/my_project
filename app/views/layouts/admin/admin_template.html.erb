@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyProject</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="wrapper" class="menuDisplayed">
+      <!-- Sidebar -->
+      <%= render "layouts/sidebar" %>
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <!-- Navbar -->
+        <%= render "layouts/navbar" %>
+
+        <!-- Navbar-title -->
+        <%= render "layouts/navbar_title" %>
+        <div class="container-fluid main-content">
+          <div class="row">
+            <div class="col-lg-12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Toggle Script -->
+    <script>
+      $('#menu-toggle').click(function (e) {
+        $('#wrapper').toggleClass('menuDisplayed');
+      });
+
+      $("#sidebar .dropdown").click(function() {
+        $(this).toggleClass("open");
+        $(this).toggleClass("dropdown");
+        $(this).toggleClass("dropup");
+      });
+
+      $("#sidebar .dropup").click(function() {
+        $(this).toggleClass("open");
+        $(this).toggleClass("dropdown");
+        $(this).toggleClass("dropup");
+      });
+    </script>
+  </body>
+</html>

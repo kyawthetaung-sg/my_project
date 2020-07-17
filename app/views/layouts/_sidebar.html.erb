@@ -1,47 +1,18 @@
-<div id="sidebar-wrapper">
+<div id="sidebar-wrapper" style="background: #4183d7;">
     <div id="sidebar-image">
-        <a href="acc"></a>
+        <a href="acc"><%= image_tag("my_logo.png", :alt => "rss feed") %></a>
     </div>
     <hr class="image-underline"></hr>
     <nav id="sidebar">
         <ul class="list-unstyled components">
-        <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled submenu" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
-                </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-            <ul class="collapse list-unstyled submenu" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">Portfolio</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
-        </li>
+            <li class="<%= request.path == root_path ? 'open active' : '' %>">
+                <%= link_to root_path, id: "main-menu" do %>
+                    <i class="fas fa-home"></i>
+                    <%= t("menu.admin.home") %>
+                <% end %>
+            </li>
+            <%= site_setting_links %>
+            <%= page_setting_links %>
         </ul>
     </nav>
 </div>
