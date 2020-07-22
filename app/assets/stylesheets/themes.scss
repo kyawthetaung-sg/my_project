@@ -1,0 +1,35 @@
+// Place all the styles related to the themes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+div#card-sidebar {
+    height: 150px;
+    width: 50px;
+}
+
+.card-footer .card-label {
+    display: inline;
+}
+
+.card-footer ul {
+    margin-bottom: 0;
+}
+
+.card-footer ul button#dropdownMenuButton {
+    border: 2px solid #19cfec;
+    border-radius: 5px;
+}
+
+.active .card {
+    border: 3px solid #1ed2c6;
+}
+
+.active .card-footer {
+    border-top: 3px solid #1ed2c6;
+}
+
+svg#card-icon {
+    position: absolute;
+    color: #FFF;
+    font-size: 25px;
+}

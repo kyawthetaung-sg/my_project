@@ -1,0 +1,36 @@
+<%= link_to 'New Theme', new_theme_path, class: "btn btn-success" %>
+<div class="row mt-3">
+  <% @themes.each do |theme| %>
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3 <%= theme.id == current_user.theme_id ? 'active' : '' %>">
+      <div class="card">
+        <i class="<%= theme.id == current_user.theme_id ? 'far fa-check-circle' : '' %>" id="card-icon"></i>
+        <%= link_to user_theme_path(theme) do %>
+          <div class="card-header" style="background: <%= theme.color %>">
+          </div>
+          <div id="card-sidebar" style="background: <%= theme.color %>">
+          </div>
+        <% end %>
+      <div class="card-footer">
+          <ul class="list-unstyled">
+            <li class="card-label"><strong><%= theme.name %></strong></li>
+            <li class="card-label float-right">
+              <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <%= link_to 'Show', theme, class: "dropdown-item" %>
+                  <%= link_to 'Edit', edit_theme_path(theme), class: "dropdown-item" %>
+                  <% if theme.users.count > 0 %>
+                    <%= link_to 'Delete', "javascript:void(0)", class: "dropdown-item disabled", disabled: true %>
+                  <% else %>
+                    <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

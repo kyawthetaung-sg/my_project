@@ -1,6 +1,6 @@
-<div id="sidebar-wrapper" style="background: #4183d7;">
+<div id="sidebar-wrapper" style="background: <%= current_user.theme.color %>;">
     <div id="sidebar-image">
-        <a href="acc"><%= image_tag("my_logo.png", :alt => "rss feed") %></a>
+        <a href="acc"><%= image_tag("logo.png", :alt => "rss feed") %></a>
     </div>
     <hr class="image-underline"></hr>
     <nav id="sidebar">

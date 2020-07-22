@@ -17,7 +17,7 @@ module Admin::AdminTemplateHelper
         
         def main_dropdown_link(label = "", icon_class = "", submenu_id = "", options = {})
             condition = options.any? do |option|
-            option[:path] == request.path
+                request.path.include? option[:path]
             end
             
             html = <<-EOT

@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_070517) do
+ActiveRecord::Schema.define(version: 2020_07_22_063838) do
+
+  create_table "themes", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_themes_on_created_by"
+    t.index ["deleted_at"], name: "index_themes_on_deleted_at"
+    t.index ["deleted_by"], name: "index_themes_on_deleted_by"
+    t.index ["updated_by"], name: "index_themes_on_updated_by"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,8 +35,12 @@ ActiveRecord::Schema.define(version: 2020_07_08_070517) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "theme_id", default: 1, null: false
+    t.integer "language", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["theme_id"], name: "index_users_on_theme_id"
   end
 
+  add_foreign_key "users", "themes"
 end

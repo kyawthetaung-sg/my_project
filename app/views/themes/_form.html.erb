@@ -1,0 +1,28 @@
+<%= form_with(model: theme, local: true) do |form| %>
+  <% if theme.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
+
+      <ul>
+        <% theme.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :color %>
+    <%= form.color_field :color, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
+    <%= link_to 'Cancel', themes_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

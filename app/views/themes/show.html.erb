@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @theme.name %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @theme.color %>
+</p>
+
+<%= link_to 'Edit', edit_theme_path(@theme), class: "btn btn-info" %>
+<%= link_to 'Back', themes_path, class: "btn btn-secondary" %>
