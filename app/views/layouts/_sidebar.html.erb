@@ -1,6 +1,8 @@
 <div id="sidebar-wrapper" style="background: <%= current_user.theme.color %>;">
     <div id="sidebar-image">
-        <a href="acc"><%= image_tag("logo.png", :alt => "rss feed") %></a>
+        <%= link_to root_path do %>
+            <%= image_tag("my_logo.png", :alt => "rss feed") %></a>
+        <% end %>
     </div>
     <hr class="image-underline"></hr>
     <nav id="sidebar">
@@ -11,6 +13,7 @@
                     <%= t("menu.admin.home") %>
                 <% end %>
             </li>
+            <%= user_management_links %>
             <%= site_setting_links %>
             <%= page_setting_links %>
         </ul>

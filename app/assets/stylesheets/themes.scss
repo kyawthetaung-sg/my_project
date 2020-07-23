@@ -33,3 +33,8 @@ svg#card-icon {
     color: #FFF;
     font-size: 25px;
 }
+
+.icon_disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Color:</strong>
-  <%= @theme.color %>
+  <div style="background: <%= @theme.color %>;width: 150px;height: 20px;"></div>
 </p>
 
 <%= link_to 'Edit', edit_theme_path(@theme), class: "btn btn-info" %>

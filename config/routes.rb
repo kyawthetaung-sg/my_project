@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :roles
+  resources :members
   resources :themes
   get '/user_theme/:id', to: 'themes#update_user_theme', :as => :user_theme
   resources :pages

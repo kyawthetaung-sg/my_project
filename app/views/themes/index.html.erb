@@ -18,10 +18,11 @@
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                   <%= link_to 'Show', theme, class: "dropdown-item" %>
-                  <%= link_to 'Edit', edit_theme_path(theme), class: "dropdown-item" %>
                   <% if theme.users.count > 0 || theme.created_by == nil %>
-                    <%= link_to 'Delete', "javascript:void(0)", class: "dropdown-item disabled", disabled: true %>
+                    <%= link_to 'Edit', "javascript:void(0)", class: "dropdown-item icon_disabled" %>
+                    <%= link_to 'Delete', "javascript:void(0)", class: "dropdown-item icon_disabled" %>
                   <% else %>
+                    <%= link_to 'Edit', edit_theme_path(theme), class: "dropdown-item" %>
                     <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
                   <% end %>
                 </div>
