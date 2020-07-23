@@ -10,10 +10,17 @@
   </head>
 
   <body>
+    <%= render 'layouts/notice' %>
     <div class="application-wrapper fadeInDown">
       <div id="formContent">
         <%= yield %>
       </div>
     </div>
+
+    <script>
+      $(document).ready(function(){
+        $("#notice").fadeOut(9000);
+      });
+    </script>
   </body>
 </html>

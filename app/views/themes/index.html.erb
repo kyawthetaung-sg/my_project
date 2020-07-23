@@ -19,7 +19,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                   <%= link_to 'Show', theme, class: "dropdown-item" %>
                   <%= link_to 'Edit', edit_theme_path(theme), class: "dropdown-item" %>
-                  <% if theme.users.count > 0 %>
+                  <% if theme.users.count > 0 || theme.created_by == nil %>
                     <%= link_to 'Delete', "javascript:void(0)", class: "dropdown-item disabled", disabled: true %>
                   <% else %>
                     <%= link_to 'Delete', theme, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>

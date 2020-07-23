@@ -5,7 +5,7 @@ class ThemesController < Admin::AdminTemplateController
   # GET /themes.json
   def index
     @title = "Themes"
-    @themes = Theme.where(created_by: current_user)
+    @themes = Theme.where(created_by: current_user).or(Theme.where(created_by: nil))
   end
 
   # GET /themes/1
