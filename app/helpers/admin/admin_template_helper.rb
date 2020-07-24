@@ -1,10 +1,17 @@
 module Admin::AdminTemplateHelper
     def user_management_links
         options = [
-            {condition: false, path: members_path, icon_class: "far fa-circle", label: "Users"},
             {condition: false, path: roles_path, icon_class: "far fa-circle", label: "Roles"},
             ]
             main_dropdown_link(t("menu.admin.user_management"), "fas fa-user", "userSubmenu", options)
+    end
+
+    def business_links
+        options = [
+            {condition: true, path: categories_path, icon_class: "far fa-circle", label: "Business Category"},
+            {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},
+            ]
+            main_dropdown_link(t("menu.admin.business"), "fas fa-wallet", "businessSubmenu", options)
     end
 
     def site_setting_links

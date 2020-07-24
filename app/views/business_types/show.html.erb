@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @business_type.name %>
+</p>
+
+<p>
+  <strong>Purchase price:</strong>
+  <%= @business_type.purchase_price %>
+</p>
+
+<p>
+  <strong>Sale price:</strong>
+  <%= @business_type.sale_price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @business_type.quantity %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @business_type.category.name %>
+</p>
+
+<%= link_to 'Edit', edit_business_type_path(@business_type), class: "btn btn-info" %>
+<%= link_to 'Back', business_types_path, class: "btn btn-secondary" %>

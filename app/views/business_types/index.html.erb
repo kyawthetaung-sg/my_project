@@ -1,0 +1,36 @@
+<%= link_to 'New business type', new_business_type_path, class: "btn btn-success" %>
+
+<table class="table table-striped mt-3">
+  <thead class="text-white bg-secondary">
+    <tr>
+      <th>Name</th>
+      <th>Purchase price</th>
+      <th>Sale price</th>
+      <th>Quantity</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @business_types.each do |business_type| %>
+      <tr>
+        <td><%= business_type.name %></td>
+        <td><%= business_type.purchase_price %></td>
+        <td><%= business_type.sale_price %></td>
+        <td><%= business_type.quantity %></td>
+        <td><%= business_type.category.name %></td>
+        <td>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_business_type_path(business_type) %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, business_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @business_types.count < 1 %>
+      <tr>
+        <td colspan="8" style="text-align: center;">Empty Datas</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

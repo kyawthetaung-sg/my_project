@@ -1,0 +1,48 @@
+<%= form_with(model: business_type, local: true) do |form| %>
+  <% if business_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business_type.errors.count, "error") %> prohibited this business_type from being saved:</h2>
+
+      <ul>
+        <% business_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :category_id %>
+    <%= form.select(:category_id, Category.where(created_by: current_user.id).collect {|role| [role.name, role.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :purchase_price %>
+    <%= form.number_field :purchase_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :sale_price %>
+    <%= form.number_field :sale_price, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
+    <%= link_to 'Cancel', business_types_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

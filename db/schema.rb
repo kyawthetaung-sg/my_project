@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_081720) do
+ActiveRecord::Schema.define(version: 2020_07_24_022638) do
+
+  create_table "business_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "purchase_price"
+    t.integer "sale_price"
+    t.integer "quantity"
+    t.integer "category_id", null: false
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_business_types_on_category_id"
+    t.index ["created_by"], name: "index_business_types_on_created_by"
+    t.index ["deleted_at"], name: "index_business_types_on_deleted_at"
+    t.index ["deleted_by"], name: "index_business_types_on_deleted_by"
+    t.index ["updated_by"], name: "index_business_types_on_updated_by"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_categories_on_created_by"
+    t.index ["deleted_at"], name: "index_categories_on_deleted_at"
+    t.index ["deleted_by"], name: "index_categories_on_deleted_by"
+    t.index ["updated_by"], name: "index_categories_on_updated_by"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -56,5 +89,6 @@ ActiveRecord::Schema.define(version: 2020_07_23_081720) do
     t.index ["theme_id"], name: "index_users_on_theme_id"
   end
 
+  add_foreign_key "business_types", "categories"
   add_foreign_key "users", "themes"
 end

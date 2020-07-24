@@ -1,0 +1,28 @@
+<%= link_to 'New category', new_category_path, class: "btn btn-success" %>
+
+<table class="table table-striped mt-3">
+  <thead class="text-white bg-secondary">
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, category, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_category_path(category) %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, category, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @categories.count < 1 %>
+      <tr>
+        <td colspan="4" style="text-align: center;">Empty Datas</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
