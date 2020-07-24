@@ -10,6 +10,7 @@ module Admin::AdminTemplateHelper
         options = [
             {condition: true, path: categories_path, icon_class: "far fa-circle", label: "Business Category"},
             {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},
+            {condition: true, path: customers_path, icon_class: "far fa-circle", label: "Customer"},
             ]
             main_dropdown_link(t("menu.admin.business"), "fas fa-wallet", "businessSubmenu", options)
     end

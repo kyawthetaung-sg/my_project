@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_022638) do
+ActiveRecord::Schema.define(version: 2020_07_24_031946) do
 
   create_table "business_types", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,23 @@ ActiveRecord::Schema.define(version: 2020_07_24_022638) do
     t.index ["deleted_at"], name: "index_categories_on_deleted_at"
     t.index ["deleted_by"], name: "index_categories_on_deleted_by"
     t.index ["updated_by"], name: "index_categories_on_updated_by"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone_number"
+    t.text "address"
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_customers_on_created_by"
+    t.index ["deleted_at"], name: "index_customers_on_deleted_at"
+    t.index ["deleted_by"], name: "index_customers_on_deleted_by"
+    t.index ["updated_by"], name: "index_customers_on_updated_by"
   end
 
   create_table "roles", force: :cascade do |t|
