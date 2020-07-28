@@ -1,0 +1,197 @@
+<div class="row">
+    <div class="col-md-6">
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <% @categories.each do |category| %>
+                    <a class="nav-item nav-link <%= @categories.first.id == category.id ? 'active' : '' %>" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
+                <% end %>
+            </div>
+        </nav>
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+            <% @categories.each do |category| %>
+                <div class="tab-pane fade <%= @categories.first.id == category.id ? 'active show' : '' %>" id="nav<%= category.id %>" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+                    <div class="row">
+                        <% business_type_with_category(category).each do |business_type| %>
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6" style="margin-top: 5px;">
+                                <button href="#" id="sale" data-id="<%= business_type.id %>" data-name="<%= business_type.name %>" data-price="<%= business_type.sale_price %>" class="btn sale btn-info btn-block">
+                                    <h4><%= business_type.name %></h4>
+                                    <strong><%= business_type.sale_price %></strong>
+                                </button>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-md-6" id="dataTable">
+
+    </div>
+</div>
+
+<script>
+    $("document").ready(function(){
+        $('.sale').click(function(){
+            showTable();
+
+            var id= $(this).data('id');
+            var name= $(this).data('name');
+            var price=$(this).data('price');
+            var cart=localStorage.getItem('cart');
+
+            if(!cart){
+                var cart = '{"itemList":[]}';
+            }
+            var cartjson = JSON.parse(cart);
+            var list = {"id":id,"name":name,"price":price,"qty":1,"remark":''};
+            var status=0;
+
+            $.each(cartjson["itemList"],function(i,v){
+                if(v){
+                    var vid= v.id;
+                    if(vid==id){
+                        qty=cartjson["itemList"][i].qty;
+                        qty++;
+                        cartjson["itemList"][i].qty=qty;
+                        status=1;
+                        console.log(qty);
+                    }
+                }
+            });
+
+            if(!status){
+                cartjson["itemList"].push(list);
+            }
+
+            localStorage.setItem('cart',JSON.stringify(cartjson));
+            showTable();
+
+            console.log(cartjson);
+        });
+
+        function showTable() {
+            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Remove</th></tr>';
+
+            var cart=localStorage.getItem('cart');
+            var subtotal=0;
+            var tax=0;
+            if (cart) {
+                var cart=localStorage.getItem('cart');
+                var cartjson=JSON.parse(cart);
+
+                $.each(cartjson["itemList"],function(i,v){
+                if (v) {
+                    var vid=v.id;
+                    var vname=v.name;
+                    var vprice=v.price;
+                    var vqty=v.qty;
+                    var total=vprice*vqty;
+                    subtotal += total;
+
+                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
+
+                }
+                });
+                    //tax = subtotal*0.05;
+                    var taxtotal=subtotal+tax;
+
+                table +='<tr><td colspan=3>Total</td><td>'+subtotal+'</td></tr>';
+                //table +='<tr><td colspan=3>tax</td><td>'+tax+'</td></tr>';
+                //table +='<tr><td colspan=3>Subtotal</td><td>'+taxtotal+'</td></tr>';
+                table +='<tr><td colspan=3>Customer</td><td><select id="customer_id" class="form-control"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
+                table +='<tr><td colspan=3>First Payment</td><td><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
+                table +='<tr><td colspan=3>Remark</td><td><textarea id="remark" name="remark" class="form-control" placeholder="Remark"></textarea></td></tr>';
+                table +='<tr><td colspan=3>Capture</td><td><input id="file" type="file" name="file" class="form-control" multiple></td></tr>';
+                table +='<tr><td colspan=4><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
+
+                table +='</table>';
+            }
+
+            $("#dataTable").html(table);
+        }
+
+        $('#dataTable').on('click','.plus',function() {
+            var id=$(this).data('id');
+            var cart=localStorage.getItem('cart');
+            var cartjson= JSON.parse(cart);
+
+            $.each(cartjson['itemList'],function(i,v) {
+                if(v){
+                    var vid=v.id;
+                    if(vid==id){
+                        qty=cartjson['itemList'][i].qty;
+                        ++qty;
+                        cartjson['itemList'][i].qty=qty;
+                    }
+                }
+            });
+            localStorage.setItem('cart',JSON.stringify(cartjson));
+            showTable();
+        });
+
+        $('#dataTable').on('click','.minusbutton',function() {
+            var id = $(this).data('id');
+            var cart=localStorage.getItem('cart');
+            var cartjson=JSON.parse(cart);
+
+            $.each(cartjson['itemList'],function(i,v) {
+                if(v){
+                var vid = v.id;
+                if(vid==id){
+                    qty=cartjson['itemList'][i].qty;
+                    qty--;
+                    cartjson['itemList'][i].qty=qty;
+                }
+                }
+            });
+            localStorage.setItem('cart',JSON.stringify(cartjson));
+            showTable();
+        });
+
+        $('#dataTable').on('click','.removebutton',function() {
+            var id=$(this).data('id');
+            var cart = localStorage.getItem('cart');
+            var cartjson = JSON.parse(cart);
+
+            $.each(cartjson['itemList'],function(i, v) {
+            if(v){
+                var vid = v.id;
+                if(vid==id){
+                qty=cartjson['itemList'][i].qty;
+                cartjson['itemList'][i]=null;
+                }
+            }
+            });
+            localStorage.setItem('cart',JSON.stringify(cartjson));
+            showTable();
+        });
+
+        $('#dataTable').on('click','.order',function() {
+            var cart =localStorage.getItem('cart');
+            var cartjson = JSON.parse(cart);
+            var customer_id = $('#customer_id').val();
+            var first_payment = $('#first_payment').val();
+            var remark = $('#remark').val();
+            var file = $('#file').val();
+            var files = [];
+            for (var i = 0; i < $('#file').get(0).files.length; ++i) {
+                files.push($('#file').get(0).files[i].name);
+            }
+
+            var param = location.href;
+            $.ajax({
+                url: param+"/checkout",
+                type: "POST",
+                data: {"customer_id" : customer_id, "first_payment" : first_payment, "remark" : remark, "files" : files},
+                dataType: "json",
+                success: function(data) {
+                    alert(data.message);
+                    localStorage.clear();
+                    $('#dataTable').html('');
+                    window.location.reload();
+                }
+            });
+        });
+
+    });
+</script>

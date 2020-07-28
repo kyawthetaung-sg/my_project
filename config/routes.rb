@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :customers
+  resources :product_sales
+  post 'product_sales/checkout/', to: 'product_sales#checkout'
   resources :business_types
   resources :categories
   resources :roles
