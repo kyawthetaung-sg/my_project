@@ -2,7 +2,7 @@
 #sidebar-wrapper {
     z-index: 1;
     position: fixed;
-    width: 0;
+    width: 250px;
     height: 100%;
     overflow-y: auto;
 }
@@ -27,15 +27,6 @@ hr.image-underline {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding-left: 0;
-}
-
-/*  Change the width of the sidebar to display it */
-#wrapper.menuDisplayed #sidebar-wrapper {
-    width: 250px;
-}
-
-#wrapper.menuDisplayed #page-content-wrapper {
     padding-left: 250px;
 }
 
@@ -94,7 +85,6 @@ hr.image-underline {
     right: 20px;
     top: 15px;
     font-size: 25px;
-    /* display: inline-block; */
     margin-left: 0.255em;
     vertical-align: 0.255em;
     content: "";
@@ -116,47 +106,19 @@ hr.image-underline {
     border-left: 0.3em solid transparent;
 }
 
-// /*  Auto resize for sidebar to display it */
-// @media (max-width: 768px) {
-//     /*  Side bar */
-//     #sidebar-wrapper {
-//         width: 0;
-//     }
+/*  Auto resize for sidebar to display it */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        width: 0;
+    }
 
-//     .navbar-wrapper {
-//         left: 0;
-//     }
+    #page-content-wrapper {
+        padding-left: 0;
+    }
 
-//     #wrapper.menuDisplayed .navbar-wrapper {
-//         left: 250px;
-//     }
-
-//     .navbar-wrapper #fa-bars {
-//         display: inline;
-//     }
-
-//     .navbar-wrapper #fa-arrow {
-//         display: none;
-//     }
-
-//     #wrapper.menuDisplayed #fa-arrow {
-//         display: inline;
-//     }
-
-//     #wrapper.menuDisplayed #fa-bars {
-//         display: none;
-//     }
-//     /*  Page content */
-//     #page-content-wrapper {
-//         padding-left: 0;
-//     }
-
-//     /*  Change the width of the sidebar to display it */
-//     #wrapper.menuDisplayed #sidebar-wrapper {
-//         width: 250px;
-//     }
+    #wrapper.menuDisplayed #sidebar-wrapper {
+        width: 250px;
+        margin-top: 40px;
+    }
     
-//     #wrapper.menuDisplayed #page-content-wrapper {
-//         padding-left: 250px;
-//     }
-// }
+}
