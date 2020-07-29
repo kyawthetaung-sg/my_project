@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sale_lists
   resources :customers
   resources :product_sales
   post 'product_sales/checkout/', to: 'product_sales#checkout'

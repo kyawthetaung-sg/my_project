@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_031946) do
+ActiveRecord::Schema.define(version: 2020_07_29_064907) do
 
   create_table "business_types", force: :cascade do |t|
     t.string "name"
-    t.integer "purchase_price"
-    t.integer "sale_price"
+    t.float "purchase_price"
+    t.float "sale_price"
     t.integer "quantity"
     t.integer "category_id", null: false
     t.datetime "deleted_at"
@@ -76,6 +76,42 @@ ActiveRecord::Schema.define(version: 2020_07_24_031946) do
     t.index ["updated_by"], name: "index_roles_on_updated_by"
   end
 
+  create_table "sale_list_business_types", id: false, force: :cascade do |t|
+    t.integer "sale_list_id", null: false
+    t.integer "business_type_id", null: false
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_type_id"], name: "index_sale_list_business_types_on_business_type_id"
+    t.index ["created_by"], name: "index_sale_list_business_types_on_created_by"
+    t.index ["deleted_at"], name: "index_sale_list_business_types_on_deleted_at"
+    t.index ["deleted_by"], name: "index_sale_list_business_types_on_deleted_by"
+    t.index ["sale_list_id"], name: "index_sale_list_business_types_on_sale_list_id"
+    t.index ["updated_by"], name: "index_sale_list_business_types_on_updated_by"
+  end
+
+  create_table "sale_lists", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "customer_id", null: false
+    t.float "first_payment", default: 0.0, null: false
+    t.string "image"
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_sale_lists_on_created_by"
+    t.index ["customer_id"], name: "index_sale_lists_on_customer_id"
+    t.index ["deleted_at"], name: "index_sale_lists_on_deleted_at"
+    t.index ["deleted_by"], name: "index_sale_lists_on_deleted_by"
+    t.index ["updated_by"], name: "index_sale_lists_on_updated_by"
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "name"
     t.string "color"
@@ -107,5 +143,8 @@ ActiveRecord::Schema.define(version: 2020_07_24_031946) do
   end
 
   add_foreign_key "business_types", "categories"
+  add_foreign_key "sale_list_business_types", "business_types"
+  add_foreign_key "sale_list_business_types", "sale_lists"
+  add_foreign_key "sale_lists", "customers"
   add_foreign_key "users", "themes"
 end

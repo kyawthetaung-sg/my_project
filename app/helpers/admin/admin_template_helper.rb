@@ -8,6 +8,7 @@ module Admin::AdminTemplateHelper
 
     def business_links
         options = [
+            {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: "Sale List"},
             {condition: true, path: product_sales_path, icon_class: "far fa-circle", label: "Product Sale"},
             {condition: true, path: categories_path, icon_class: "far fa-circle", label: "Business Category"},
             {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},

@@ -2,8 +2,8 @@ class CreateBusinessTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :business_types do |t|
       t.string :name
-      t.integer :purchase_price
-      t.integer :sale_price
+      t.float :purchase_price
+      t.float :sale_price
       t.integer :quantity
       t.references :category, null: false, foreign_key: true
       t.datetime :deleted_at

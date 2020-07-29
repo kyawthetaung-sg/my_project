@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-12 mt-3">
+    <%= form_tag sale_lists_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+      <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control mr-sm-2" %>
+      <%= button_tag(type: "submit", class: "btn btn-outline-secondary my-2 my-sm-0") do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-12">
+    <table class="table table-striped mt-3">
+      <thead class="text-white bg-secondary">
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Totle Price</th>
+          <th>First Payment</th>
+          <th>Remain Price</th>
+          <th>Note</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @sale_lists.each do |sale_list| %>
+          <tr>
+            <td><%= sale_list.date %></td>
+            <td><%= business_type_name(sale_list.id) %></td>
+            <td><%= business_type_total_price(sale_list.id) %></td>
+            <td><%= sale_list.first_payment %></td>
+            <td><%= business_type_total_price(sale_list.id) - sale_list.first_payment %></td>
+            <td><%= sale_list.note %></td>
+            <td>
+              <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, sale_list, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+              <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_sale_list_path(sale_list) %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, sale_list, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @sale_lists.count < 1 %>
+          <tr>
+            <td colspan="7" style="text-align: center;">Empty Datas</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

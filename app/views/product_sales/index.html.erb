@@ -99,16 +99,16 @@
                 }
                 });
                     //tax = subtotal*0.05;
-                    var taxtotal=subtotal+tax;
+                    //var taxtotal=subtotal+tax;
 
-                table +='<tr><td colspan=3>Total</td><td>'+subtotal+'</td></tr>';
+                table +='<tr class="bg-info text-white"><td colspan=3>Total</td><td colspan=2>'+subtotal+'</td></tr>';
                 //table +='<tr><td colspan=3>tax</td><td>'+tax+'</td></tr>';
                 //table +='<tr><td colspan=3>Subtotal</td><td>'+taxtotal+'</td></tr>';
                 table +='<tr><td colspan=3>Customer</td><td colspan=2><select id="customer_id" class="form-control"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
+                table +='<tr><td colspan=3>Date</td><td colspan=2><input id="date_time" type="datetime-local" name="date_time" class="form-control"></td></tr>';
                 table +='<tr><td colspan=3>First Payment</td><td colspan=2><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
                 table +='<tr><td colspan=3>Remark</td><td colspan=2><textarea id="remark" name="remark" class="form-control" placeholder="Remark"></textarea></td></tr>';
-                table +='<tr><td colspan=3>Capture</td><td colspan=2><input id="file" type="file" name="file" class="form-control" multiple></td></tr>';
-                table +='<tr><td colspan=4><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
+                table +='<tr><td colspan=5><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
 
                 table +='</table>';
             }
@@ -176,20 +176,26 @@
             var cart =localStorage.getItem('cart');
             var cartjson = JSON.parse(cart);
             var customer_id = $('#customer_id').val();
+            var date_time = $('#date_time').val();
             var first_payment = $('#first_payment').val();
+            if(first_payment == "") {
+                first_payment = 0
+            }
             var remark = $('#remark').val();
 
             var param = location.href;
             $.ajax({
                 url: param+"/checkout",
                 type: "POST",
-                data: {"customer_id" : customer_id, "first_payment" : first_payment, "remark" : remark},
+                data: {"cartjson" : cartjson, "customer_id" : customer_id, "date" : date_time, "first_payment" : first_payment, "note" : remark},
                 dataType: "json",
                 success: function(data) {
+                    if(data.status) {
+                        localStorage.clear();
+                        $('#dataTable').html('');
+                        window.location.reload();
+                    }
                     alert(data.message);
-                    localStorage.clear();
-                    $('#dataTable').html('');
-                    window.location.reload();
                 }
             });
         });

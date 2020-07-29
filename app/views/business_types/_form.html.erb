@@ -26,13 +26,13 @@
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :purchase_price %>
-    <%= form.number_field :purchase_price, class: "form-control" %>
+    <%= form.number_field :purchase_price, step: :any, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :sale_price %>
-    <%= form.number_field :sale_price, class: "form-control" %>
+    <%= form.number_field :sale_price, step: :any, class: "form-control" %>
   </div>
 
   <div class="form-group">
