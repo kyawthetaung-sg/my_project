@@ -1,29 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @business_type.name %>
-</p>
-
-<p>
-  <strong>Purchase price:</strong>
-  <%= @business_type.purchase_price %>
-</p>
-
-<p>
-  <strong>Sale price:</strong>
-  <%= @business_type.sale_price %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @business_type.quantity %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @business_type.category.name %>
-</p>
+<table class="show-table">
+  <tr>
+    <th>Category:</th>
+    <td><%= @business_type.category.name %></td>
+  </tr>
+  <tr>
+    <th>Name:</th>
+    <td><%= @business_type.name %></td>
+  </tr>
+  <tr>
+    <th>Purchase price:</th>
+    <td><%= @business_type.purchase_price %></td>
+  </tr>
+  <tr>
+    <th>Sale price:</th>
+    <td><%= @business_type.sale_price %></td>
+  </tr>
+  <tr>
+    <th>Quantity:</th>
+    <td><%= @business_type.quantity %></td>
+  </tr>
+  <tr>
+    <th>Sould Out Quantity:</th>
+    <td><%= sould_out_quantity(@business_type.id) %></td>
+  </tr>
+  <tr>
+    <th>Remain Quantity:</th>
+    <td><%= @business_type.quantity - sould_out_quantity(@business_type.id) %></td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_business_type_path(@business_type), class: "btn btn-info" %>
 <%= link_to 'Back', business_types_path, class: "btn btn-secondary" %>

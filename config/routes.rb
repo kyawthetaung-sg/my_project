@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :product_sales
   post 'product_sales/checkout/', to: 'product_sales#checkout'
   resources :business_types
+  get '/business_types/:id/add', to: 'business_types#add', :as => :add_business_type
   resources :categories
   resources :roles
   resources :themes

@@ -7,3 +7,14 @@
     position: absolute;
     right: 0;
 }
+
+table.show-table {
+    th {
+        width: 180px;
+        text-align: right;
+    }
+
+    td {
+        padding-left: 20px;
+    }
+}

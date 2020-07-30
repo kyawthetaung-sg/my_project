@@ -2,33 +2,33 @@ module Admin::AdminTemplateHelper
     def user_management_links
         options = [
             {condition: false, path: roles_path, icon_class: "far fa-circle", label: "Roles"},
-            ]
-            main_dropdown_link(t("menu.admin.user_management"), "fas fa-user", "userSubmenu", options)
+        ]
+        main_dropdown_link(t("menu.admin.user_management"), "fas fa-user", "userSubmenu", options)
     end
 
     def business_links
         options = [
-            {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: "Sale List"},
             {condition: true, path: product_sales_path, icon_class: "far fa-circle", label: "Product Sale"},
+            {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: "Sale List"},
             {condition: true, path: categories_path, icon_class: "far fa-circle", label: "Business Category"},
             {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},
             {condition: true, path: customers_path, icon_class: "far fa-circle", label: "Customer"},
-            ]
-            main_dropdown_link(t("menu.admin.business"), "fas fa-wallet", "businessSubmenu", options)
+        ]
+        main_dropdown_link(t("menu.admin.business"), "fas fa-wallet", "businessSubmenu", options)
     end
 
     def site_setting_links
         options = [
             {condition: true, path: themes_path, icon_class: "far fa-circle", label: "Themes"},
-            ]
-            main_dropdown_link(t("menu.admin.settings"), "fas fa-cog", "settingSubmenu", options)
+        ]
+        main_dropdown_link(t("menu.admin.settings"), "fas fa-cog", "settingSubmenu", options)
     end
 
     def page_setting_links
         options = [
-        {condition: false, path: new_theme_path, icon_class: "far fa-circle", label: "Pages"},
-        {condition: false, path: edit_theme_path(1), icon_class: "far fa-circle", label: "Pages 2"},
-        {condition: false, path: new_page_path, icon_class: "far fa-circle", label: "Pages 3"},
+            {condition: false, path: new_theme_path, icon_class: "far fa-circle", label: "Pages"},
+            {condition: false, path: edit_theme_path(1), icon_class: "far fa-circle", label: "Pages 2"},
+            {condition: false, path: new_page_path, icon_class: "far fa-circle", label: "Pages 3"},
         ]
         main_dropdown_link(t("menu.admin.page_settings"), "fa fa-user", "pagesettingSubmenu", options)
     end

@@ -1,5 +1,5 @@
 class BusinessTypesController < Admin::AdminTemplateController
-  before_action :set_business_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_business_type, only: [:show, :edit, :add, :update, :destroy]
 
   # GET /business_types
   # GET /business_types.json
@@ -25,6 +25,11 @@ class BusinessTypesController < Admin::AdminTemplateController
     @title = "Business Type Editing"
   end
 
+  # GET /business_types/1/add
+  def add
+    @title = "Business Type Adding"
+  end
+
   # POST /business_types
   # POST /business_types.json
   def create
@@ -47,14 +52,29 @@ class BusinessTypesController < Admin::AdminTemplateController
   # PATCH/PUT /business_types/1.json
   def update
     @title = "Business Type Editing"
-    @business_type.created_by = current_user.id
-    respond_to do |format|
-      if @business_type.update(business_type_params)
-        format.html { redirect_to business_types_path, notice: 'Business type was successfully updated.' }
-        format.json { render :show, status: :ok, location: @business_type }
-      else
-        format.html { render :edit }
-        format.json { render json: @business_type.errors, status: :unprocessable_entity }
+    if params[:commit] != "Add"
+      @business_type.created_by = current_user.id
+      respond_to do |format|
+        if @business_type.update(business_type_params)
+          format.html { redirect_to business_types_path, notice: 'Business type was successfully updated.' }
+          format.json { render :show, status: :ok, location: @business_type }
+        else
+          format.html { render :edit }
+          format.json { render json: @business_type.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @old_qty = @business_type.quantity
+      @new_qty = params.require(:business_type).permit(:add_quantity)[:add_quantity].to_i
+      @total_qty = @old_qty + @new_qty
+      respond_to do |format|
+        if @business_type.update(quantity: @total_qty)
+          format.html { redirect_to business_types_path, notice: 'Business type was successfully added.' }
+          format.json { render :show, status: :ok, location: @business_type }
+        else
+          format.html { render :add }
+          format.json { render json: @business_type.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
