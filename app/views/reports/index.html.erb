@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12 mt-3">
+    <%= form_tag customers_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+      <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control mr-sm-2" %>
+      <%= button_tag(type: "submit", class: "btn btn-outline-secondary my-2 my-sm-0") do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-12">
+    <table class="table table-striped mt-3">
+      <thead class="text-white bg-secondary">
+        <tr>
+          <th>Business Category</th>
+          <th>Business Type Name</th>
+          <th>Purchase Price</th>
+          <th>Remain Qty</th>
+          <th>Sale Price</th>
+          <th>Sould Out Qty</th>
+          <th>Sould Out Price</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @sale_products.each do |sale_product| %>
+          <tr>
+            <td><%= sale_product.business_type.category.name %></td>
+            <td><%= sale_product.business_type.name %></td>
+            <td><%= sale_product.business_type.purchase_price %></td>
+            <td><%= sale_product.business_type.quantity - sould_out_quantity(sale_product.business_type_id) %></td>
+            <td><%= sale_product.business_type.sale_price %></td>
+            <td><%= sould_out_quantity(sale_product.business_type_id) %></td>
+            <td><%= sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id) %></td>
+          </tr>
+        <% end %>
+        <% if @sale_products.count < 1 %>
+          <tr>
+            <td colspan="2" style="text-align: center;">Empty Datas</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

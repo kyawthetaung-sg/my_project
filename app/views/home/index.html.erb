@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12">
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="tab-all" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">All</a>
+                <% @categories.each do |category| %>
+                    <a class="nav-item nav-link" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
+                <% end %>
+            </div>
+        </nav>
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+            <div class="tab-pane fade show active id="nav-all" role="tabpanel" aria-labelledby="tab-all">
+                <div class="row">
+                    <table class="show-table">
+                        <tr>
+                            <th>All Capital:</th>
+                            <td><%= @business_types.map(&:purchase_price).sum * @business_types.map(&:quantity).sum %></td>
+                        </tr>
+                        <tr>
+                            <th>Sould Out Price:</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <% @categories.each do |category| %>
+                <div class="tab-pane fade" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+                    <div class="row">
+                        <table class="show-table">
+                            <tr>
+                                <th>Capital:</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

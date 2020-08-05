@@ -1,0 +1,13 @@
+<nav class="navbar navbar-index-header">
+    <%= link_to 'New Customer', new_customer_path, class: "btn btn-success" %>
+    <%= form_tag customers_path, method: "get", class: "form-inline" do %>
+        <div class="input-group ml-md-2">
+            <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control" %>
+            <div class="input-group-append">
+                <%= button_tag(type: "submit", class: "btn btn-outline-secondary", id: "search-submit") do %>
+                <i class="fas fa-search"></i>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</nav>

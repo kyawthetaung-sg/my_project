@@ -1,15 +1,10 @@
-<%= link_to 'New business type', new_business_type_path, class: "btn btn-success" %>
-
+<%= render 'index_header' %>
 <table class="table table-striped mt-3">
   <thead class="text-white bg-secondary">
     <tr>
-      <th>Name</th>
-      <th>Purchase price</th>
-      <th>Sale price</th>
-      <th>Quantity</th>
-      <th>Sould Out Quantity</th>
-      <th>Remain Quantity</th>
       <th>Category</th>
+      <th>Name</th>
+      <th>Remain Quantity</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,13 +12,9 @@
   <tbody>
     <% @business_types.each do |business_type| %>
       <tr>
-        <td><%= business_type.name %></td>
-        <td><%= business_type.purchase_price %></td>
-        <td><%= business_type.sale_price %></td>
-        <td><%= business_type.quantity %></td>
-        <td><%= sould_out_quantity(business_type.id) %></td>
-        <td><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
         <td><%= business_type.category.name %></td>
+        <td><%= business_type.name %></td>
+        <td><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
         <td>
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type %>
           <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type) %>

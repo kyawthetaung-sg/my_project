@@ -1,0 +1,33 @@
+<table class="show-table">
+  <tr>
+    <th>Date:</th>
+    <td><%= @sale_list.date %></td>
+  </tr>
+  <tr>
+    <th>Customer Name:</th>
+    <td><%= @sale_list.customer.name %></td>
+  </tr>
+  <tr>
+    <th>Product Names:</th>
+    <td><%= business_type_name(@sale_list.id) %></td>
+  </tr>
+  <tr>
+    <th>Totle Price:</th>
+    <td><%= business_type_total_price(@sale_list.id) %></td>
+  </tr>
+  <tr>
+    <th>Payment:</th>
+    <td><%= @sale_list.first_payment %></td>
+  </tr>
+  <tr>
+    <th>Remain Price:</th>
+    <td><%= business_type_total_price(@sale_list.id) - @sale_list.first_payment %></td>
+  </tr>
+  <tr>
+    <th>Note:</th>
+    <td><%= @sale_list.note %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_sale_list_path(@sale_list), class: "btn btn-info" %>
+<%= link_to 'Back', sale_lists_path, class: "btn btn-secondary" %>

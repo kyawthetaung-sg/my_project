@@ -13,6 +13,12 @@
                     <%= t("menu.admin.home") %>
                 <% end %>
             </li>
+            <li class="<%= request.path == reports_path ? 'open active' : '' %>">
+                <%= link_to reports_path, id: "main-menu" do %>
+                    <i class="fas fa-chart-line"></i>
+                    <%= t("menu.admin.reports") %>
+                <% end %>
+            </li>
             <%= user_management_links %>
             <%= business_links %>
             <%= site_setting_links %>

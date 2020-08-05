@@ -18,3 +18,11 @@ table.show-table {
         padding-left: 20px;
     }
 }
+
+nav.navbar-index-header {
+    padding: 0;
+}
+
+nav.navbar-index-header > a, select, input, .input-group {
+    margin-bottom: 5px;
+}

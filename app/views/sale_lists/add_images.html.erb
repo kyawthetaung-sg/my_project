@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-8">
+        <%= form_with(model: @sale_list, local: true) do |form| %>
+            <div class="form-group">
+                <%= form.label :image %>
+                <%= form.file_field :image, multiple: true, class: "form-control" %>
+            </div>
+
+            <div class="actions">
+                <%= form.submit "Add", class: "btn btn-success" %>
+                <%= link_to 'Cancel', sale_lists_path, class: "btn btn-secondary" %>
+            </div>
+        <% end %>
+    </div>
+</div>

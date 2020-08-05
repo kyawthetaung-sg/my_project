@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'reports/index', :as => :reports
   resources :sale_lists
+  get '/sale_lists/:id/add_images', to: 'sale_lists#add_images', :as => :add_images_sale_list
+  post '/sale_lists/:id/add_images', to: 'sale_lists#update_images', :as => :update_images_sale_list
   resources :customers
   resources :product_sales
   post 'product_sales/checkout/', to: 'product_sales#checkout'

@@ -5,7 +5,8 @@ class CustomersController < Admin::AdminTemplateController
   # GET /customers.json
   def index
     @title = "Customer Lists"
-    @customers = Customer.where(["name LIKE ?", "%#{params[:name]}%"]).where(created_by: current_user.id)
+    @customers = Customer.filter(params.slice(:name))
+    @customers = @customers.where(created_by: current_user.id)
   end
 
   # GET /customers/1
