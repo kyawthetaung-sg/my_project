@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_064907) do
+ActiveRecord::Schema.define(version: 2020_08_09_111408) do
 
   create_table "business_types", force: :cascade do |t|
     t.string "name"
-    t.float "purchase_price"
-    t.float "sale_price"
+    t.integer "purchase_price"
+    t.integer "sale_price"
     t.integer "quantity"
     t.integer "category_id", null: false
     t.datetime "deleted_at"
@@ -60,6 +60,74 @@ ActiveRecord::Schema.define(version: 2020_07_29_064907) do
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["deleted_by"], name: "index_customers_on_deleted_by"
     t.index ["updated_by"], name: "index_customers_on_updated_by"
+  end
+
+  create_table "expense_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_expense_categories_on_created_by"
+    t.index ["deleted_at"], name: "index_expense_categories_on_deleted_at"
+    t.index ["deleted_by"], name: "index_expense_categories_on_deleted_by"
+    t.index ["updated_by"], name: "index_expense_categories_on_updated_by"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.datetime "date"
+    t.decimal "amount"
+    t.integer "expense_category_id", null: false
+    t.integer "payment_mode_id", null: false
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_expenses_on_created_by"
+    t.index ["deleted_at"], name: "index_expenses_on_deleted_at"
+    t.index ["deleted_by"], name: "index_expenses_on_deleted_by"
+    t.index ["expense_category_id"], name: "index_expenses_on_expense_category_id"
+    t.index ["payment_mode_id"], name: "index_expenses_on_payment_mode_id"
+    t.index ["updated_by"], name: "index_expenses_on_updated_by"
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.datetime "date"
+    t.decimal "amount"
+    t.integer "expense_category_id", null: false
+    t.integer "payment_mode_id", null: false
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_incomes_on_created_by"
+    t.index ["deleted_at"], name: "index_incomes_on_deleted_at"
+    t.index ["deleted_by"], name: "index_incomes_on_deleted_by"
+    t.index ["expense_category_id"], name: "index_incomes_on_expense_category_id"
+    t.index ["payment_mode_id"], name: "index_incomes_on_payment_mode_id"
+    t.index ["updated_by"], name: "index_incomes_on_updated_by"
+  end
+
+  create_table "payment_modes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by"], name: "index_payment_modes_on_created_by"
+    t.index ["deleted_at"], name: "index_payment_modes_on_deleted_at"
+    t.index ["deleted_by"], name: "index_payment_modes_on_deleted_by"
+    t.index ["updated_by"], name: "index_payment_modes_on_updated_by"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -143,6 +211,10 @@ ActiveRecord::Schema.define(version: 2020_07_29_064907) do
   end
 
   add_foreign_key "business_types", "categories"
+  add_foreign_key "expenses", "expense_categories"
+  add_foreign_key "expenses", "payment_modes"
+  add_foreign_key "incomes", "expense_categories"
+  add_foreign_key "incomes", "payment_modes"
   add_foreign_key "sale_list_business_types", "business_types"
   add_foreign_key "sale_list_business_types", "sale_lists"
   add_foreign_key "sale_lists", "customers"

@@ -14,7 +14,17 @@ module Admin::AdminTemplateHelper
             {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},
             {condition: true, path: customers_path, icon_class: "far fa-circle", label: "Customer"},
         ]
-        main_dropdown_link(t("menu.admin.business"), "fas fa-wallet", "businessSubmenu", options)
+        main_dropdown_link(t("menu.admin.business"), "fas fa-briefcase", "businessSubmenu", options)
+    end
+
+    def expense_links
+        options = [
+            {condition: true, path: expense_categories_path, icon_class: "far fa-circle", label: "Category"},
+            {condition: true, path: payment_modes_path, icon_class: "far fa-circle", label: "Payment Mode"},
+            {condition: true, path: incomes_path, icon_class: "far fa-circle", label: "Income"},
+            {condition: true, path: expenses_path, icon_class: "far fa-circle", label: "Expense"},
+        ]
+        main_dropdown_link(t("menu.admin.expense"), "fas fa-wallet", "expenseSubmenu", options)
     end
 
     def site_setting_links

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :expenses
+  resources :incomes
+  resources :payment_modes
+  resources :expense_categories
   get 'reports/index', :as => :reports
   resources :sale_lists
   get '/sale_lists/:id/add_images', to: 'sale_lists#add_images', :as => :add_images_sale_list

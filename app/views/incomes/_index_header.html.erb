@@ -1,0 +1,36 @@
+<nav class="navbar navbar-index-header">
+  <%= link_to 'New income', new_income_path, class: "btn btn-success" %>
+  <%= form_tag incomes_path, method: "get", class: "form-inline" do %>
+    <%= select_tag "expense_category_id", options_from_collection_for_select(@expense_categories, "id", "name", selected: params[:expense_category_id]), prompt: "Select a category", class: "form-control mr-2" %>
+    <%= select_tag "payment_mode_id", options_from_collection_for_select(@payment_modes, "id", "name", selected: params[:payment_mode_id]), prompt: "Select a payment", class: "form-control mr-2" %>
+    <%= date_field_tag 'start_date', params[:start_date], class: 'form-control mr-2', placeholder: "Start" %>
+    <%= date_field_tag 'end_date', params[:end_date], class: 'form-control mr-2' %>
+    <div class="input-group mr-2">
+        <%= text_field_tag :note, params[:note], placeholder: "note", class: "form-control" %>
+        <div class="input-group-append">
+            <%= button_tag(type: "submit", class: "btn btn-outline-secondary", id: "search-submit") do %>
+            <i class="fas fa-search"></i>
+            <% end %>
+        </div>
+    </div>
+  <% end %>
+</nav>
+
+
+<script>
+  $("#expense_category_id").change(function() {
+    $("#search-submit").click();
+  });
+
+  $("#payment_mode_id").change(function() {
+    $("#search-submit").click();
+  });
+
+  $("#start_date").change(function() {
+    $("#search-submit").click();
+  });
+
+  $("#end_date").change(function() {
+    $("#search-submit").click();
+  });
+</script>
