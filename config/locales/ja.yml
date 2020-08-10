@@ -1,0 +1,75 @@
+ja:
+  main_sidebar:
+    home: "ダッシュボード"
+    report: "レポート"
+    business: "ビジネス"
+    expense: "費用"
+    setting: "構成"
+
+  sub_sidebar:
+    business:
+      category: "カテゴリー"
+      type: "製品"
+      product_sale: "製品販売"
+      sale_list: "セール一覧"
+      customer: "お客様"
+    expense:
+      category: "カテゴリー"
+      payment_mode: "支払いモード"
+      income: "所得"
+      expense: "費用"
+    setting:
+      theme: "テーマ"
+
+  menu_title:
+    home: "ダッシュボード"
+    report: "レポート"
+    business:
+      product_sale:
+        index: "製品販売一覧"
+      sale_list:
+        index: "セール一覧"
+    setting:
+      edit_language: "言語編集"
+
+  action_button:
+    new: "新規作成"
+    save: "登録する"
+    cancel: "キャンセル"
+    edit: "編集"
+    update: "更新する"
+    delete: "削除"
+    back: "戻る"
+    detail: "詳細"
+    add_image: "画像を追加"
+    add_payment: "支払いを追加"
+
+  activerecord:
+    attributes:
+      customer:
+        name: "名"
+        phone_number: "電話番号"
+        address: "アドレス"
+        note: "備考"
+
+  report:
+    filter:
+      category: "カテゴリーを選ぶ"
+      product: "商品を選択してください"
+    index:
+      category: "カテゴリー"
+      product: "製品"
+      purchase_price: "購入金額"
+      sale_price: "セールスプライス"
+      qty: "量"
+      remain_qty: "残り量"
+      sold_out_qty: "売り切れ数量"
+      sold_out_price: "完売価格"
+      total_price: "合計金額"
+
+  customers:
+    index:
+      name: "名"
+      phone_number: "電話番号"
+      address: "アドレス"
+      note: "備考"

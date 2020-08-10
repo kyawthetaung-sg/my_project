@@ -1,0 +1,15 @@
+<div id="body_content">
+    <%= form_for @user, :url => update_language_path(@user.id) do |f| %>
+        <div class="row">
+            <div class="col-sm-6">
+                <%= f.label :language %>
+                <%= f.select(:language, @languages, {}, { :class => 'form-control' }) %>
+            </div>
+        </div>
+    
+        <div class="mt-3">
+            <%= f.submit t("action_button.update"), class: "btn btn-outline-info" %>
+            <%= link_to t("action_button.cancel"), settings_path, class: "btn btn-outline-secondary" %>
+        </div>
+    <% end %>
+</div>

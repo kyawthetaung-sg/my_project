@@ -1,44 +1,48 @@
-<div class="row">
-  <div class="col-md-12 mt-3">
-    <%= form_tag customers_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-      <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control mr-sm-2" %>
-      <%= button_tag(type: "submit", class: "btn btn-outline-secondary my-2 my-sm-0") do %>
-        <i class="fas fa-search"></i>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-12">
-    <table class="table table-striped mt-3">
-      <thead class="text-white bg-secondary">
+  <%= render 'index_header' %>
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary">
+      <tr>
+        <th><%= t 'report.index.category' %></th>
+        <th><%= t 'report.index.product' %></th>
+        <th class="text-right"><%= t 'report.index.qty' %> x</th>
+        <th class="text-right"><%= t 'report.index.purchase_price' %></th>
+        <th class="text-right"><%= t 'report.index.sold_out_qty' %> x</th>
+        <th class="text-right"><%= t 'report.index.sale_price' %> =</th>
+        <th class="text-right"><%= t 'report.index.sold_out_price' %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%
+        @total_purchase_price = 0
+        @total_sould_out_price = 0
+      %>
+      <% @sale_products.each do |sale_product| %>
         <tr>
-          <th>Business Category</th>
-          <th>Business Type Name</th>
-          <th>Purchase Price</th>
-          <th>Remain Qty</th>
-          <th>Sale Price</th>
-          <th>Sould Out Qty</th>
-          <th>Sould Out Price</th>
+          <td><%= sale_product.business_type.category.name %></td>
+          <td><%= sale_product.business_type.name %></td>
+          <td class="text-right"><%= sale_product.business_type.quantity %></td>
+          <td class="text-right"><%= sale_product.business_type.purchase_price %></td>
+          <td class="text-right"><%= sould_out_quantity(sale_product.business_type_id) %></td>
+          <td class="text-right"><%= sale_product.business_type.sale_price %></td>
+          <td class="text-right"><%= sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id) %></td>
         </tr>
-      </thead>
-    
-      <tbody>
-        <% @sale_products.each do |sale_product| %>
-          <tr>
-            <td><%= sale_product.business_type.category.name %></td>
-            <td><%= sale_product.business_type.name %></td>
-            <td><%= sale_product.business_type.purchase_price %></td>
-            <td><%= sale_product.business_type.quantity - sould_out_quantity(sale_product.business_type_id) %></td>
-            <td><%= sale_product.business_type.sale_price %></td>
-            <td><%= sould_out_quantity(sale_product.business_type_id) %></td>
-            <td><%= sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id) %></td>
-          </tr>
-        <% end %>
-        <% if @sale_products.count < 1 %>
-          <tr>
-            <td colspan="2" style="text-align: center;">Empty Datas</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+        <%
+          @total_purchase_price += sale_product.business_type.quantity * sale_product.business_type.purchase_price
+          @total_sould_out_price += sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id)
+        %>
+      <% end %>
+      <% if @sale_products.count < 1 %>
+        <tr>
+          <td colspan="7" class="text-center">Empty Datas</td>
+        </tr>
+      <% else %>
+        <tr class="bg-secondary text-white">
+          <td colspan="2" class="text-center"><%= t 'report.index.total_price' %></td>
+          <td colspan="2" class="text-right"><%= @total_purchase_price %></td>
+          <td colspan="3" class="text-right"><%= @total_sould_out_price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

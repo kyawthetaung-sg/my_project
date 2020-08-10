@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <div class="nav nav-tabs nav-fill " id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="tab-all" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">All</a>
                 <% @categories.each do |category| %>
                     <a class="nav-item nav-link" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
@@ -9,28 +9,183 @@
             </div>
         </nav>
         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-            <div class="tab-pane fade show active id="nav-all" role="tabpanel" aria-labelledby="tab-all">
+            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="tab-all">
                 <div class="row">
-                    <table class="show-table">
-                        <tr>
-                            <th>All Capital:</th>
-                            <td><%= @business_types.map(&:purchase_price).sum * @business_types.map(&:quantity).sum %></td>
-                        </tr>
-                        <tr>
-                            <th>Sould Out Price:</th>
-                        </tr>
-                    </table>
+                    <%
+                        @all_initial_capital = 0
+                        @all_sould_out_capital = 0
+                        @all_remain_capital = 0
+                        @all_sould_out_price = 0
+                        @all_sould_out_price_cash = 0
+
+                        @sale_products.each do |sale_product|
+                            @all_initial_capital += sale_product.business_type.quantity * sale_product.business_type.purchase_price
+                            @all_sould_out_capital += sale_product.business_type.purchase_price * sould_out_quantity(sale_product.business_type_id)
+                            @all_remain_capital += sale_product.business_type.purchase_price * (sale_product.business_type.quantity - sould_out_quantity(sale_product.business_type_id))
+                            @all_sould_out_price += sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id)
+                            @all_sould_out_price_cash += sale_product.sale_list.first_payment
+                        end
+
+                        @all_profit = @all_sould_out_price - @all_sould_out_capital
+                        @all_final_amount = @all_initial_capital + @all_profit
+
+                        @all_sould_out_price_debt = @all_sould_out_price - @all_sould_out_price_cash
+                    %>
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <table class="show-table">
+                            <h4><u>Initial Capital</u></h4>
+                            <tr>
+                                <th>Remain Capital:</th>
+                                <td class="text-right"><%= @all_remain_capital %></td>
+                            </tr>
+                            <tr>
+                                <th>Sould Out Capital:</th>
+                                <td class="text-right"><%= @all_sould_out_capital %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">+</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th>Total Capital:</th>
+                                <td class="text-right"><%= @all_initial_capital %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <table class="show-table">
+                            <h4><u>Profit</u></h4>
+                            <tr>
+                                <th>Sould Out Price:</th>
+                                <td class="text-right"><%= @all_sould_out_price %></td>
+                            </tr>
+                            <tr>
+                                <th>Sould Out Capital:</th>
+                                <td class="text-right"><%= @all_sould_out_capital %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">-</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th>Total Profit:</th>
+                                <td class="text-right"><%= @all_profit %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <table class="show-table">
+                            <h4><u>Final Capital</u></h4>
+                            <tr>
+                                <th>Remain Capital:</th>
+                                <td class="text-right"><%= @all_remain_capital %></td>
+                            </tr>
+                            <tr>
+                                <th>Sould Out Amount (Cash):</th>
+                                <td class="text-right"><%= @all_sould_out_price_cash %></td>
+                            </tr>
+                            <tr>
+                                <th>Sould Out Amount (Debt):</th>
+                                <td class="text-right"><%= @all_sould_out_price_debt %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">+</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th>Final Amount:</th>
+                                <td class="text-right"><%= @all_final_amount %></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <% @categories.each do |category| %>
-                <div class="tab-pane fade" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+                <div class="tab-pane fade" id="nav<%= category.id %>" role="tabpanel" aria-labelledby="tab<%= category.id %>">
                     <div class="row">
-                        <table class="show-table">
-                            <tr>
-                                <th>Capital:</th>
-                                <td></td>
-                            </tr>
-                        </table>
+                        <%
+                            @initial_capital = 0
+                            @sould_out_capital = 0
+                            @remain_capital = 0
+                            @sould_out_price = 0
+                            @sould_out_price_cash = 0
+
+                            @sale_products.each do |sale_product|
+                                if sale_product.business_type.category.id == category.id
+                                    @initial_capital += sale_product.business_type.quantity * sale_product.business_type.purchase_price
+                                    @sould_out_capital += sale_product.business_type.purchase_price * sould_out_quantity(sale_product.business_type_id)
+                                    @remain_capital += sale_product.business_type.purchase_price * (sale_product.business_type.quantity - sould_out_quantity(sale_product.business_type_id))
+                                    @sould_out_price += sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id)
+                                    @sould_out_price_cash += sale_product.sale_list.first_payment
+                                end
+                            end
+
+                            @profit = @sould_out_price - @sould_out_capital
+                            @final_amount = @initial_capital + @profit
+
+                            @sould_out_price_debt = @sould_out_price - @sould_out_price_cash
+                        %>
+                        <div class="col-md-4 col-sm-6 mb-3">
+                            <table class="show-table">
+                                <h4><u>Initial Capital</u></h4>
+                                <tr>
+                                    <th>Remain Capital:</th>
+                                    <td class="text-right"><%= @remain_capital %></td>
+                                </tr>
+                                <tr>
+                                    <th>Sould Out Capital:</th>
+                                    <td class="text-right"><%= @sould_out_capital %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">+</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th>Total Capital:</th>
+                                    <td class="text-right"><%= @initial_capital %></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-6 mb-3">
+                            <table class="show-table">
+                                <h4><u>Profit</u></h4>
+                                <tr>
+                                    <th>Sould Out Price:</th>
+                                    <td class="text-right"><%= @sould_out_price %></td>
+                                </tr>
+                                <tr>
+                                    <th>Sould Out Capital:</th>
+                                    <td class="text-right"><%= @sould_out_capital %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">-</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th>Total Profit:</th>
+                                    <td class="text-right"><%= @profit %></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-6 mb-3">
+                            <table class="show-table">
+                                <h4><u>Final Capital</u></h4>
+                                <tr>
+                                    <th>Remain Capital:</th>
+                                    <td class="text-right"><%= @remain_capital %></td>
+                                </tr>
+                                <tr>
+                                    <th>Sould Out Amount (Cash):</th>
+                                    <td class="text-right"><%= @sould_out_price_cash %></td>
+                                </tr>
+                                <tr>
+                                    <th>Sould Out Amount (Debt):</th>
+                                    <td class="text-right"><%= @sould_out_price_debt %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">+</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th>Final Amount:</th>
+                                    <td class="text-right"><%= @final_amount %></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             <% end %>

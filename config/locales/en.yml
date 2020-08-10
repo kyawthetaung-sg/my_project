@@ -30,4 +30,77 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  main_sidebar:
+    home: "Dashboard"
+    report: "Report"
+    business: "Business"
+    expense: "Expense"
+    setting: "Setting"
+
+  sub_sidebar:
+    business:
+      category: "Category"
+      type: "Product"
+      product_sale: "Product Sale"
+      sale_list: "Sale List"
+      customer: "Customer"
+    expense:
+      category: "Category"
+      payment_mode: "Payment Mode"
+      income: "Income"
+      expense: "Expense"
+    setting:
+      theme: "Theme"
+
+  menu_title:
+    home: "Dashboard"
+    report: "Report"
+    business:
+      product_sale:
+        index: "Product Sale"
+      sale_list:
+        index: "Sale List"
+    setting:
+      edit_language: "Language Editing"
+
+  action_button:
+    new: "New"
+    save: "Save"
+    cancel: "Cancel"
+    edit: "Edit"
+    update: "Update"
+    delete: "Delete"
+    back: "Back"
+    detail: "Detail"
+    add_image: "Add image"
+    add_payment: "Add payment"
+
+  activerecord:
+    attributes:
+      customer:
+        name: "Name"
+        phone_number: "Phone number"
+        address: "Address"
+        note: "Note"
+
+  report:
+    filter:
+      category: "Select a categroy"
+      product: "Select a product"
+    index:
+      category: "Categroy"
+      product: "Product"
+      purchase_price: "Purchase Price"
+      sale_price: "Sale Price"
+      qty: "Qty"
+      remain_qty: "Remain Qty"
+      sold_out_qty: "Sold Out Qty"
+      sold_out_price: "Sold Out Price"
+      total_price: "Total Price"
+
+  customers:
+    index:
+      name: "Name"
+      phone_number: "Phone number"
+      address: "Address"
+      note: "Note"

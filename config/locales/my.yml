@@ -1,0 +1,75 @@
+my:
+  main_sidebar:
+    home: "Dashboard"
+    report: "Report"
+    business: "စီးပွားရေး"
+    expense: "အသုံးစရိတ်"
+    setting: "Setting"
+
+  sub_sidebar:
+    business:
+      category: "အမျိုးအစား"
+      type: "ထုတ်ကုန်"
+      product_sale: "ကုန်ပစ္စည်းရောင်းချခြင်း"
+      sale_list: "အရောင်းစာရင်း"
+      customer: "ဖောက်သည်"
+    expense:
+      category: "အမျိုးအစား"
+      payment_mode: "ငွေပေးချေမှုစနစ်"
+      income: "ဝင်ငွေ"
+      expense: "အသုံးစရိတ်"
+    setting:
+      theme: "အသွင်အပြင်"
+
+  menu_title:
+    home: "Dashboard"
+    report: "Report"
+    business:
+      product_sale:
+        index: "ကုန်ပစ္စည်းရောင်းချခြင်း"
+      sale_list:
+        index: "အရောင်းစာရင်း"
+    setting:
+      edit_language: "ဘာသာစကားပြောင်းလဲခြင်း"
+
+  action_button:
+    new: "အသစ်"
+    save: "သိမ်းဆည်းမည်"
+    cancel: "မပြုလုပ်တော့ပါ"
+    edit: "ပြင်ဆင်မည်"
+    update: "ပြောင်းလဲမည်"
+    delete: "ဖျက်မည်"
+    back: "နောက်သို့"
+    detail: "အသေးစိတ်"
+    add_image: "ပုံထည့်မည်"
+    add_payment: "ငွေပေးချေမှုကိုထည့်မည်"
+
+  activerecord:
+    attributes:
+      customer:
+        name: "အမည်"
+        phone_number: "ဖုန်းနံပါတ်"
+        address: "လိပ်စာ"
+        note: "မှတ်ချက်"
+
+  report:
+    filter:
+      category: "အမျိုးအစားရွေးပါ"
+      product: "ထုတ်ကုန်တစ်ခုရွေးပါ"
+    index:
+      category: "အမျိုးအစား"
+      product: "ထုတ်ကုန်"
+      purchase_price: "ဝယ်ယူစျေး"
+      sale_price: "ရောင်းဈေး"
+      qty: "အရေအတွက်"
+      remain_qty: "ကျန်ရှိသည့်အရေအတွက်"
+      sold_out_qty: "ရောင်းထွက်သည့်အရေအတွက်"
+      sold_out_price: "ရောင်းထွက်သည့်ငွေ"
+      total_price: "စုစုပေါင်းငွေပမာဏ"
+
+  customers:
+    index:
+      name: "အမည်"
+      phone_number: "ဖုန်းနံပါတ်"
+      address: "လိပ်စာ"
+      note: "မှတ်ချက်"

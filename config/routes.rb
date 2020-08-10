@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'settings/index', :as => :settings
+  get 'settings/edit_language', :as => :edit_language
+  patch 'language/:id', to: 'settings#update_language', :as => :update_language
   get 'reports/index', :as => :reports
   resources :sale_lists
   get '/sale_lists/:id/add_images', to: 'sale_lists#add_images', :as => :add_images_sale_list

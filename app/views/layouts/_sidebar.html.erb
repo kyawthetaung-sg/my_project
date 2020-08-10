@@ -10,13 +10,13 @@
             <li class="<%= request.path == root_path ? 'open active' : '' %>">
                 <%= link_to root_path, id: "main-menu" do %>
                     <i class="fas fa-home"></i>
-                    <%= t("menu.admin.home") %>
+                    <%= t("main_sidebar.home") %>
                 <% end %>
             </li>
             <li class="<%= request.path == reports_path ? 'open active' : '' %>">
                 <%= link_to reports_path, id: "main-menu" do %>
                     <i class="fas fa-chart-line"></i>
-                    <%= t("menu.admin.reports") %>
+                    <%= t("main_sidebar.report") %>
                 <% end %>
             </li>
             <%= user_management_links %>
