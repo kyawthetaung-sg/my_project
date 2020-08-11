@@ -1,44 +1,202 @@
 <div class="row">
-  <div class="col-md-12 mt-3">
-    <%= form_tag customers_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-      <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control mr-sm-2" %>
-      <%= button_tag(type: "submit", class: "btn btn-outline-secondary my-2 my-sm-0") do %>
-        <i class="fas fa-search"></i>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="col-md-12">
-    <table class="table table-striped mt-3">
-      <thead class="text-white bg-secondary">
-        <tr>
-          <th>Business Category</th>
-          <th>Business Type Name</th>
-          <th>Purchase Price</th>
-          <th>Remain Qty</th>
-          <th>Sale Price</th>
-          <th>Sould Out Qty</th>
-          <th>Sould Out Price</th>
-        </tr>
-      </thead>
-    
-      <tbody>
-        <% @sale_products.each do |sale_product| %>
-          <tr>
-            <td><%= sale_product.business_type.category.name %></td>
-            <td><%= sale_product.business_type.name %></td>
-            <td><%= sale_product.business_type.purchase_price %></td>
-            <td><%= sale_product.business_type.quantity - sould_out_quantity(sale_product.business_type_id) %></td>
-            <td><%= sale_product.business_type.sale_price %></td>
-            <td><%= sould_out_quantity(sale_product.business_type_id) %></td>
-            <td><%= sale_product.business_type.sale_price * sould_out_quantity(sale_product.business_type_id) %></td>
-          </tr>
-        <% end %>
-        <% if @sale_products.count < 1 %>
-          <tr>
-            <td colspan="2" style="text-align: center;">Empty Datas</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+    <div class="col-md-12">
+        <nav>
+            <div class="nav nav-tabs nav-fill " id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="tab-all" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">All</a>
+                <% @categories.each do |category| %>
+                    <a class="nav-item nav-link" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
+                <% end %>
+            </div>
+        </nav>
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="tab-all">
+                <div class="row">
+                    <%
+                        @all_initial_capital = 0
+                        @all_sould_out_capital = 0
+                        @all_remain_capital = 0
+                        @all_sould_out_price = 0
+                        @all_sould_out_price_cash = 0
+
+                        @business_types.each do |business_type|
+                            @all_initial_capital += business_type.quantity * business_type.purchase_price
+                        end
+
+                        @sale_products.each do |sale_product|
+                            @all_sould_out_capital += sale_product.business_type.purchase_price
+                            @all_sould_out_price += sale_product.sale_price
+                            @all_sould_out_price_cash += sale_product.sale_list.first_payment
+                        end
+
+                        @all_remain_capital = @all_initial_capital - @all_sould_out_capital
+                        @all_profit = @all_sould_out_price - @all_sould_out_capital
+                        @all_final_amount = @all_initial_capital + @all_profit
+
+                        @all_sould_out_price_debt = @all_sould_out_price - @all_sould_out_price_cash
+                    %>
+                    <div class="col-md-4 col-sm-6 mb-5">
+                        <table class="show-table">
+                            <h4><u><%= t 'report.index.initial_capital' %></u></h4>
+                            <tr>
+                                <th><%= t 'report.index.remain_capital' %>:</th>
+                                <td class="text-right"><%= @all_remain_capital %></td>
+                            </tr>
+                            <tr>
+                                <th><%= t 'report.index.sold_out_capital' %>:</th>
+                                <td class="text-right"><%= @all_sould_out_capital %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">+</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th><%= t 'report.index.total_capital' %>:</th>
+                                <td class="text-right"><%= @all_initial_capital %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-5">
+                        <table class="show-table">
+                            <h4><u><%= t 'report.index.final_capital' %></u></h4>
+                            <tr>
+                                <th><%= t 'report.index.remain_capital' %>:</th>
+                                <td class="text-right"><%= @all_remain_capital %></td>
+                            </tr>
+                            <tr>
+                                <th><%= t 'report.index.sold_out_amount_cash' %>:</th>
+                                <td class="text-right"><%= @all_sould_out_price_cash %></td>
+                            </tr>
+                            <tr>
+                                <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                <td class="text-right"><%= @all_sould_out_price_debt %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">+</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th><%= t 'report.index.final_amount' %>:</th>
+                                <td class="text-right"><%= @all_final_amount %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-5">
+                        <table class="show-table">
+                            <h4><u><%= t 'report.index.profit' %></u></h4>
+                            <tr>
+                                <th><%= t 'report.index.sold_out_amount' %>:</th>
+                                <td class="text-right"><%= @all_sould_out_price %></td>
+                            </tr>
+                            <tr>
+                                <th><%= t 'report.index.sold_out_capital' %>:</th>
+                                <td class="text-right"><%= @all_sould_out_capital %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">-</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th><%= t 'report.index.total_profit' %>:</th>
+                                <td class="text-right"><%= @all_profit %></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <% @categories.each do |category| %>
+                <div class="tab-pane fade" id="nav<%= category.id %>" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+                    <div class="row">
+                        <%
+                            @initial_capital = 0
+                            @sould_out_capital = 0
+                            @remain_capital = 0
+                            @sould_out_price = 0
+                            @sould_out_price_cash = 0
+
+                            @business_types.each do |business_type|
+                                if business_type.category_id == category.id
+                                    @initial_capital += business_type.quantity * business_type.purchase_price
+                                end
+                            end
+
+                            @sale_products.each do |sale_product|
+                                if sale_product.business_type.category.id == category.id
+                                    @sould_out_capital += sale_product.business_type.purchase_price
+                                    @sould_out_price += sale_product.sale_price
+                                    @sould_out_price_cash += sale_product.sale_list.first_payment
+                                end
+                            end
+
+                            @remain_capital = @initial_capital - @sould_out_capital
+                            @profit = @sould_out_price - @sould_out_capital
+                            @final_amount = @initial_capital + @profit
+
+                            @sould_out_price_debt = @sould_out_price - @sould_out_price_cash
+                        %>
+                        <div class="col-md-4 col-sm-6 mb-5">
+                            <table class="show-table">
+                                <h4><u><%= t 'report.index.initial_capital' %></u></h4>
+                                <tr>
+                                    <th><%= t 'report.index.remain_capital' %>:</th>
+                                    <td class="text-right"><%= @remain_capital %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_capital' %>:</th>
+                                    <td class="text-right"><%= @sould_out_capital %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">+</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th><%= t 'report.index.total_capital' %>:</th>
+                                    <td class="text-right"><%= @initial_capital %></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-6 mb-5">
+                            <table class="show-table">
+                                <h4><u><%= t 'report.index.final_capital' %></u></h4>
+                                <tr>
+                                    <th><%= t 'report.index.remain_capital' %>:</th>
+                                    <td class="text-right"><%= @remain_capital %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_amount_cash' %>:</th>
+                                    <td class="text-right"><%= @sould_out_price_cash %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                    <td class="text-right"><%= @sould_out_price_debt %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">+</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th><%= t 'report.index.final_amount' %>:</th>
+                                    <td class="text-right"><%= @final_amount %></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4 col-sm-6 mb-5">
+                            <table class="show-table">
+                                <h4><u><%= t 'report.index.profit' %></u></h4>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_amount' %>:</th>
+                                    <td class="text-right"><%= @sould_out_price %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_capital' %>:</th>
+                                    <td class="text-right"><%= @sould_out_capital %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">-</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th><%= t 'report.index.total_profit' %>:</th>
+                                    <td class="text-right"><%= @profit %></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
 </div>

@@ -2,7 +2,7 @@ class SaleListsController < Admin::AdminTemplateController
   before_action :set_sale_list, only: [:show, :edit, :update, :update_images, :destroy]
 
   def index
-    @title = "Sale Lists"
+    @title = t("menu_title.business.sale_list.index")
     @customers = Customer.where(created_by: current_user)
 
     @sale_lists = SaleList.filter(params.slice(:customer_id, :start_date, :end_date))

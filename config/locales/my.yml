@@ -1,0 +1,78 @@
+my:
+  main_sidebar:
+    home: "Dashboard"
+    report: "Report"
+    business: "စီးပွားရေး"
+    expense: "အသုံးစရိတ်"
+    setting: "Setting"
+
+  sub_sidebar:
+    business:
+      category: "အမျိုးအစား"
+      type: "ထုတ်ကုန်"
+      product_sale: "ကုန်ပစ္စည်းရောင်းချခြင်း"
+      sale_list: "အရောင်းစာရင်း"
+      customer: "ဖောက်သည်"
+    expense:
+      category: "အမျိုးအစား"
+      payment_mode: "ငွေပေးချေမှုစနစ်"
+      income: "ဝင်ငွေ"
+      expense: "အသုံးစရိတ်"
+    setting:
+      theme: "အသွင်အပြင်"
+
+  menu_title:
+    home: "Dashboard"
+    report: "Report"
+    business:
+      product_sale:
+        index: "ကုန်ပစ္စည်းရောင်းချခြင်း"
+      sale_list:
+        index: "အရောင်းစာရင်း"
+    setting:
+      edit_language: "ဘာသာစကားပြောင်းလဲခြင်း"
+
+  action_button:
+    new: "အသစ်"
+    save: "သိမ်းဆည်းမည်"
+    cancel: "မပြုလုပ်တော့ပါ"
+    edit: "ပြင်ဆင်မည်"
+    update: "ပြောင်းလဲမည်"
+    delete: "ဖျက်မည်"
+    back: "နောက်သို့"
+    detail: "အသေးစိတ်"
+    add_image: "ပုံထည့်မည်"
+    add_payment: "ငွေပေးချေမှုကိုထည့်မည်"
+    add_product: "ထုတ်ကုန်ထည့်ပါ"
+
+  activerecord:
+    attributes:
+      customer:
+        name: "အမည်"
+        phone_number: "ဖုန်းနံပါတ်"
+        address: "လိပ်စာ"
+        note: "မှတ်ချက်"
+
+  report:
+    filter:
+      category: "အမျိုးအစားရွေးပါ"
+      product: "ထုတ်ကုန်တစ်ခုရွေးပါ"
+    index:
+      initial_capital: "ကန ဦး အရင်းအနှီး"
+      remain_capital: "ကျန်ရှိသောအရင်းအနှီး"
+      sold_out_capital: "ရောင်းရသောအရင်းအနှီး"
+      total_capital: "စုစုပေါင်းအရင်းအနှီး"
+      final_capital: "နောက်ဆုံးအရင်းအနှီး"
+      sold_out_amount_cash: "ရောင်းသည့်ပမာဏ (ငွေသား)"
+      sold_out_amount_debt: "ရောင်းလိုက်သောပမာဏ (အကြွေး)"
+      final_amount: "နောက်ဆုံးပမာဏ"
+      profit: "အမြတ်အစွန်း"
+      sold_out_amount: "ရောင်းလိုက်သောပမာဏ"
+      total_profit: "စုစုပေါင်းအမြတ်"
+
+  customers:
+    index:
+      name: "အမည်"
+      phone_number: "ဖုန်းနံပါတ်"
+      address: "လိပ်စာ"
+      note: "မှတ်ချက်"

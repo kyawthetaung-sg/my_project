@@ -1,0 +1,78 @@
+ja:
+  main_sidebar:
+    home: "ダッシュボード"
+    report: "レポート"
+    business: "ビジネス"
+    expense: "費用"
+    setting: "構成"
+
+  sub_sidebar:
+    business:
+      category: "カテゴリー"
+      type: "製品"
+      product_sale: "製品販売"
+      sale_list: "セール一覧"
+      customer: "お客様"
+    expense:
+      category: "カテゴリー"
+      payment_mode: "支払いモード"
+      income: "所得"
+      expense: "費用"
+    setting:
+      theme: "テーマ"
+
+  menu_title:
+    home: "ダッシュボード"
+    report: "レポート"
+    business:
+      product_sale:
+        index: "製品販売一覧"
+      sale_list:
+        index: "セール一覧"
+    setting:
+      edit_language: "言語編集"
+
+  action_button:
+    new: "新規作成"
+    save: "登録する"
+    cancel: "キャンセル"
+    edit: "編集"
+    update: "更新する"
+    delete: "削除"
+    back: "戻る"
+    detail: "詳細"
+    add_image: "画像を追加"
+    add_payment: "支払いを追加"
+    add_product: "製品を追加"
+
+  activerecord:
+    attributes:
+      customer:
+        name: "名"
+        phone_number: "電話番号"
+        address: "アドレス"
+        note: "備考"
+
+  report:
+    filter:
+      category: "カテゴリーを選ぶ"
+      product: "商品を選択してください"
+    index:
+      initial_capital: "当初の資本金"
+      remain_capital: "残りの資本"
+      sold_out_capital: "販売資本"
+      total_capital: "総資本"
+      final_capital: "最終的な資本"
+      sold_out_amount_cash: "売り切れ金額（現金）"
+      sold_out_amount_debt: "売り切れ金額（負債）"
+      final_amount: "最終金額"
+      profit: "利益"
+      sold_out_amount: "売り切れ金額"
+      total_profit: "利益総額"
+
+  customers:
+    index:
+      name: "名"
+      phone_number: "電話番号"
+      address: "アドレス"
+      note: "備考"

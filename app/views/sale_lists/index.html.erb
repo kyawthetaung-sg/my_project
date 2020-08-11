@@ -24,10 +24,10 @@
         <td><%= business_type_total_price(sale_list.id) - sale_list.first_payment %></td>
         <td><%= sale_list.note %></td>
         <td>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, sale_list, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
-          <%= link_to '<i class="fas fa-images"></i>'.html_safe, add_images_sale_list_path(sale_list) %>
-          <%= link_to '<i class="far fa-credit-card"></i>'.html_safe, edit_sale_list_path(sale_list) %>
-          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, sale_list, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, sale_list, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <%= link_to '<i class="fas fa-images"></i>'.html_safe, add_images_sale_list_path(sale_list), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_image") %>
+          <%= link_to '<i class="far fa-credit-card"></i>'.html_safe, edit_sale_list_path(sale_list), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_payment") %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, sale_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
         </td>
       </tr>
     <% end %>

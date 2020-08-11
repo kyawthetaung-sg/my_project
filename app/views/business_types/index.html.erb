@@ -16,14 +16,14 @@
         <td><%= business_type.name %></td>
         <td><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
         <td>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type %>
-          <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type) %>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_product") %>
           <% if sould_out_quantity(business_type.id) > 0 %>
             <%= link_to '<i class="fas fa-edit"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
           <% else %>
-            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_business_type_path(business_type) %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, business_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, business_type, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
           <% end %>
         </td>
       </tr>

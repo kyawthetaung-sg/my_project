@@ -3,16 +3,16 @@ module Admin::AdminTemplateHelper
         options = [
             {condition: false, path: roles_path, icon_class: "far fa-circle", label: "Roles"},
         ]
-        main_dropdown_link(t("menu.admin.user_management"), "fas fa-user", "userSubmenu", options)
+        main_dropdown_link(t("main_sidebar.admin.user_management"), "fas fa-user", "userSubmenu", options)
     end
 
     def business_links
         options = [
-            {condition: true, path: product_sales_path, icon_class: "far fa-circle", label: "Product Sale"},
-            {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: "Sale List"},
-            {condition: true, path: categories_path, icon_class: "far fa-circle", label: "Business Category"},
-            {condition: true, path: business_types_path, icon_class: "far fa-circle", label: "Business Type"},
-            {condition: true, path: customers_path, icon_class: "far fa-circle", label: "Customer"},
+            {condition: true, path: product_sales_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.product_sale")},
+            {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.sale_list")},
+            {condition: true, path: categories_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.category")},
+            {condition: true, path: business_types_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.type")},
+            {condition: true, path: customers_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.customer")},
         ]
         main_dropdown_link(t("menu.admin.business"), "fas fa-briefcase", "businessSubmenu", options)
     end
@@ -29,9 +29,9 @@ module Admin::AdminTemplateHelper
 
     def site_setting_links
         options = [
-            {condition: true, path: themes_path, icon_class: "far fa-circle", label: "Themes"},
+            {condition: true, path: themes_path, icon_class: "far fa-circle", label: t("sub_sidebar.setting.theme")},
         ]
-        main_dropdown_link(t("menu.admin.settings"), "fas fa-cog", "settingSubmenu", options)
+        main_dropdown_link(t("main_sidebar.setting"), "fas fa-cog", "settingSubmenu", options)
     end
 
     def page_setting_links
@@ -40,7 +40,7 @@ module Admin::AdminTemplateHelper
             {condition: false, path: edit_theme_path(1), icon_class: "far fa-circle", label: "Pages 2"},
             {condition: false, path: new_page_path, icon_class: "far fa-circle", label: "Pages 3"},
         ]
-        main_dropdown_link(t("menu.admin.page_settings"), "fa fa-user", "pagesettingSubmenu", options)
+        main_dropdown_link(t("main_sidebar.setting"), "fa fa-user", "pagesettingSubmenu", options)
     end
 
     def main_dropdown_link(label = "", icon_class = "", submenu_id = "", options = {})
@@ -81,6 +81,16 @@ module Admin::AdminTemplateHelper
             link_to path do
                 "<i class='#{icon_class}'></i> #{label}".html_safe
             end
+        end
+    end
+
+    def full_language(lang_id)
+        if lang_id == 3
+            language_name = "Myanmar"
+        elsif lang_id == 2
+            language_name = "Japanese"
+        else
+            language_name = "English"
         end
     end
 end
