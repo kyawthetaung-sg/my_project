@@ -40,6 +40,7 @@
 
 <script>
     $("document").ready(function(){
+        localStorage.clear();
         $('.sale').click(function(){
             showTable();
 
@@ -53,7 +54,7 @@
                 var cart = '{"itemList":[]}';
             }
             var cartjson = JSON.parse(cart);
-            var list = {"id":id,"name":name,"remain_quantity":remain_quantity,"price":price,"qty":1,"remark":''};
+            var list = {"id":id,"name":name,"remain_quantity":remain_quantity,"price":price,"qty":1,"remark":'',"sale_price":0};
             var status=0;
 
             $.each(cartjson["itemList"],function(i,v){
@@ -78,12 +79,10 @@
 
             localStorage.setItem('cart',JSON.stringify(cartjson));
             showTable();
-
-            console.log(cartjson);
         });
 
         function showTable() {
-            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Remove</th></tr>';
+            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Purchase Price</th><th>Remove</th></tr>';
 
             var cart=localStorage.getItem('cart');
             var subtotal=0;
@@ -102,7 +101,7 @@
                     var total=vprice*vqty;
                     subtotal += total;
 
-                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
+                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td><input type="number" class="form-control" name="sale_price" id="sale_price_'+vid+'"></td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
 
                 }
                 });
@@ -199,6 +198,14 @@
                 first_payment = 0
             }
             var remark = $('#remark').val();
+
+            $.each(cartjson['itemList'],function(i,v) {
+                if(v){
+                    var vid= v.id;
+                    var sale_price = $('#sale_price_'+vid).val();
+                    cartjson['itemList'][i].sale_price=sale_price;
+                }
+            });
 
             var param = location.href;
             $.ajax({

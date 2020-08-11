@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_064907) do
   create_table "sale_list_business_types", id: false, force: :cascade do |t|
     t.integer "sale_list_id", null: false
     t.integer "business_type_id", null: false
+    t.float "sale_price"
     t.datetime "deleted_at"
     t.integer "created_by", limit: 8
     t.integer "updated_by", limit: 8

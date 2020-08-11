@@ -43,6 +43,7 @@ my:
     detail: "အသေးစိတ်"
     add_image: "ပုံထည့်မည်"
     add_payment: "ငွေပေးချေမှုကိုထည့်မည်"
+    add_product: "ထုတ်ကုန်ထည့်ပါ"
 
   activerecord:
     attributes:
@@ -57,15 +58,17 @@ my:
       category: "အမျိုးအစားရွေးပါ"
       product: "ထုတ်ကုန်တစ်ခုရွေးပါ"
     index:
-      category: "အမျိုးအစား"
-      product: "ထုတ်ကုန်"
-      purchase_price: "ဝယ်ယူစျေး"
-      sale_price: "ရောင်းဈေး"
-      qty: "အရေအတွက်"
-      remain_qty: "ကျန်ရှိသည့်အရေအတွက်"
-      sold_out_qty: "ရောင်းထွက်သည့်အရေအတွက်"
-      sold_out_price: "ရောင်းထွက်သည့်ငွေ"
-      total_price: "စုစုပေါင်းငွေပမာဏ"
+      initial_capital: "ကန ဦး အရင်းအနှီး"
+      remain_capital: "ကျန်ရှိသောအရင်းအနှီး"
+      sold_out_capital: "ရောင်းရသောအရင်းအနှီး"
+      total_capital: "စုစုပေါင်းအရင်းအနှီး"
+      final_capital: "နောက်ဆုံးအရင်းအနှီး"
+      sold_out_amount_cash: "ရောင်းသည့်ပမာဏ (ငွေသား)"
+      sold_out_amount_debt: "ရောင်းလိုက်သောပမာဏ (အကြွေး)"
+      final_amount: "နောက်ဆုံးပမာဏ"
+      profit: "အမြတ်အစွန်း"
+      sold_out_amount: "ရောင်းလိုက်သောပမာဏ"
+      total_profit: "စုစုပေါင်းအမြတ်"
 
   customers:
     index:

@@ -74,6 +74,7 @@ en:
     detail: "Detail"
     add_image: "Add image"
     add_payment: "Add payment"
+    add_product: "Add product"
 
   activerecord:
     attributes:
@@ -88,15 +89,17 @@ en:
       category: "Select a categroy"
       product: "Select a product"
     index:
-      category: "Categroy"
-      product: "Product"
-      purchase_price: "Purchase Price"
-      sale_price: "Sale Price"
-      qty: "Qty"
-      remain_qty: "Remain Qty"
-      sold_out_qty: "Sold Out Qty"
-      sold_out_price: "Sold Out Price"
-      total_price: "Total Price"
+      initial_capital: "Initial Capital"
+      remain_capital: "Remain Capital"
+      sold_out_capital: "Sales Capital"
+      total_capital: "Total Capital"
+      final_capital: "Final Capital"
+      sold_out_amount_cash: "Sold Out Amount (Cash)"
+      sold_out_amount_debt: "Sold Out Amount (Debt)"
+      final_amount: "Final Amount"
+      profit: "Profit"
+      sold_out_amount: "Sold Out Amount"
+      total_profit: "Total Profit"
 
   customers:
     index:
