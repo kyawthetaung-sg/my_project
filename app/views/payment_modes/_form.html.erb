@@ -1,0 +1,24 @@
+<%= form_with(model: payment_mode, local: true) do |form| %>
+  <% if payment_mode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment_mode.errors.count, "error") %> prohibited this payment_mode from being saved:</h2>
+
+      <ul>
+        <% payment_mode.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-success" %>
+    <%= link_to 'Cancel', payment_modes_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<%= link_to 'New Payment Mode', new_payment_mode_path, class: "btn btn-success" %>
+<table class="table table-striped mt-3">
+  <thead class="text-white bg-secondary">
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payment_modes.each do |payment_mode| %>
+      <tr>
+        <td><%= payment_mode.name %></td>
+        <td>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, payment_mode, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_payment_mode_path(payment_mode) %>
+          <% if payment_mode.incomes.count > 0 || payment_mode.expenses.count > 0 %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, payment_mode, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @payment_modes.count < 1 %>
+      <tr>
+        <td colspan="4" style="text-align: center;">Empty Datas</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

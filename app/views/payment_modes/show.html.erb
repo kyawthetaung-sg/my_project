@@ -1,0 +1,8 @@
+<table class="mb-3">
+  <tr>
+    <th>Name:</th>
+    <td><%= @payment_mode.name %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_payment_mode_path(@payment_mode), class: "btn btn-info" %>
+<%= link_to 'Back', payment_modes_path, class: "btn btn-secondary" %>

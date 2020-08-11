@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :expenses
+  resources :incomes
+  resources :payment_modes
+  resources :expense_categories
   get 'settings/index', :as => :settings
   get 'settings/edit_language', :as => :edit_language
   patch 'language/:id', to: 'settings#update_language', :as => :update_language

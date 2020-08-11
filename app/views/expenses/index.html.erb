@@ -1,0 +1,41 @@
+<%= render 'index_header' %>
+<table class="table table-striped mt-3">
+  <thead class="text-white bg-secondary">
+    <tr>
+      <th>Date</th>
+      <th>Category</th>
+      <th>Payment mode</th>
+      <th>Note</th>
+      <th class="text-right">Amount</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= expense.date.strftime("%d-%m-%y %I:%M%P") %></td>
+        <td><%= expense.expense_category.name %></td>
+        <td><%= expense.payment_mode.name %></td>
+        <td><%= expense.note %></td>
+        <td class="text-right"><%= expense.amount %></td>
+        <td>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, expense, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_expense_path(expense) %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, expense, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @expenses.count < 1 %>
+      <tr>
+        <td colspan="6" style="text-align: center;">Empty Datas</td>
+      </tr>
+    <% else %>
+      <tr class="bg-secondary text-white">
+        <td colspan="4" style="text-align: center;">Total Amount</td>
+        <td class="text-right"><%= @expenses.map(&:amount).sum %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

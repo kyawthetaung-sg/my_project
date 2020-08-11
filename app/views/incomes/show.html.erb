@@ -1,0 +1,24 @@
+<table class="mb-3 show-table">
+  <tr>
+    <th>Date:</th>
+    <td><%= @income.date.strftime("%d-%m-%Y %I:%M%P") %></td>
+  </tr>
+  <tr>
+    <th>Amount:</th>
+    <td><%= @income.amount %></td>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><%= @income.expense_category.name %></td>
+  </tr>
+  <tr>
+    <th>Payment mode:</th>
+    <td><%= @income.payment_mode.name %></td>
+  </tr>
+  <tr>
+    <th>Note:</th>
+    <td><%= @income.note %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_income_path(@income), class: "btn btn-info" %>
+<%= link_to 'Back', incomes_path, class: "btn btn-secondary" %>

@@ -1,0 +1,8 @@
+<table class="mb-3">
+  <tr>
+    <th>Name:</th>
+    <td><%= @expense_category.name %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_expense_category_path(@expense_category), class: "btn btn-info" %>
+<%= link_to 'Back', expense_categories_path, class: "btn btn-secondary" %>
