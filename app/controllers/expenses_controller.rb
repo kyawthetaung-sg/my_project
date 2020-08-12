@@ -5,8 +5,8 @@ class ExpensesController < Admin::AdminTemplateController
   # GET /expenses.json
   def index
     @title = 'Expnese'
-    @expense_categories = ExpenseCategory.where(created_by: current_user.id)
-    @payment_modes = PaymentMode.where(created_by: current_user.id)
+    @expense_categories = ExpenseCategory.where(created_by: current_user.id).or(ExpenseCategory.where(created_by: nil))
+    @payment_modes = PaymentMode.where(created_by: current_user.id).or(PaymentMode.where(created_by: nil))
 
     @expenses = Expense.filter(params.slice(:expense_category_id, :payment_mode_id, :note, :start_date, :end_date))
     @expenses = @expenses.where(created_by: current_user.id)

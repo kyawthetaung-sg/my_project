@@ -5,7 +5,7 @@ class PaymentModesController < Admin::AdminTemplateController
   # GET /payment_modes.json
   def index
     @title = 'Payment Modes'
-    @payment_modes = PaymentMode.where(created_by: current_user.id)
+    @payment_modes = PaymentMode.where(created_by: current_user.id).or(PaymentMode.where(created_by: nil))
   end
 
   # GET /payment_modes/1

@@ -1,0 +1,37 @@
+<%= link_to t("menu_title.user_management.account.new"), new_account_path, class: "btn btn-info" %>
+
+<table class="table table-striped mt-3">
+  <thead class="text-white bg-secondary">
+    <tr>
+      <th><%= t '.user_name' %></th>
+      <th><%= t '.first_name' %></th>
+      <th><%= t '.last_name' %></th>
+      <th><%= t '.email' %></th>
+      <th><%= t '.role' %></th>
+      <th><%= t '.theme' %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.user_name %></td>
+        <td><%= account.first_name %></td>
+        <td><%= account.last_name %></td>
+        <td><%= account.email %></td>
+        <td><%= account.role.name %></td>
+        <td><%= account.theme.name %></td>
+        <td>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, account, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_account_path(account), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+          <% if account.id == current_user.id %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, account, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

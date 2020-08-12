@@ -4,12 +4,13 @@ my:
     report: "Report"
     business: "စီးပွားရေး"
     expense: "အသုံးစရိတ်"
+    user_management: "အသုံးပြုသူစီမံခန့်ခွဲမှု"
     setting: "Setting"
 
   sub_sidebar:
     business:
       category: "အမျိုးအစား"
-      type: "ထုတ်ကုန်"
+      product: "ထုတ်ကုန်"
       product_sale: "ကုန်ပစ္စည်းရောင်းချခြင်း"
       sale_list: "အရောင်းစာရင်း"
       customer: "ဖောက်သည်"
@@ -18,6 +19,9 @@ my:
       payment_mode: "ငွေပေးချေမှုစနစ်"
       income: "ဝင်ငွေ"
       expense: "အသုံးစရိတ်"
+    user_management:
+      account: "အကောင့်"
+      role: "လုပ်ပိုင်ခွင့်"
     setting:
       theme: "အသွင်အပြင်"
 
@@ -29,6 +33,15 @@ my:
         index: "ကုန်ပစ္စည်းရောင်းချခြင်း"
       sale_list:
         index: "အရောင်းစာရင်း"
+    user_management:
+      role:
+        permission: "ခွင့်ပြုချက်"
+      account:
+        index: "အကောင့်စာရင်း"
+        new: "အကောင့်အသစ်လုပ်ပါ"
+        create: "အကောင့်လုပ်ပါ"
+        update: "အကောင့်အသစ်ပြောင်းပါ"
+        detail: "အကောင့်အသေးစိတ်"
     setting:
       edit_language: "ဘာသာစကားပြောင်းလဲခြင်း"
 
@@ -41,6 +54,7 @@ my:
     delete: "ဖျက်မည်"
     back: "နောက်သို့"
     detail: "အသေးစိတ်"
+    permission: "ခွင့်ပြုချက်"
     add_image: "ပုံထည့်မည်"
     add_payment: "ငွေပေးချေမှုကိုထည့်မည်"
     add_product: "ထုတ်ကုန်ထည့်ပါ"
@@ -76,3 +90,25 @@ my:
       phone_number: "ဖုန်းနံပါတ်"
       address: "လိပ်စာ"
       note: "မှတ်ချက်"
+
+  accounts:
+    index:
+      user_name: "အသုံးပြုသူအမည်"
+      first_name: "ပထမနာမည်"
+      last_name: "နောက်ဆုံးအမည်"
+      email: "အီးမေးလ်"
+      role: "လုပ်ပိုင်ခွင့်"
+      theme: "အသွင်အပြင်"
+    show:
+      user_name: "အသုံးပြုသူအမည်"
+      first_name: "ပထမနာမည်"
+      last_name: "နောက်ဆုံးအမည်"
+      email: "အီးမေးလ်"
+      role: "လုပ်ပိုင်ခွင့်"
+      theme: "အသွင်အပြင်"
+
+  permission:
+    create: "အသစ်ပြုလုပ်ခြင်း"
+    read: "ဖတ်ခြင်း"
+    update: "ပြောင်းလဲခြင်း"
+    delete: "ဖျက်သိမ်းခြင်း"

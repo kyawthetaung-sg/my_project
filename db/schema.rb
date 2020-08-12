@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_111408) do
+ActiveRecord::Schema.define(version: 2020_08_11_101308) do
 
   create_table "business_types", force: :cascade do |t|
     t.string "name"
-    t.integer "purchase_price"
-    t.integer "sale_price"
+    t.float "purchase_price"
+    t.float "sale_price"
     t.integer "quantity"
     t.integer "category_id", null: false
     t.datetime "deleted_at"
@@ -130,6 +130,14 @@ ActiveRecord::Schema.define(version: 2020_08_09_111408) do
     t.index ["updated_by"], name: "index_payment_modes_on_updated_by"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_permissions_on_role_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -197,18 +205,32 @@ ActiveRecord::Schema.define(version: 2020_08_09_111408) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "user_name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "theme_id"
+    t.integer "theme_id", null: false
     t.integer "language", default: 1, null: false
+    t.integer "role_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.index ["created_by"], name: "index_users_on_created_by"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.index ["deleted_by"], name: "index_users_on_deleted_by"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["theme_id"], name: "index_users_on_theme_id"
+    t.index ["updated_by"], name: "index_users_on_updated_by"
+    t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 
   add_foreign_key "business_types", "categories"
@@ -216,8 +238,10 @@ ActiveRecord::Schema.define(version: 2020_08_09_111408) do
   add_foreign_key "expenses", "payment_modes"
   add_foreign_key "incomes", "expense_categories"
   add_foreign_key "incomes", "payment_modes"
+  add_foreign_key "permissions", "roles"
   add_foreign_key "sale_list_business_types", "business_types"
   add_foreign_key "sale_list_business_types", "sale_lists"
   add_foreign_key "sale_lists", "customers"
+  add_foreign_key "users", "roles"
   add_foreign_key "users", "themes"
 end

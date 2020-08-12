@@ -35,12 +35,13 @@ en:
     report: "Report"
     business: "Business"
     expense: "Expense"
+    user_management: "User Management"
     setting: "Setting"
 
   sub_sidebar:
     business:
       category: "Category"
-      type: "Product"
+      product: "Product"
       product_sale: "Product Sale"
       sale_list: "Sale List"
       customer: "Customer"
@@ -49,6 +50,9 @@ en:
       payment_mode: "Payment Mode"
       income: "Income"
       expense: "Expense"
+    user_management:
+      account: "Account"
+      role: "Role"
     setting:
       theme: "Theme"
 
@@ -60,6 +64,15 @@ en:
         index: "Product Sale"
       sale_list:
         index: "Sale List"
+    user_management:
+      role:
+        permission: "Permission"
+      account:
+        index: "List of account"
+        new: "Make a new account"
+        create: "Make account"
+        update: "Update account"
+        detail: "Details of account"
     setting:
       edit_language: "Language Editing"
 
@@ -72,6 +85,7 @@ en:
     delete: "Delete"
     back: "Back"
     detail: "Detail"
+    permission: "Permission"
     add_image: "Add image"
     add_payment: "Add payment"
     add_product: "Add product"
@@ -107,3 +121,25 @@ en:
       phone_number: "Phone number"
       address: "Address"
       note: "Note"
+
+  accounts:
+    index:
+      user_name: "User name"
+      first_name: "First name"
+      last_name: "Last name"
+      email: "Email"
+      role: "Role"
+      theme: "Theme"
+    show:
+      user_name: "User name"
+      first_name: "First name"
+      last_name: "Last name"
+      email: "Email"
+      role: "Role"
+      theme: "Theme"
+
+  permission:
+    create: "Create"
+    read: "Read"
+    update: "Upadate"
+    delete: "Delete"

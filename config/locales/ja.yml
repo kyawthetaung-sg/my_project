@@ -4,12 +4,13 @@ ja:
     report: "レポート"
     business: "ビジネス"
     expense: "費用"
+    user_management: "ユーザー管理"
     setting: "構成"
 
   sub_sidebar:
     business:
       category: "カテゴリー"
-      type: "製品"
+      product: "製品"
       product_sale: "製品販売"
       sale_list: "セール一覧"
       customer: "お客様"
@@ -18,6 +19,9 @@ ja:
       payment_mode: "支払いモード"
       income: "所得"
       expense: "費用"
+    user_management:
+      account: "アカウント"
+      role: "権限"
     setting:
       theme: "テーマ"
 
@@ -29,6 +33,15 @@ ja:
         index: "製品販売一覧"
       sale_list:
         index: "セール一覧"
+    user_management:
+      role:
+        permission: "許可"
+      account:
+        index: "アカウント一覧"
+        new: "新しいアカウントを作る"
+        create: "アカウントを作る"
+        update: "アカウントを更新する"
+        detail: "アカウントの詳細"
     setting:
       edit_language: "言語編集"
 
@@ -41,6 +54,7 @@ ja:
     delete: "削除"
     back: "戻る"
     detail: "詳細"
+    permission: "許可"
     add_image: "画像を追加"
     add_payment: "支払いを追加"
     add_product: "製品を追加"
@@ -76,3 +90,32 @@ ja:
       phone_number: "電話番号"
       address: "アドレス"
       note: "備考"
+
+  accounts:
+    index:
+      user_name: "ユーザー名"
+      first_name: "ファーストネーム"
+      last_name: "苗字"
+      email: "Eメール"
+      role: "役割"
+      theme: "テーマ"
+    show:
+      user_name: "ユーザー名"
+      first_name: "ファーストネーム"
+      last_name: "苗字"
+      email: "Eメール"
+      role: "役割"
+      theme: "テーマ"
+    create:
+      user_name: "ユーザー名"
+      first_name: "ファーストネーム"
+      last_name: "苗字"
+      email: "Eメール"
+      role: "役割"
+      theme: "テーマ"
+
+  permission:
+    create: "作成する"
+    read: "読んだ"
+    update: "更新する"
+    delete: "削除"

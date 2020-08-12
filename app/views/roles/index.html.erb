@@ -1,4 +1,4 @@
-<%= link_to 'New role', new_role_path, class: "btn btn-success" %>
+<%= link_to 'New role', new_role_path, class: "btn btn-info" %>
 
 <table class="table table-striped mt-3">
   <thead class="text-white bg-secondary">
@@ -13,10 +13,18 @@
       <tr>
         <td><%= role.name %></td>
         <td>
-          <%= link_to '<i class="fas fa-key"></i>'.html_safe, roles_path, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, role, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_role_path(role) %>
-          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, role, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if role.id == 1 %>
+            <%= link_to '<i class="fas fa-key"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-key"></i>'.html_safe, permission_path(role), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
+          <% end %>
+          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, role, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_role_path(role), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <% if role.users.count > 0 %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, role, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+          <% end %>
         </td>
       </tr>
     <% end %>

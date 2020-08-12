@@ -1,0 +1,399 @@
+<div id="body_content">
+    <%= link_to t("action_button.back"), roles_path, class: "btn btn-outline-secondary" %>
+    
+    <div class="row">
+        <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+            <h5><i class="fa fa-home"> </i> <%= t('main_sidebar.home') %></h5>
+    
+            <label>
+                <%= t('permission.read') %>
+                <input type="checkbox" value="home_read" id="permission_checkbox" <%= has_permission_checked(@role, "home_read") %> />
+                <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+            </label><br>
+    
+        </div>
+    
+        <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+            <h5><i class="fas fa-circle"></i> <%= t('main_sidebar.report') %></h5>
+           
+            <label>
+                <%= t('permission.create') %>
+                <input type="checkbox" value="report_create" id="permission_checkbox" <%= has_permission_checked(@role, "report_create") %> />
+                <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+            </label><br>
+    
+            <label>
+                <%= t('permission.read') %>
+                <input type="checkbox" value="report_read" id="permission_checkbox" <%= has_permission_checked(@role, "report_read") %> />
+                <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+            </label><br>
+    
+            <label>
+                <%= t('permission.update') %>
+                <input type="checkbox" value="report_update" id="permission_checkbox" <%= has_permission_checked(@role, "report_update") %> />
+                <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+            </label><br>
+    
+            <label>
+                <%= t('permission.delete') %>
+                <input type="checkbox" value="report_delete" id="permission_checkbox" <%= has_permission_checked(@role, "report_delete") %> />
+                <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+            </label><br>  
+    
+        </div>
+        <div class="col-12 bg-green-light">
+            <h4 class="mt-3"><u><%= t("main_sidebar.business") %></u></h4>
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.business.product_sale') %></h5>
+                
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="product_sale_create" id="permission_checkbox" <%= has_permission_checked(@role, "product_sale_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.business.sale_list') %></h5>
+            
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="sale_list_read" id="permission_checkbox" <%= has_permission_checked(@role, "sale_list_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="sale_list_update" id="permission_checkbox" <%= has_permission_checked(@role, "sale_list_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="sale_list_delete" id="permission_checkbox" <%= has_permission_checked(@role, "sale_list_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+            
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.business.category') %></h5>
+                
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="business_category_create" id="permission_checkbox" <%= has_permission_checked(@role, "business_category_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="business_category_read" id="permission_checkbox" <%= has_permission_checked(@role, "business_category_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="business_category_update" id="permission_checkbox" <%= has_permission_checked(@role, "business_category_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="business_category_delete" id="permission_checkbox" <%= has_permission_checked(@role, "business_category_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+            
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.business.product') %></h5>
+                
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="product_create" id="permission_checkbox" <%= has_permission_checked(@role, "product_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="product_read" id="permission_checkbox" <%= has_permission_checked(@role, "product_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="product_update" id="permission_checkbox" <%= has_permission_checked(@role, "product_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="product_delete" id="permission_checkbox" <%= has_permission_checked(@role, "product_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+            
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.business.customer') %></h5>
+                
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="customer_create" id="permission_checkbox" <%= has_permission_checked(@role, "customer_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="customer_read" id="permission_checkbox" <%= has_permission_checked(@role, "customer_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="customer_update" id="permission_checkbox" <%= has_permission_checked(@role, "customer_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+            
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="customer_delete" id="permission_checkbox" <%= has_permission_checked(@role, "customer_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+            
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 bg-yellow-light">
+            <h4 class="mt-3"><u><%= t("main_sidebar.expense") %></u></h4>
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.expense.income') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="income_create" id="permission_checkbox" <%= has_permission_checked(@role, "income_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="income_read" id="permission_checkbox" <%= has_permission_checked(@role, "income_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="income_update" id="permission_checkbox" <%= has_permission_checked(@role, "income_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="income_delete" id="permission_checkbox" <%= has_permission_checked(@role, "income_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.expense.expense') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="expense_create" id="permission_checkbox" <%= has_permission_checked(@role, "expense_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="expense_read" id="permission_checkbox" <%= has_permission_checked(@role, "expense_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="expense_update" id="permission_checkbox" <%= has_permission_checked(@role, "expense_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="expense_delete" id="permission_checkbox" <%= has_permission_checked(@role, "expense_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.expense.category') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="expense_category_create" id="permission_checkbox" <%= has_permission_checked(@role, "expense_category_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="expense_category_read" id="permission_checkbox" <%= has_permission_checked(@role, "expense_category_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="expense_category_update" id="permission_checkbox" <%= has_permission_checked(@role, "expense_category_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="expense_category_delete" id="permission_checkbox" <%= has_permission_checked(@role, "expense_category_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.expense.payment_mode') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="payment_mode_create" id="permission_checkbox" <%= has_permission_checked(@role, "payment_mode_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="payment_mode_read" id="permission_checkbox" <%= has_permission_checked(@role, "payment_mode_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="payment_mode_update" id="permission_checkbox" <%= has_permission_checked(@role, "payment_mode_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="payment_mode_delete" id="permission_checkbox" <%= has_permission_checked(@role, "payment_mode_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 bg-pink-light">
+            <h4 class="mt-3"><u><%= t("main_sidebar.user_management") %></u></h4>
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.user_management.account') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="account_create" id="permission_checkbox" <%= has_permission_checked(@role, "account_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="account_read" id="permission_checkbox" <%= has_permission_checked(@role, "account_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="account_update" id="permission_checkbox" <%= has_permission_checked(@role, "account_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="account_delete" id="permission_checkbox" <%= has_permission_checked(@role, "account_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.user_management.role') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="role_create" id="permission_checkbox" <%= has_permission_checked(@role, "role_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="role_read" id="permission_checkbox" <%= has_permission_checked(@role, "role_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="role_update" id="permission_checkbox" <%= has_permission_checked(@role, "role_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="role_delete" id="permission_checkbox" <%= has_permission_checked(@role, "role_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 bg-blue-light">
+            <h4 class="mt-3"><u><%= t("main_sidebar.setting") %></u></h4>
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-sm-5 checkbox" id="permission_box">
+                    <h5><i class="fas fa-circle"></i> <%= t('sub_sidebar.setting.theme') %></h5>
+                    
+                    <label>
+                        <%= t('permission.create') %>
+                        <input type="checkbox" value="theme_create" id="permission_checkbox" <%= has_permission_checked(@role, "theme_create") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.read') %>
+                        <input type="checkbox" value="theme_read" id="permission_checkbox" <%= has_permission_checked(@role, "theme_read") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.update') %>
+                        <input type="checkbox" value="theme_update" id="permission_checkbox" <%= has_permission_checked(@role, "theme_update") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>
+
+                    <label>
+                        <%= t('permission.delete') %>
+                        <input type="checkbox" value="theme_delete" id="permission_checkbox" <%= has_permission_checked(@role, "theme_delete") %> />
+                        <span class="cr"><i class="cr-icon fas fa-check text-info"></i></span>
+                    </label><br>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("change", "#permission_checkbox", function() {
+        var param = location.href;
+        $.ajax({
+            url: param+"/create_permission",
+            type: "POST",
+            data: {"name" : $(this).val()},
+            dataType: "json",
+            success: function(data) {
+                console.log(data.message);
+            }
+        });
+    });
+</script>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :accounts
   resources :expenses
   resources :incomes
   resources :payment_modes
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
   get '/business_types/:id/add', to: 'business_types#add', :as => :add_business_type
   resources :categories
   resources :roles
+  get 'role/permission/:id', to: 'roles#permission', as: 'permission'
+  post 'role/permission/:id/create_permission', to: 'roles#create_permission', as: 'create_permission'
   resources :themes
   get '/user_theme/:id', to: 'themes#update_user_theme', :as => :user_theme
   resources :pages

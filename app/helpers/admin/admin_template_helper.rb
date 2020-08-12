@@ -1,9 +1,10 @@
 module Admin::AdminTemplateHelper
     def user_management_links
         options = [
-            {condition: false, path: roles_path, icon_class: "far fa-circle", label: "Roles"},
+            {condition: true, path: accounts_path, icon_class: "far fa-circle", label: t("sub_sidebar.user_management.account")},
+            {condition: true, path: roles_path, icon_class: "far fa-circle", label: t("sub_sidebar.user_management.role")},
         ]
-        main_dropdown_link(t("main_sidebar.admin.user_management"), "fas fa-user", "userSubmenu", options)
+        main_dropdown_link(t("main_sidebar.user_management"), "fas fa-user", "userSubmenu", options)
     end
 
     def business_links
@@ -11,10 +12,10 @@ module Admin::AdminTemplateHelper
             {condition: true, path: product_sales_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.product_sale")},
             {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.sale_list")},
             {condition: true, path: categories_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.category")},
-            {condition: true, path: business_types_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.type")},
+            {condition: true, path: business_types_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.product")},
             {condition: true, path: customers_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.customer")},
         ]
-        main_dropdown_link(t("menu.admin.business"), "fas fa-briefcase", "businessSubmenu", options)
+        main_dropdown_link(t("main_sidebar.business"), "fas fa-briefcase", "businessSubmenu", options)
     end
 
     def expense_links
@@ -24,7 +25,7 @@ module Admin::AdminTemplateHelper
             {condition: true, path: incomes_path, icon_class: "far fa-circle", label: "Income"},
             {condition: true, path: expenses_path, icon_class: "far fa-circle", label: "Expense"},
         ]
-        main_dropdown_link(t("menu.admin.expense"), "fas fa-wallet", "expenseSubmenu", options)
+        main_dropdown_link(t("main_sidebar.expense"), "fas fa-wallet", "expenseSubmenu", options)
     end
 
     def site_setting_links
@@ -92,5 +93,9 @@ module Admin::AdminTemplateHelper
         else
             language_name = "English"
         end
+    end
+
+    def has_permission_checked(role, name)
+        (role.permissions.pluck(:name).include? name) ? 'checked' : ''
     end
 end

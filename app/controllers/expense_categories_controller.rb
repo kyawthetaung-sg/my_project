@@ -5,7 +5,7 @@ class ExpenseCategoriesController < Admin::AdminTemplateController
   # GET /expense_categories.json
   def index
     @title = 'Categories'
-    @expense_categories = ExpenseCategory.where(created_by: current_user.id)
+    @expense_categories = ExpenseCategory.where(created_by: current_user.id).or(ExpenseCategory.where(created_by: nil))
   end
 
   # GET /expense_categories/1

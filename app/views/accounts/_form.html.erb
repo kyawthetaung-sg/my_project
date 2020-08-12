@@ -1,0 +1,66 @@
+<%= form_with(model: account, local: true) do |form| %>
+  <% if account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+        <% account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :user_name %>
+    <%= form.text_field :user_name, placeholder: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :password %>
+    <%= form.text_field :password, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :password_confirmation %>
+    <%= form.text_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :role_id %>
+    <%= form.select(:role_id, Role.where(deleted_at: nil).collect {|role| [role.name, role.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :theme_id %>
+    <%= form.select(:theme_id, Theme.where(created_by: current_user.id).or(Theme.where(created_by: nil)).collect {|theme| [theme.name, theme.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-info" %>
+    <%= link_to 'Cancel', accounts_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

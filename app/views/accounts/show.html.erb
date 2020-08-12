@@ -1,0 +1,28 @@
+<table class="show-table">
+  <tr>
+    <th><%= t '.user_name' %>:</th>
+    <td><%= @account.user_name %></td>
+  </tr>
+  <tr>
+    <th><%= t '.first_name' %>:</th>
+    <td><%= @account.first_name %></td>
+  </tr>
+  <tr>
+    <th><%= t '.last_name' %>:</th>
+    <td><%= @account.last_name %></td>
+  </tr>
+  <tr>
+    <th><%= t '.email' %>:</th>
+    <td><%= @account.email %></td>
+  </tr>
+  <tr>
+    <th><%= t '.role' %>:</th>
+    <td><%= @account.role.name %></td>
+  </tr>
+  <tr>
+    <th><%= t '.theme' %>:</th>
+    <td><%= @account.theme.name %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_account_path(@account), class: "btn btn-info" %>
+<%= link_to 'Back', accounts_path, class: "btn btn-secondary" %>
