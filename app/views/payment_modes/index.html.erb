@@ -1,4 +1,4 @@
-<%= link_to 'New Payment Mode', new_payment_mode_path, class: "btn btn-success" %>
+<%= link_to 'New Payment Mode', new_payment_mode_path, class: "btn btn-info" %>
 <table class="table table-striped mt-3">
   <thead class="text-white bg-secondary">
     <tr>
@@ -14,7 +14,7 @@
         <td>
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, payment_mode, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
           <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_payment_mode_path(payment_mode) %>
-          <% if payment_mode.incomes.count > 0 || payment_mode.expenses.count > 0 %>
+          <% if payment_mode.incomes.count > 0 || payment_mode.expenses.count > 0 || payment_mode.created_by == nil %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
           <% else %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, payment_mode, method: :delete, data: { confirm: 'Are you sure?' } %>

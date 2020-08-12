@@ -1,11 +1,11 @@
 class RolesController < Admin::AdminTemplateController
-  before_action :set_role, only: [:show, :edit, :update, :destroy]
+  before_action :set_role, only: [:show, :edit, :update, :destroy, :permission]
 
   # GET /roles
   # GET /roles.json
   def index
     @title = "Roles"
-    @roles = Role.where(created_by: current_user).or(Role.where(created_by: nil))
+    @roles = Role.where(deleted_at: nil)
   end
 
   # GET /roles/1
@@ -66,6 +66,24 @@ class RolesController < Admin::AdminTemplateController
       format.html { redirect_to roles_url, notice: 'Role was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def permission
+    @title = t("menu_title.user_management.role.permission")
+  end
+
+  def create_permission
+    @permission = Permission.where(role_id: params[:id], name: params[:name]).first
+    unless @permission
+      @new_permission = Permission.new
+      @new_permission.role_id = params[:id]
+      @new_permission.name = params[:name]
+      @new_permission.save
+    else
+      @permission.destroy
+    end
+
+    render json: { message: "success" }
   end
 
   private
