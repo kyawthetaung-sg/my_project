@@ -8,8 +8,12 @@ Rails.application.routes.draw do
   get 'settings/edit_language', :as => :edit_language
   patch 'language/:id', to: 'settings#update_language', :as => :update_language
   get 'reports/index', :as => :reports
-  resources :sale_lists
-  get '/sale_lists/:id/add_images', to: 'sale_lists#add_images', :as => :add_images_sale_list
+  resources :sale_lists do
+    member do
+      get :add_images
+      delete :delete_image_attachment
+    end
+  end
   post '/sale_lists/:id/add_images', to: 'sale_lists#update_images', :as => :update_images_sale_list
   resources :customers
   resources :product_sales

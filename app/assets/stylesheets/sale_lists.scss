@@ -1,3 +1,15 @@
 // Place all the styles related to the SaleLists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+div.image-box {
+    border: 1px solid #00000024;
+    padding: 5px;
+    margin: 5px;
+}
+
+div.image-box a {
+    position: absolute;
+    color: rgb(245, 14, 14);
+    margin: 5px;
+}

@@ -55,11 +55,28 @@ class SaleListsController < Admin::AdminTemplateController
   def update_images
     @title = "Adding Images"
     respond_to do |format|
-      if @sale_list.update(image: params[:image])
-        format.html { redirect_to sale_lists_path, notice: 'Images was successfully added.' }
+      if params[:image]
+        @sale_list.avatars.attach(params[:image])
+        format.html { redirect_to @sale_list, notice: 'Images was successfully added.' }
         format.json { render :show, status: :ok, location: @sale_list }
       else
         format.html { render :add }
+        format.json { render json: @sale_list.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def delete_image_attachment
+    @sale_list_id = params[:id].split('/')[0]
+    @sale_list = SaleList.find(@sale_list_id)
+    @image_id = params[:id].split('/')[1]
+    @image = ActiveStorage::Attachment.find(@image_id)
+    respond_to do |format|
+      if @image.purge
+        format.html { redirect_to @sale_list, notice: 'Images was successfully deleted.' }
+        format.json { render :show, status: :ok, location: @sale_list }
+      else
+        format.html { render :show }
         format.json { render json: @sale_list.errors, status: :unprocessable_entity }
       end
     end

@@ -1,4 +1,4 @@
-<table class="show-table">
+<table class="show-table mb-3">
   <tr>
     <th>Date:</th>
     <td><%= @sale_list.date %></td>
@@ -28,6 +28,22 @@
     <td><%= @sale_list.note %></td>
   </tr>
 </table>
+<div class="row mb-3">
+  <div class="col-12 mb-3">
+    <%= link_to 'Add Image', add_images_sale_list_path(@sale_list), class: "btn btn-outline-info" %>
+  </div>
+  <% if @sale_list.avatars.attached? %>
+    <div class="col-12">
+      <h4><u>Images</u></h3>
+    </div>
+    <% @sale_list.avatars.each do |image| %>
+      <div class="col-md-3 col-lg-2 image-box">
+        <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, delete_image_attachment_sale_list_url([@sale_list,image]), method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+        <%= image_tag image, width: "100%" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_sale_list_path(@sale_list), class: "btn btn-info" %>
 <%= link_to 'Back', sale_lists_path, class: "btn btn-secondary" %>
