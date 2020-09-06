@@ -28,11 +28,11 @@
     <% end %>
     <% if @expenses.count < 1 %>
       <tr>
-        <td colspan="6" style="text-align: center;">Empty Datas</td>
+        <td colspan="6" class="text-center">Empty Datas</td>
       </tr>
     <% else %>
       <tr class="bg-secondary text-white">
-        <td colspan="4" style="text-align: center;">Total Amount</td>
+        <td colspan="4" class="text-center">Total Amount</td>
         <td class="text-right"><%= @expenses.map(&:amount).sum %></td>
         <td></td>
       </tr>

@@ -1,0 +1,81 @@
+class CapitalsController < Admin::AdminTemplateController
+  before_action :set_capital, only: [:show, :edit, :update, :destroy]
+  before_action :set_title, only: [:index, :new, :create, :show, :edit, :update]
+
+  # GET /capitals
+  # GET /capitals.json
+  def index
+    @capitals = Capital.where(created_by: current_user.id)
+  end
+
+  # GET /capitals/1
+  # GET /capitals/1.json
+  def show
+  end
+
+  # GET /capitals/new
+  def new
+    @capital = Capital.new
+  end
+
+  # GET /capitals/1/edit
+  def edit
+  end
+
+  # POST /capitals
+  # POST /capitals.json
+  def create
+    @capital = Capital.new(capital_params)
+    @capital.created_by = current_user.id
+
+    respond_to do |format|
+      if @capital.save
+        format.html { redirect_to capitals_path, notice: 'Capital was successfully created.' }
+        format.json { render :index, status: :created, location: @capital }
+      else
+        format.html { render :new }
+        format.json { render json: @capital.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /capitals/1
+  # PATCH/PUT /capitals/1.json
+  def update
+    @capital.created_by = current_user.id
+    respond_to do |format|
+      if @capital.update(capital_params)
+        format.html { redirect_to capitals_path, notice: 'Capital was successfully updated.' }
+        format.json { render :index, status: :ok, location: @capital }
+      else
+        format.html { render :edit }
+        format.json { render json: @capital.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /capitals/1
+  # DELETE /capitals/1.json
+  def destroy
+    @capital.destroy
+    respond_to do |format|
+      format.html { redirect_to capitals_url, notice: 'Capital was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_capital
+      @capital = Capital.find(params[:id])
+    end
+
+    def set_title
+      @title = t("menu_title.business.capital." + params[:action])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def capital_params
+      params.require(:capital).permit(:date, :amount, :category_id, :note)
+    end
+end

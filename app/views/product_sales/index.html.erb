@@ -82,7 +82,7 @@
         });
 
         function showTable() {
-            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Purchase Price</th><th>Remove</th></tr>';
+            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Sale Price</th><th>Remove</th></tr>';
 
             var cart=localStorage.getItem('cart');
             var subtotal=0;
@@ -101,21 +101,21 @@
                     var total=vprice*vqty;
                     subtotal += total;
 
-                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td><input type="number" class="form-control" name="sale_price" id="sale_price_'+vid+'"></td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
+                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td><input type="number" class="form-control" style="width: 100px;" name="sale_price" id="sale_price_'+vid+'"></td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
 
                 }
                 });
                     //tax = subtotal*0.05;
                     //var taxtotal=subtotal+tax;
 
-                table +='<tr class="bg-info text-white"><td colspan=3>Total</td><td colspan=2>'+subtotal+'</td></tr>';
+                table +='<tr class="bg-secondary text-white"><td colspan=3>Total</td><td colspan=3>'+subtotal+'</td></tr>';
                 //table +='<tr><td colspan=3>tax</td><td>'+tax+'</td></tr>';
                 //table +='<tr><td colspan=3>Subtotal</td><td>'+taxtotal+'</td></tr>';
-                table +='<tr><td colspan=3>Customer</td><td colspan=2><select id="customer_id" class="form-control"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
-                table +='<tr><td colspan=3>Date</td><td colspan=2><input id="date_time" type="datetime-local" name="date_time" placeholder="Select Date" class="form-control"></td></tr>';
-                table +='<tr><td colspan=3>First Payment</td><td colspan=2><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
-                table +='<tr><td colspan=3>Note</td><td colspan=2><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td></tr>';
-                table +='<tr><td colspan=5><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
+                table +='<tr><td colspan=2 class="text-right">Customer :</td><td colspan=2><select id="customer_id" class="form-control"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td><td colspan=2></td></tr>';
+                table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=2><input id="date_time" type="datetime-local" name="date_time" placeholder="Select Date" class="form-control"></td><td colspan=2></td></tr>';
+                table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=2><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td><td colspan=2></td></tr>';
+                table +='<tr><td colspan=2 class="text-right">Note :</td><td colspan=2><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td><td colspan=2></td></tr>';
+                table +='<tr><td colspan=4><button class="btn btn-success btn-block order">Checkout</button></td><td colspan=2></td></tr>';
 
                 table +='</table>';
             }

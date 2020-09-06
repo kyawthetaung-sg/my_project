@@ -46,6 +46,7 @@ en:
       sale_list: "Sale List"
       customer: "Customer"
     expense:
+      capital: "Capital"
       category: "Category"
       payment_mode: "Payment Mode"
       income: "Income"
@@ -64,6 +65,20 @@ en:
         index: "Product Sale"
       sale_list:
         index: "Sale List"
+      capital:
+        index: "List of capital"
+        new: "Make capital"
+        create: "Make capital"
+        edit: "Update capital"
+        update: "Update capital"
+        show: "Details of capital"
+      customer:
+        index: "List of customer"
+        new: "Make customer"
+        create: "Make customer"
+        edit: "Update customer"
+        update: "Update customer"
+        show: "Details of customer"
     user_management:
       role:
         permission: "Permission"
@@ -105,14 +120,14 @@ en:
     index:
       initial_capital: "Initial Capital"
       remain_capital: "Remain Capital"
-      sold_out_capital: "Sales Capital"
+      sold_out_capital: "Capital for sale"
       total_capital: "Total Capital"
       final_capital: "Final Capital"
-      sold_out_amount_cash: "Sold Out Amount (Cash)"
-      sold_out_amount_debt: "Sold Out Amount (Debt)"
+      sold_out_amount_cash: "Amount of sales (Cash)"
+      sold_out_amount_debt: "Amount of sales (Debt)"
       final_amount: "Final Amount"
       profit: "Profit"
-      sold_out_amount: "Sold Out Amount"
+      sold_out_amount: "Amount of sales"
       total_profit: "Total Profit"
 
   customers:

@@ -1,0 +1,41 @@
+<%= form_with(model: capital, local: true) do |form| %>
+  <% if capital.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(capital.errors.count, "error") %> prohibited this capital from being saved:</h2>
+
+      <ul>
+        <% capital.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :date %>
+    <%= form.date_select :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: :any, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :category_id %>
+    <%= form.select(:category_id, Category.where(created_by: current_user.id).collect {|category| [category.name, category.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :note %>
+    <%= form.text_area :note, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-info" %>
+    <%= link_to 'Cancel', capitals_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

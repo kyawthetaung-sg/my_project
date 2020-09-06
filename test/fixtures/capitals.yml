@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2020-08-13
+  amount: 9.99
+  category: one
+  note: MyText
+
+two:
+  date: 2020-08-13
+  amount: 9.99
+  category: two
+  note: MyText

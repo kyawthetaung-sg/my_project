@@ -3,7 +3,7 @@ class CreateSaleLists < ActiveRecord::Migration[6.0]
     create_table :sale_lists do |t|
       t.datetime :date
       t.references :customer, null: false, foreign_key: true
-      t.float :first_payment, null: false, default: 0
+      t.decimal :first_payment, null: false, default: 0
       t.string :image
       t.text :note
       t.datetime :deleted_at

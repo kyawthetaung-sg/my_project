@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_073313) do
+ActiveRecord::Schema.define(version: 2020_08_13_025543) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 2020_08_12_073313) do
 
   create_table "business_types", force: :cascade do |t|
     t.string "name"
-    t.float "purchase_price"
-    t.float "sale_price"
+    t.decimal "purchase_price"
+    t.decimal "sale_price"
     t.integer "quantity"
     t.integer "category_id", null: false
     t.datetime "deleted_at"
@@ -50,6 +50,24 @@ ActiveRecord::Schema.define(version: 2020_08_12_073313) do
     t.index ["deleted_at"], name: "index_business_types_on_deleted_at"
     t.index ["deleted_by"], name: "index_business_types_on_deleted_by"
     t.index ["updated_by"], name: "index_business_types_on_updated_by"
+  end
+
+  create_table "capitals", force: :cascade do |t|
+    t.date "date"
+    t.decimal "amount"
+    t.integer "category_id", null: false
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_capitals_on_category_id"
+    t.index ["created_by"], name: "index_capitals_on_created_by"
+    t.index ["deleted_at"], name: "index_capitals_on_deleted_at"
+    t.index ["deleted_by"], name: "index_capitals_on_deleted_by"
+    t.index ["updated_by"], name: "index_capitals_on_updated_by"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -176,7 +194,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_073313) do
   create_table "sale_list_business_types", id: false, force: :cascade do |t|
     t.integer "sale_list_id", null: false
     t.integer "business_type_id", null: false
-    t.float "sale_price"
+    t.decimal "sale_price"
     t.datetime "deleted_at"
     t.integer "created_by", limit: 8
     t.integer "updated_by", limit: 8
@@ -194,7 +212,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_073313) do
   create_table "sale_lists", force: :cascade do |t|
     t.datetime "date"
     t.integer "customer_id", null: false
-    t.float "first_payment", default: 0.0, null: false
+    t.decimal "first_payment", default: "0.0", null: false
     t.string "image"
     t.text "note"
     t.datetime "deleted_at"
@@ -256,6 +274,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_073313) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_types", "categories"
+  add_foreign_key "capitals", "categories"
   add_foreign_key "expenses", "expense_categories"
   add_foreign_key "expenses", "payment_modes"
   add_foreign_key "incomes", "expense_categories"

@@ -1,10 +1,10 @@
 class CustomersController < Admin::AdminTemplateController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_title, only: [:index, :new, :create, :show, :edit, :update]
 
   # GET /customers
   # GET /customers.json
   def index
-    @title = "Customer Lists"
     @customers = Customer.filter(params.slice(:name))
     @customers = @customers.where(created_by: current_user.id)
   end
@@ -12,24 +12,20 @@ class CustomersController < Admin::AdminTemplateController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @title = "Customer Details"
   end
 
   # GET /customers/new
   def new
-    @title = "Customer Creation"
     @customer = Customer.new
   end
 
   # GET /customers/1/edit
   def edit
-    @title = "Customer Editing"
   end
 
   # POST /customers
   # POST /customers.json
   def create
-    @title = "Customer Creation"
     @customer = Customer.new(customer_params)
     @customer.created_by = current_user.id
 
@@ -47,7 +43,6 @@ class CustomersController < Admin::AdminTemplateController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
-    @title = "Customer Editing"
     @customer.created_by = current_user.id
     respond_to do |format|
       if @customer.update(customer_params)
@@ -74,6 +69,10 @@ class CustomersController < Admin::AdminTemplateController
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
       @customer = Customer.find(params[:id])
+    end
+
+    def set_title
+      @title = t("menu_title.business.customer." + params[:action])
     end
 
     # Only allow a list of trusted parameters through.
