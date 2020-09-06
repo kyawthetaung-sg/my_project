@@ -4,7 +4,7 @@ module CapitalsHelper
     end
 
     def initial_capital_with_category(category)
-        Capital.where(created_by: current_user.id, category: category).sum(:amount)
+        BusinessType.where(created_by: current_user.id, category: category).sum("quantity * purchase_price")
     end
 
     def using_capital

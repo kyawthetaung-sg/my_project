@@ -4,7 +4,6 @@
   <thead class="text-white bg-secondary">
     <tr>
       <th>Date</th>
-      <th>Category</th>
       <th class="text-right">Capital Amount</th>
       <th>Note</th>
       <th></th>
@@ -15,7 +14,6 @@
     <% @capitals.each do |capital| %>
       <tr>
         <td><%= capital.date %></td>
-        <td><%= capital.category.name %></td>
         <td class="text-right"><%= number_with_precision_format(capital.amount) %></td>
         <td><%= capital.note %></td>
         <td>
@@ -31,7 +29,7 @@
       </tr>
     <% else %>
       <tr class="bg-secondary text-white">
-        <td colspan="2" class="text-center">Total Amount</td>
+        <td class="text-center">Total Amount</td>
         <td class="text-right"><%= number_with_precision_format(@capitals.sum(:amount)) %></td>
         <td colspan="3"></td>
       </tr>

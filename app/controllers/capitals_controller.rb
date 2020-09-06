@@ -76,6 +76,6 @@ class CapitalsController < Admin::AdminTemplateController
 
     # Only allow a list of trusted parameters through.
     def capital_params
-      params.require(:capital).permit(:date, :amount, :category_id, :note)
+      params.require(:capital).permit(:date, :amount, :note)
     end
 end

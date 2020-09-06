@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
   create_table "capitals", force: :cascade do |t|
     t.date "date"
     t.decimal "amount"
-    t.integer "category_id", null: false
     t.text "note"
     t.datetime "deleted_at"
     t.integer "created_by", limit: 8
@@ -63,7 +62,6 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
     t.integer "deleted_by", limit: 8
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_capitals_on_category_id"
     t.index ["created_by"], name: "index_capitals_on_created_by"
     t.index ["deleted_at"], name: "index_capitals_on_deleted_at"
     t.index ["deleted_by"], name: "index_capitals_on_deleted_by"
@@ -274,7 +272,6 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_types", "categories"
-  add_foreign_key "capitals", "categories"
   add_foreign_key "expenses", "expense_categories"
   add_foreign_key "expenses", "payment_modes"
   add_foreign_key "incomes", "expense_categories"

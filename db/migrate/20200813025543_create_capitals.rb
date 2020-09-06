@@ -3,7 +3,6 @@ class CreateCapitals < ActiveRecord::Migration[6.0]
     create_table :capitals do |t|
       t.date :date
       t.decimal :amount
-      t.references :category, null: false, foreign_key: true
       t.text :note
       t.datetime :deleted_at
       t.integer :created_by, :limit => 8

@@ -2,7 +2,7 @@
 
   <a herf="#" id="menu-toggle"><i class="fas fa-bars" id="fa-bars"></i><i class="fas fa-angle-double-left" id="fa-arrow"></i></a>
   <ul class="main-navbar float-right">
-    <li><a href="#"><i class="fas fa-user"></i><i id="navbar-lable"> Kyaw..</i></a></li>
+    <li><a href="#"><i class="fas fa-user"></i><i id="navbar-lable"> <%= current_user.user_name %></i></a></li>
     <li><%= link_to '<i class="fas fa-cog"></i>'.html_safe, settings_path %></li>
     <li><a href="#"><i class="fas fa-bell"></i></a></li>
     <li><%= link_to '<i class="fas fa-sign-out-alt"></i>'.html_safe, destroy_user_session_path, method: :delete %></li>

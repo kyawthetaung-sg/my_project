@@ -13,21 +13,25 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-6 mb-5">
                         <table class="show-table">
-                            <h4><u><%= t 'report.index.initial_capital' %></u></h4>
+                            <h4><u><%= t 'report.index.capital' %></u></h4>
+                            <tr>
+                                <th><%= t 'report.index.initial_capital' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(initial_capital) %></td>
+                            </tr>
                             <tr>
                                 <th><%= t 'report.index.using_capital' %>:</th>
                                 <td class="text-right"><%= number_with_precision_format(using_capital) %></td>
                             </tr>
                             <tr>
-                                <th><%= t 'report.index.remain_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(initial_capital - using_capital) %></td>
+                                <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(sold_out_price - sold_out_price_cash) %></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="text-right">+</td>
+                                <td colspan="2" class="text-right">-</td>
                             </tr>
                             <tr class="bg-secondary text-white">
-                                <th><%= t 'report.index.initial_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(initial_capital) %></td>
+                                <th><%= t 'report.index.remain_capital' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(initial_capital - (using_capital + (sold_out_price - sold_out_price_cash))) %></td>
                             </tr>
                             <tr>
                                 <th><%= t 'report.index.profit' %>:</th>
@@ -38,7 +42,7 @@
                             </tr>
                             <tr class="bg-secondary text-white">
                                 <th><%= t 'report.index.final_amount' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(initial_capital + (sold_out_price - sould_out_capital)) %></td>
+                                <td class="text-right"><%= number_with_precision_format((initial_capital - (using_capital + (sold_out_price - sold_out_price_cash))) + (sold_out_price - sould_out_capital)) %></td>
                             </tr>
                         </table>
                     </div>
@@ -89,20 +93,20 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-6 mb-5">
                             <table class="show-table">
-                                <h4><u><%= t 'report.index.initial_capital' %></u></h4>
+                                <h4><u><%= t 'report.index.using_capital' %></u></h4>
                                 <tr>
-                                    <th><%= t 'report.index.using_capital' %>:</th>
+                                    <th><%= t 'report.index.remain_capital' %>:</th>
                                     <td class="text-right"><%= number_with_precision_format(using_capital_with_category(category)) %></td>
                                 </tr>
                                 <tr>
-                                    <th><%= t 'report.index.remain_capital' %>:</th>
+                                    <th><%= t 'report.index.sold_out_capital' %>:</th>
                                     <td class="text-right"><%= number_with_precision_format(initial_capital_with_category(category) - using_capital_with_category(category)) %></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right">+</td>
                                 </tr>
                                 <tr class="bg-secondary text-white">
-                                    <th><%= t 'report.index.initial_capital' %>:</th>
+                                    <th><%= t 'report.index.using_capital' %>:</th>
                                     <td class="text-right"><%= number_with_precision_format(initial_capital_with_category(category)) %></td>
                                 </tr>
                                 <tr>
