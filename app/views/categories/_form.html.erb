@@ -16,6 +16,22 @@
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <%= form.label :show_sale %><br />
+    <%= form.label :show_sale, "Yes", :value => "true"  %>
+    <%= form.radio_button :show_sale, true  %>
+    <%= form.label :show_sale, "No", :value => "false" %>
+    <%= form.radio_button :show_sale, false  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :show_report %><br />
+    <%= form.label :show_report, "Yes", :value => "true"  %>
+    <%= form.radio_button :show_report, true  %>
+    <%= form.label :show_report, "No", :value => "false" %>
+    <%= form.radio_button :show_report, false  %>
+  </div>
+
   <div class="actions">
     <%= form.submit class: "btn btn-info" %>
     <%= link_to 'Cancel', categories_path, class: "btn btn-secondary" %>

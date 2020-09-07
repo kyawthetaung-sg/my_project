@@ -72,6 +72,13 @@ en:
         edit: "Update capital"
         update: "Update capital"
         show: "Details of capital"
+      general_expense:
+        index: "List of general expense"
+        new: "Make general expense"
+        create: "Make general expense"
+        edit: "Update general expense"
+        update: "Update general expense"
+        show: "Details of general expense"
       customer:
         index: "List of customer"
         new: "Make customer"

@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @capital.date %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @capital.amount %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @capital.note %>
-</p>
-
-<%= link_to 'Edit', edit_capital_path(@capital) %> |
-<%= link_to 'Back', capitals_path %>
+<table class="mb-3 show-table">
+  <tr>
+    <th>Date:</th>
+    <td><%= @capital.date.strftime("%d-%m-%Y") %></td>
+  </tr>
+  <tr>
+    <th>Amount:</th>
+    <td><%= @capital.amount %></td>
+  </tr>
+  <tr>
+    <th>Note:</th>
+    <td><%= @capital.note %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_capital_path(@capital), class: "btn btn-info" %>
+<%= link_to 'Back', capitals_path, class: "btn btn-secondary" %>

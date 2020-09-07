@@ -1,7 +1,7 @@
 class ProductSalesController < Admin::AdminTemplateController
   def index
     @title = t("menu_title.business.product_sale.index")
-    @categories = Category.where(created_by: current_user.id)
+    @categories = Category.where(created_by: current_user.id, show_sale: true)
     @business_types = BusinessType.where(created_by: current_user.id)
     @customers = Customer.where(created_by: current_user.id)
   end

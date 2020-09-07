@@ -4,6 +4,8 @@
   <thead class="text-white bg-secondary">
     <tr>
       <th>Name</th>
+      <th>Show sale</th>
+      <th>Show in report</th>
       <th></th>
     </tr>
   </thead>
@@ -12,10 +14,12 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
+        <td><%= category.show_sale ? '<i class="fas fa-check-circle text-success"></i>'.html_safe : '<i class="fas fa-times-circle text-danger"></i>'.html_safe %></td>
+        <td><%= category.show_report ? '<i class="fas fa-check-circle text-success"></i>'.html_safe : '<i class="fas fa-times-circle text-danger"></i>'.html_safe %></td>
         <td>
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, category, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
           <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_category_path(category), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
-          <% if category.business_types.count > 0 || category.capitals.count > 0 %>
+          <% if category.business_types.count > 0 || category.general_expenses.count > 0 %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
           <% else %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, category, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
@@ -25,7 +29,7 @@
     <% end %>
     <% if @categories.count < 1 %>
       <tr>
-        <td colspan="4" class="text-center">Empty Datas</td>
+        <td colspan="6" class="text-center">Empty Datas</td>
       </tr>
     <% end %>
   </tbody>

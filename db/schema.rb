@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_025543) do
+ActiveRecord::Schema.define(version: 2020_09_07_014922) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
     t.integer "deleted_by", limit: 8
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "show_sale", default: true
+    t.boolean "show_report", default: true
     t.index ["created_by"], name: "index_categories_on_created_by"
     t.index ["deleted_at"], name: "index_categories_on_deleted_at"
     t.index ["deleted_by"], name: "index_categories_on_deleted_by"
@@ -131,6 +133,24 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
     t.index ["expense_category_id"], name: "index_expenses_on_expense_category_id"
     t.index ["payment_mode_id"], name: "index_expenses_on_payment_mode_id"
     t.index ["updated_by"], name: "index_expenses_on_updated_by"
+  end
+
+  create_table "general_expenses", force: :cascade do |t|
+    t.date "date"
+    t.integer "category_id", null: false
+    t.integer "amount"
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_general_expenses_on_category_id"
+    t.index ["created_by"], name: "index_general_expenses_on_created_by"
+    t.index ["deleted_at"], name: "index_general_expenses_on_deleted_at"
+    t.index ["deleted_by"], name: "index_general_expenses_on_deleted_by"
+    t.index ["updated_by"], name: "index_general_expenses_on_updated_by"
   end
 
   create_table "incomes", force: :cascade do |t|
@@ -274,6 +294,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_025543) do
   add_foreign_key "business_types", "categories"
   add_foreign_key "expenses", "expense_categories"
   add_foreign_key "expenses", "payment_modes"
+  add_foreign_key "general_expenses", "categories"
   add_foreign_key "incomes", "expense_categories"
   add_foreign_key "incomes", "payment_modes"
   add_foreign_key "permissions", "roles"

@@ -1,0 +1,41 @@
+<%= form_with(model: general_expense, local: true) do |form| %>
+  <% if general_expense.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(general_expense.errors.count, "error") %> prohibited this general_expense from being saved:</h2>
+
+      <ul>
+        <% general_expense.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :date %>
+    <%= form.date_select :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :category_id %>
+    <%= form.select(:category_id, Category.where(created_by: current_user.id).collect {|category| [category.name, category.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <span class="badge badge-danger"><%= t('form_action.required') %></span>
+    <%= form.label :amount %>
+    <%= form.number_field :amount, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :note %>
+    <%= form.text_area :note, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-info" %>
+    <%= link_to 'Cancel', general_expenses_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

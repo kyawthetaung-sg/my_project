@@ -1,7 +1,7 @@
 <table class="show-table mb-3">
   <tr>
     <th>Date:</th>
-    <td><%= @sale_list.date %></td>
+    <td><%= @sale_list.date.strftime("%d-%m-%Y %I:%M%P") %></td>
   </tr>
   <tr>
     <th>Customer Name:</th>

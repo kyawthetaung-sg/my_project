@@ -51,7 +51,7 @@ class ExpensesController < Admin::AdminTemplateController
   # PATCH/PUT /expenses/1.json
   def update
     @title = 'Expnese'
-    @expense.created_by = current_user.id
+    @expense.updated_by = current_user.id
     respond_to do |format|
       if @expense.update(expense_params)
         format.html { redirect_to expenses_path, notice: 'Expense was successfully updated.' }

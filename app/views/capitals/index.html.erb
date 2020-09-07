@@ -13,7 +13,7 @@
   <tbody>
     <% @capitals.each do |capital| %>
       <tr>
-        <td><%= capital.date %></td>
+        <td><%= capital.date.strftime("%d-%m-%Y") %></td>
         <td class="text-right"><%= number_with_precision_format(capital.amount) %></td>
         <td><%= capital.note %></td>
         <td>

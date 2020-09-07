@@ -1,0 +1,20 @@
+<table class="show-table">
+  <tr>
+    <th>Date:</th>
+    <td><%= @general_expense.date.strftime("%d-%m-%Y") %></td>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><%= @general_expense.category.name %></td>
+  </tr>
+  <tr>
+    <th>Amount:</th>
+    <td><%= @general_expense.amount %></td>
+  </tr>
+  <tr>
+    <th>Note:</th>
+    <td><%= @general_expense.note %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_general_expense_path(@general_expense), class: "btn btn-info" %>
+<%= link_to 'Back', general_expenses_path, class: "btn btn-secondary" %>

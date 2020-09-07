@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :general_expenses
   resources :capitals
   resources :accounts
   resources :expenses
