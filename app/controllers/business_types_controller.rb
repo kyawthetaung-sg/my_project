@@ -4,7 +4,7 @@ class BusinessTypesController < Admin::AdminTemplateController
   # GET /business_types
   # GET /business_types.json
   def index
-    @title = "Business Type Lists"
+    @title = "Product Lists"
     @categories = Category.where(created_by: current_user.id)
     @business_types = BusinessType.filter(params.slice(:category_id, :name))
     @business_types = @business_types.where(created_by: current_user.id)
@@ -13,35 +13,35 @@ class BusinessTypesController < Admin::AdminTemplateController
   # GET /business_types/1
   # GET /business_types/1.json
   def show
-    @title = "Business Type Details"
+    @title = "Product Details"
   end
 
   # GET /business_types/new
   def new
-    @title = "Business Type Creation"
+    @title = "Product Creation"
     @business_type = BusinessType.new
   end
 
   # GET /business_types/1/edit
   def edit
-    @title = "Business Type Editing"
+    @title = "Product Editing"
   end
 
   # GET /business_types/1/add
   def add
-    @title = "Business Type Adding"
+    @title = "Product Adding"
   end
 
   # POST /business_types
   # POST /business_types.json
   def create
-    @title = "Business Type Creation"
+    @title = "Product Creation"
     @business_type = BusinessType.new(business_type_params)
     @business_type.created_by = current_user.id
 
     respond_to do |format|
       if @business_type.save
-        format.html { redirect_to business_types_path, notice: 'Business type was successfully created.' }
+        format.html { redirect_to business_types_path, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @business_type }
       else
         format.html { render :new }
@@ -53,12 +53,12 @@ class BusinessTypesController < Admin::AdminTemplateController
   # PATCH/PUT /business_types/1
   # PATCH/PUT /business_types/1.json
   def update
-    @title = "Business Type Editing"
+    @title = "Product Editing"
     if params[:commit] != "Add"
       @business_type.created_by = current_user.id
       respond_to do |format|
         if @business_type.update(business_type_params)
-          format.html { redirect_to business_types_path, notice: 'Business type was successfully updated.' }
+          format.html { redirect_to business_types_path, notice: 'Product was successfully updated.' }
           format.json { render :show, status: :ok, location: @business_type }
         else
           format.html { render :edit }
@@ -71,7 +71,7 @@ class BusinessTypesController < Admin::AdminTemplateController
       @total_qty = @old_qty + @new_qty
       respond_to do |format|
         if @business_type.update(quantity: @total_qty)
-          format.html { redirect_to business_types_path, notice: 'Business type was successfully added.' }
+          format.html { redirect_to business_types_path, notice: 'Product was successfully added.' }
           format.json { render :show, status: :ok, location: @business_type }
         else
           format.html { render :add }
@@ -86,7 +86,7 @@ class BusinessTypesController < Admin::AdminTemplateController
   def destroy
     @business_type.destroy
     respond_to do |format|
-      format.html { redirect_to business_types_url, notice: 'Business type was successfully destroyed.' }
+      format.html { redirect_to business_types_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -64,7 +64,7 @@ en:
       product_sale:
         index: "Product Sale"
       sale_list:
-        index: "Sale List"
+        index: "Sale Lists"
       capital:
         index: "List of capital"
         new: "Make capital"

@@ -1,9 +1,12 @@
 <%= render 'index_header' %>
 <table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary">
+  <thead class="text-white bg-secondary" id="print-header">
     <tr>
       <th>Category</th>
       <th>Name</th>
+      <th>Quantity:</th>
+      <th>Purchase price:</th>
+      <th class="text-right">Total price:</th>
       <th>Remain Quantity</th>
       <th></th>
     </tr>
@@ -14,8 +17,11 @@
       <tr>
         <td><%= business_type.category.name %></td>
         <td><%= business_type.name %></td>
+        <td><%= business_type.quantity %></td>
+        <td><%= business_type.purchase_price %></td>
+        <td class="text-right"><%= business_type.quantity * business_type.purchase_price %></td>
         <td><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
-        <td>
+        <td class="action">
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
           <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_product") %>
           <% if sould_out_quantity(business_type.id) > 0 %>
@@ -30,7 +36,13 @@
     <% end %>
     <% if @business_types.count < 1 %>
       <tr>
-        <td colspan="8" class="text-center">Empty Datas</td>
+        <td colspan="7" class="text-center">Empty Datas</td>
+      </tr>
+    <% else %>
+      <tr class="bg-secondary text-white" id="print-footer">
+        <td colspan="4" class="text-center">Total</td>
+        <td class="text-right"><%= number_with_precision_format(@business_types.sum("quantity * purchase_price")) %></td>
+        <td colspan="2"></td>
       </tr>
     <% end %>
   </tbody>

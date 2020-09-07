@@ -1,6 +1,6 @@
 <%= render 'index_header' %>
 <table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary">
+  <thead class="text-white bg-secondary" id="print-header">
     <tr>
       <th>Date</th>
       <th>Customer Name</th>
@@ -33,7 +33,7 @@
         <td class="text-right"><%= sale_list.first_payment %></td>
         <td class="text-right"><%= business_type_total_price(sale_list.id) - sale_list.first_payment %></td>
         <td><%= sale_list.note %></td>
-        <td>
+        <td class="action">
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, sale_list, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
           <%= link_to '<i class="fas fa-images"></i>'.html_safe, add_images_sale_list_path(sale_list), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_image") %>
           <%= link_to '<i class="far fa-credit-card"></i>'.html_safe, edit_sale_list_path(sale_list), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_payment") %>
@@ -46,8 +46,8 @@
         <td colspan="8" class="text-center">Empty Datas</td>
       </tr>
     <% else %>
-      <tr class="bg-secondary text-white">
-        <td colspan="3" class="text-right">Total</td>
+      <tr class="bg-secondary text-white" id="print-footer">
+        <td colspan="3" class="text-center">Total</td>
         <td class="text-right"><%= @total_price %></td>
         <td class="text-right"><%= @first_payment %></td>
         <td class="text-right"><%= @remain_price %></td>

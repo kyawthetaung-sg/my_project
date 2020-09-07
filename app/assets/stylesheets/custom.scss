@@ -44,3 +44,18 @@ nav.navbar-index-header {
 .bg-blue-light {
     background-color: #667bd42b !important;
 }
+
+@media print {
+    div#sidebar-wrapper, nav.navbar-wrapper, td.action {
+        display: none;
+    }
+
+    div.main-content, nav.title-navbar-wrapper {
+        margin-left: -200px;
+    }
+
+    #print-header, #print-footer {
+        font-weight: bold !important;
+        color: #000 !important;
+    }
+}

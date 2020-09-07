@@ -1,17 +1,18 @@
 <nav class="navbar navbar-index-header">
-    <%= form_tag sale_lists_path, method: "get", class: "form-inline" do %>
-        <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "name", selected: params[:customer_id]), prompt: "Select a customer", class: "form-control mr-2" %>
-        <%= date_field_tag 'start_date', params[:start_date], class: 'form-control  mr-2', placeholder: "Start" %>
-        <%= date_field_tag 'end_date', params[:end_date], class: 'form-control  mr-2' %>
-        <div class="input-group  mr-2">
-            <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control" %>
-            <div class="input-group-append">
-                <%= button_tag(type: "submit", class: "btn btn-outline-secondary", id: "search-submit") do %>
-                <i class="fas fa-search"></i>
-                <% end %>
-            </div>
-        </div>
-    <% end %>
+  <%= link_to '<i class="fas fa-print"></i>'.html_safe, '#', onclick: "printpage()", class: "btn btn-outline-info" %>
+  <%= form_tag sale_lists_path, method: "get", class: "form-inline" do %>
+      <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "name", selected: params[:customer_id]), prompt: "Select a customer", class: "form-control mr-2" %>
+      <%= date_field_tag 'start_date', params[:start_date], class: 'form-control  mr-2', placeholder: "Start" %>
+      <%= date_field_tag 'end_date', params[:end_date], class: 'form-control  mr-2' %>
+      <div class="input-group  mr-2">
+          <%= text_field_tag :name, params[:name], placeholder: "name", class: "form-control" %>
+          <div class="input-group-append">
+              <%= button_tag(type: "submit", class: "btn btn-outline-secondary", id: "search-submit") do %>
+              <i class="fas fa-search"></i>
+              <% end %>
+          </div>
+      </div>
+  <% end %>
 </nav>
 
 
@@ -27,4 +28,8 @@
   $("#end_date").change(function() {
     $("#search-submit").click();
   });
+
+  function printpage(){
+    window.print()
+  }
 </script>
