@@ -4,23 +4,31 @@
     <tr>
       <th>Category</th>
       <th>Name</th>
-      <th>Quantity</th>
-      <th>Purchase price</th>
+      <th class="text-right">Quantity</th>
+      <th class="text-right">Purchase price</th>
       <th class="text-right">Total price</th>
-      <th>Remain Quantity</th>
+      <th class="text-right">Remain Quantity</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
+    <%
+      @final_total = 0
+      @remain_qty = 0
+    %>
     <% @business_types.each do |business_type| %>
+      <%
+        @final_total += business_type.quantity * business_type.purchase_price
+        @remain_qty += business_type.quantity - sould_out_quantity(business_type.id)
+      %>
       <tr>
         <td><%= business_type.category.name %></td>
         <td><%= business_type.name %></td>
-        <td><%= business_type.quantity %></td>
-        <td><%= business_type.purchase_price %></td>
+        <td class="text-right"><%= business_type.quantity %></td>
+        <td class="text-right"><%= business_type.purchase_price %></td>
         <td class="text-right"><%= business_type.quantity * business_type.purchase_price %></td>
-        <td><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
+        <td class="text-right"><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
         <td class="action">
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
           <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_product") %>
@@ -41,8 +49,9 @@
     <% else %>
       <tr class="bg-secondary text-white" id="print-footer">
         <td colspan="4" class="text-center">Total</td>
-        <td class="text-right"><%= number_with_precision_format(@business_types.sum("quantity * purchase_price")) %></td>
-        <td colspan="2"></td>
+        <td class="text-right"><%= number_with_precision_format(@final_total) %></td>
+        <td class="text-right"><%= @remain_qty %></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
