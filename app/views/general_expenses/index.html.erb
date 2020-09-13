@@ -1,39 +1,41 @@
 <%= render 'index_header' %>
-<table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary">
-    <tr>
-      <th>Date</th>
-      <th>Category</th>
-      <th class="text-right">Amount</th>
-      <th>Note</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary">
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th class="text-right">Amount</th>
+        <th>Note</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @general_expenses.each do |general_expense| %>
-      <tr>
-        <td><%= general_expense.date.strftime("%d-%m-%Y") %></td>
-        <td><%= general_expense.category.name %></td>
-        <td class="text-right"><%= general_expense.amount %></td>
-        <td><%= general_expense.note %></td>
-        <td>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, general_expense, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_general_expense_path(general_expense), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
-          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, general_expense, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
-        </td>
-      </tr>
-    <% end %>
-    <% if @general_expenses.count < 1 %>
-      <tr>
-        <td colspan="5" class="text-center">Empty Datas</td>
-      </tr>
-    <% else %>
-      <tr class="bg-secondary text-white">
-        <td colspan="2" class="text-center">Total Amount</td>
-        <td class="text-right"><%= @general_expenses.map(&:amount).sum %></td>
-        <td colspan="2"></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @general_expenses.each do |general_expense| %>
+        <tr>
+          <td><%= general_expense.date.strftime("%d-%m-%Y") %></td>
+          <td><%= general_expense.category.name %></td>
+          <td class="text-right"><%= general_expense.amount %></td>
+          <td><%= general_expense.note %></td>
+          <td>
+            <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, general_expense, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_general_expense_path(general_expense), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, general_expense, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @general_expenses.count < 1 %>
+        <tr>
+          <td colspan="5" class="text-center">Empty Datas</td>
+        </tr>
+      <% else %>
+        <tr class="bg-secondary text-white">
+          <td colspan="2" class="text-center">Total Amount</td>
+          <td class="text-right"><%= @general_expenses.map(&:amount).sum %></td>
+          <td colspan="2"></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

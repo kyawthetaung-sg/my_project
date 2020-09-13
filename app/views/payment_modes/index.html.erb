@@ -13,7 +13,11 @@
         <td><%= payment_mode.name %></td>
         <td>
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, payment_mode, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_payment_mode_path(payment_mode) %>
+          <% if payment_mode.created_by == nil %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_payment_mode_path(payment_mode) %>
+          <% end %>
           <% if payment_mode.incomes.count > 0 || payment_mode.expenses.count > 0 || payment_mode.created_by == nil %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
           <% else %>

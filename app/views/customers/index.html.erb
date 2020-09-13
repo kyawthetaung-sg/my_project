@@ -1,33 +1,37 @@
 <%= render 'index_header' %>
-<table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary">
-    <tr>
-      <th><%= t '.name' %></th>
-      <th><%= t '.phone_number' %></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary">
+      <tr>
+        <th><%= t '.name' %></th>
+        <th><%= t '.phone_number' %></th>
+        <th><%= t '.note' %></th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.name %></td>
-        <td><%= customer.phone_number %></td>
-        <td>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, customer, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_customer_path(customer), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
-          <% if customer.sale_lists.count > 0 %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
-          <% else %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, customer, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <% if @customers.count < 1 %>
-      <tr>
-        <td colspan="7" class="text-center">Empty Datas</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.name %></td>
+          <td><%= customer.phone_number %></td>
+          <td><%= customer.note %></td>
+          <td>
+            <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, customer, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_customer_path(customer), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+            <% if customer.sale_lists.count > 0 %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+            <% else %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, customer, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @customers.count < 1 %>
+        <tr>
+          <td colspan="7" class="text-center">Empty Datas</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

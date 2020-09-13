@@ -1,38 +1,39 @@
 <%= link_to t("menu_title.business.capital.new"), new_capital_path, class: "btn btn-info" %>
-
-<table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary">
-    <tr>
-      <th>Date</th>
-      <th class="text-right">Capital Amount</th>
-      <th>Note</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @capitals.each do |capital| %>
+<div class="table-responsive">
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary">
       <tr>
-        <td><%= capital.date.strftime("%d-%m-%Y") %></td>
-        <td class="text-right"><%= number_with_precision_format(capital.amount) %></td>
-        <td><%= capital.note %></td>
-        <td>
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, capital, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_capital_path(capital), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
-          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, capital, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
-        </td>
+        <th>Date</th>
+        <th class="text-right">Capital Amount</th>
+        <th>Note</th>
+        <th></th>
       </tr>
-    <% end %>
-    <% if @capitals.count < 1 %>
-      <tr>
-        <td colspan="5" class="text-center">Empty Datas</td>
-      </tr>
-    <% else %>
-      <tr class="bg-secondary text-white">
-        <td class="text-center">Total Amount</td>
-        <td class="text-right"><%= number_with_precision_format(@capitals.sum(:amount)) %></td>
-        <td colspan="3"></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @capitals.each do |capital| %>
+        <tr>
+          <td><%= capital.date.strftime("%d-%m-%Y") %></td>
+          <td class="text-right"><%= number_with_precision_format(capital.amount) %></td>
+          <td><%= capital.note %></td>
+          <td>
+            <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, capital, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_capital_path(capital), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, capital, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @capitals.count < 1 %>
+        <tr>
+          <td colspan="5" class="text-center">Empty Datas</td>
+        </tr>
+      <% else %>
+        <tr class="bg-secondary text-white">
+          <td class="text-center">Total Amount</td>
+          <td class="text-right"><%= number_with_precision_format(@capitals.sum(:amount)) %></td>
+          <td colspan="3"></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

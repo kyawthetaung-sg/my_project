@@ -1,42 +1,44 @@
 <%= render 'index_header' %>
-<table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary" id="print-header">
-    <tr>
-      <th>Category</th>
-      <th>Name</th>
-      <th class="text-right">Quantity</th>
-      <th class="text-right">Sale price</th>
-      <th class="text-right">Total price</th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary" id="print-header">
+      <tr>
+        <th>Category</th>
+        <th>Name</th>
+        <th class="text-right">Quantity</th>
+        <th class="text-right">Sale price</th>
+        <th class="text-right">Total price</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <%
-        @final_total = 0
-    %>
-    <% @product_sale_lists.each do |product_sale_list| %>
+    <tbody>
       <%
-          @qty = total_qty(product_sale_list.business_type_id, product_sale_list.sale_price)
-          @total = @qty * product_sale_list.sale_price
-          @final_total += @total
+          @final_total = 0
       %>
-      <tr>
-          <td><%= product_sale_list.business_type.category.name %></td>
-          <td><%= product_sale_list.business_type.name %></td>
-          <td class="text-right"><%= @qty %></td>
-          <td class="text-right"><%= product_sale_list.sale_price %></td>
-          <td class="text-right"><%= @total %></td>
-      </tr>
-    <% end %>
-    <% if @product_sale_lists.length < 1 %>
-      <tr>
-        <td colspan="5" class="text-center">Empty Datas</td>
-      </tr>
-    <% else %>
-      <tr class="bg-secondary text-white" id="print-footer">
-        <td colspan="4" class="text-center">Total</td>
-        <td class="text-right"><%= number_with_precision_format(@final_total) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% @product_sale_lists.each do |product_sale_list| %>
+        <%
+            @qty = total_qty(product_sale_list.business_type_id, product_sale_list.sale_price)
+            @total = @qty * product_sale_list.sale_price
+            @final_total += @total
+        %>
+        <tr>
+            <td><%= product_sale_list.business_type.category.name %></td>
+            <td><%= product_sale_list.business_type.name %></td>
+            <td class="text-right"><%= @qty %></td>
+            <td class="text-right"><%= product_sale_list.sale_price %></td>
+            <td class="text-right"><%= @total %></td>
+        </tr>
+      <% end %>
+      <% if @product_sale_lists.length < 1 %>
+        <tr>
+          <td colspan="5" class="text-center">Empty Datas</td>
+        </tr>
+      <% else %>
+        <tr class="bg-secondary text-white" id="print-footer">
+          <td colspan="4" class="text-center">Total</td>
+          <td class="text-right"><%= number_with_precision_format(@final_total) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

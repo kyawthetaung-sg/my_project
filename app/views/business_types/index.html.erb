@@ -1,58 +1,74 @@
 <%= render 'index_header' %>
-<table class="table table-striped mt-3">
-  <thead class="text-white bg-secondary" id="print-header">
-    <tr>
-      <th>Category</th>
-      <th>Name</th>
-      <th class="text-right">Quantity</th>
-      <th class="text-right">Purchase price</th>
-      <th class="text-right">Total price</th>
-      <th class="text-right">Remain Quantity</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-striped mt-3">
+    <thead class="text-white bg-secondary" id="print-header">
+      <tr>
+        <th>Category</th>
+        <th>Name</th>
+        <th class="text-right">Quantity</th>
+        <th class="text-right">Purchase price</th>
+        <th class="text-right">Total price</th>
+        <th class="text-right">Remain Quantity</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <%
-      @final_total = 0
-      @remain_qty = 0
-    %>
-    <% @business_types.each do |business_type| %>
+    <tbody>
       <%
-        @final_total += business_type.quantity * business_type.purchase_price
-        @remain_qty += business_type.quantity - sould_out_quantity(business_type.id)
+        @final_total = 0
+        @remain_qty = 0
       %>
-      <tr>
-        <td><%= business_type.category.name %></td>
-        <td><%= business_type.name %></td>
-        <td class="text-right"><%= business_type.quantity %></td>
-        <td class="text-right"><%= business_type.purchase_price %></td>
-        <td class="text-right"><%= business_type.quantity * business_type.purchase_price %></td>
-        <td class="text-right"><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
-        <td class="action">
-          <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
-          <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_product") %>
-          <% if sould_out_quantity(business_type.id) > 0 %>
-            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
-          <% else %>
-            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
-            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, business_type, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <% if @business_types.count < 1 %>
-      <tr>
-        <td colspan="7" class="text-center">Empty Datas</td>
-      </tr>
-    <% else %>
-      <tr class="bg-secondary text-white" id="print-footer">
-        <td colspan="4" class="text-center">Total</td>
-        <td class="text-right"><%= number_with_precision_format(@final_total) %></td>
-        <td class="text-right"><%= @remain_qty %></td>
-        <td></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% @business_types.each do |business_type| %>
+        <%
+          @final_total += business_type.quantity * business_type.purchase_price
+          @remain_qty += business_type.quantity - sould_out_quantity(business_type.id)
+        %>
+        <tr>
+          <td><%= business_type.category.name %></td>
+          <td><%= business_type.name %></td>
+          <td class="text-right"><%= business_type.quantity %></td>
+          <td class="text-right"><%= business_type.purchase_price %></td>
+          <td class="text-right"><%= business_type.quantity * business_type.purchase_price %></td>
+          <td class="text-right"><%= business_type.quantity - sould_out_quantity(business_type.id) %></td>
+          <td class="action">
+            <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, business_type, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
+            <%= link_to '<i class="fas fa-plus-circle"></i>'.html_safe, add_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_product") %>
+            <% if sould_out_quantity(business_type.id) > 0 %>
+              <%= link_to '<i class="fas fa-edit"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+            <% else %>
+              <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_business_type_path(business_type), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.edit") %>
+              <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, business_type, method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.delete") %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @business_types.count < 1 %>
+        <tr>
+          <td colspan="7" class="text-center">Empty Datas</td>
+        </tr>
+      <% else %>
+        <tr class="bg-secondary text-white" id="print-footer">
+          <td colspan="4" class="text-center">Total</td>
+          <td class="text-right"><%= number_with_precision_format(@final_total) %></td>
+          <td class="text-right"><%= @remain_qty %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<nav class="navbar navbar-index-header">
+  <%= form_tag business_types_path, method: :get do %>
+    <%= select_tag :limit, options_for_select([25, 50, 100], selected: params[:limit]) %>
+    <%= submit_tag "", :id => 'page-submit', :style => "display: none;" %>
+    <label>records per page</label>
+  <% end %>
+  <%= paginate @business_types %>
+</nav>
+
+<script>
+  $("#limit").change(function() {
+    $("#page-submit").click();
+  });
+</script>

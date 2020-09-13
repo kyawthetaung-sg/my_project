@@ -13,7 +13,11 @@
         <td><%= expense_category.name %></td>
         <td>
           <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, expense_category, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.permission") %>
-          <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_expense_category_path(expense_category) %>
+          <% if expense_category.created_by == nil %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
+          <% else %>
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_expense_category_path(expense_category) %>
+          <% end %>
           <% if expense_category.incomes.count > 0 || expense_category.expenses.count > 0 || expense_category.created_by == nil %>
             <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, "javascript:void(0)", class: "icon_disabled" %>
           <% else %>
