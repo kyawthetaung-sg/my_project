@@ -3,7 +3,7 @@ class ProductSalesController < Admin::AdminTemplateController
     @title = t("menu_title.business.product_sale.index")
     @categories = Category.where(created_by: current_user.id, show_sale: true).order(:name)
     @business_types = BusinessType.where(created_by: current_user.id)
-    @customers = Customer.where(created_by: current_user.id)
+    @customers = Customer.where(created_by: current_user.id).order(:name)
   end
 
   def checkout
