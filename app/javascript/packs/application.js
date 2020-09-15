@@ -11,10 +11,14 @@ require("jquery/src/jquery")
 
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
 
 document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover()
+    $('.select2').select2()
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference

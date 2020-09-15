@@ -7,7 +7,7 @@ class BusinessTypesController < Admin::AdminTemplateController
     @title = "Product Lists"
     @categories = Category.where(created_by: current_user.id)
     @business_types = BusinessType.filter(params.slice(:category_id, :name))
-    @business_types = @business_types.where(created_by: current_user.id).page(params[:page]).per(params[:limit])
+    @business_types = @business_types.where(created_by: current_user.id).order(:category_id).page(params[:page]).per(params[:limit])
   end
 
   # GET /business_types/1

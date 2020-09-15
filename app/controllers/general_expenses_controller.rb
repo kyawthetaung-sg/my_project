@@ -7,7 +7,7 @@ class GeneralExpensesController < Admin::AdminTemplateController
   def index
     @categories = Category.where(created_by: current_user.id)
     @general_expenses = GeneralExpense.filter(params.slice(:category_id, :note))
-    @general_expenses = @general_expenses.where(created_by: current_user.id)
+    @general_expenses = @general_expenses.where(created_by: current_user.id).order(date: :desc)
   end
 
   # GET /general_expenses/1

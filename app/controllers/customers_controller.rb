@@ -6,7 +6,7 @@ class CustomersController < Admin::AdminTemplateController
   # GET /customers.json
   def index
     @customers = Customer.filter(params.slice(:name))
-    @customers = @customers.where(created_by: current_user.id)
+    @customers = @customers.where(created_by: current_user.id).order(:name).page(params[:page]).per(params[:limit])
   end
 
   # GET /customers/1

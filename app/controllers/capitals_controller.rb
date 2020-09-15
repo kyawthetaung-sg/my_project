@@ -5,7 +5,7 @@ class CapitalsController < Admin::AdminTemplateController
   # GET /capitals
   # GET /capitals.json
   def index
-    @capitals = Capital.where(created_by: current_user.id)
+    @capitals = Capital.where(created_by: current_user.id).order(date: :desc)
   end
 
   # GET /capitals/1

@@ -8,5 +8,5 @@ class GeneralExpense < ApplicationRecord
     belongs_to :category
 
   scope :filter_by_category_id, -> (category_id) { where category_id: category_id }
-  scope :filter_by_note, -> (note) { where("note LIKE ?", "#{note}%")}
+  scope :filter_by_note, -> (note) { where("note LIKE ?", "%#{note}%")}
 end

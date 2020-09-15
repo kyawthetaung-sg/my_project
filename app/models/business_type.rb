@@ -12,5 +12,5 @@ class BusinessType < ApplicationRecord
   belongs_to :category
 
   scope :filter_by_category_id, -> (category_id) { where category_id: category_id }
-  scope :filter_by_name, -> (name) { where("name LIKE ?", "#{name}%")}
+  scope :filter_by_name, -> (name) { where("name LIKE ?", "%#{name}%")}
 end

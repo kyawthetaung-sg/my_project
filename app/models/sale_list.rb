@@ -7,4 +7,5 @@ class SaleList < ApplicationRecord
   scope :filter_by_customer_id, -> (customer_id) { where customer_id: customer_id }
   scope :filter_by_start_date, -> (date) { where "date >= (?)", date }
   scope :filter_by_end_date, -> (date) { where "date <= (?)", date }
+  scope :filter_by_note, -> (note) { where("note LIKE ?", "%#{note}%")}
 end

@@ -5,7 +5,7 @@ class CategoriesController < Admin::AdminTemplateController
   # GET /categories.json
   def index
     @title = "Business Category Lists"
-    @categories = Category.where(created_by: current_user.id)
+    @categories = Category.where(created_by: current_user.id).order(:name)
   end
 
   # GET /categories/1
