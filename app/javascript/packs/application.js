@@ -14,7 +14,6 @@ import "@fortawesome/fontawesome-free/js/all";
 import $ from 'jquery'
 import 'select2'
 import flatpickr from "flatpickr"
-require("flatpickr/dist/flatpickr.css")
 
 document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="tooltip"]').tooltip()
