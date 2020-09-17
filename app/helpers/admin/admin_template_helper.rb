@@ -28,7 +28,7 @@ module Admin::AdminTemplateHelper
             {condition: true, path: incomes_path, icon_class: "far fa-circle", label: "Income"},
             {condition: true, path: expenses_path, icon_class: "far fa-circle", label: "Expense"},
         ]
-        main_dropdown_link(t("main_sidebar.expense"), "fas fa-wallet", "expenseSubmenu", options)
+        main_dropdown_link(t("main_sidebar.expense")+" (#{ current_user.user_name })", "fas fa-wallet", "expenseSubmenu", options)
     end
 
     def site_setting_links

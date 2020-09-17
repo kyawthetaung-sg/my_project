@@ -13,12 +13,26 @@ import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
 import $ from 'jquery'
 import 'select2'
-import 'select2/dist/css/select2.css'
+import flatpickr from "flatpickr"
+require("flatpickr/dist/flatpickr.css")
 
 document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover()
     $('.select2').select2()
+
+    flatpickr("[data-behavior='flatpickr']", {
+        altInput: true,
+        altFormat: "d M Y",
+        dateFormat: "Y-m-d",
+    })
+
+    flatpickr(".flatpickr.js-flatpickr-dateTime", {
+        enableTime: true,
+        altInput: true,
+        altFormat: 'd-m-Y h:i K',
+        dateFormat: "Y-m-d H:i",
+    })
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference

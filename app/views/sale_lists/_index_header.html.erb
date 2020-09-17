@@ -2,8 +2,8 @@
   <%= link_to '<i class="fas fa-print"></i>'.html_safe, '#', onclick: "printpage()", class: "btn btn-outline-info" %>
   <%= form_tag sale_lists_path, method: "get", class: "form-inline" do %>
       <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "name", selected: params[:customer_id]), prompt: "Select a customer", class: "form-control mr-2 select2" %>
-      <%= date_field_tag 'start_date', params[:start_date], class: 'form-control  mr-2', placeholder: "Start" %>
-      <%= date_field_tag 'end_date', params[:end_date], class: 'form-control  mr-2' %>
+      <%= text_field_tag 'start_date', params[:start_date], class: 'form-control bg-white mr-2 flatpickr js-flatpickr-dateTime', placeholder: "Select start date" %>
+      <%= text_field_tag 'end_date', params[:end_date], class: 'form-control bg-white mr-2 flatpickr js-flatpickr-dateTime', placeholder: "Select end date" %>
       <div class="input-group  mr-2">
           <%= text_field_tag :note, params[:note], placeholder: "note", class: "form-control" %>
           <div class="input-group-append">
@@ -17,18 +17,6 @@
 
 
 <script>
-  $("#customer_id").change(function() {
-    $("#search-submit").click();
-  });
-
-  $("#start_date").change(function() {
-    $("#search-submit").click();
-  });
-
-  $("#end_date").change(function() {
-    $("#search-submit").click();
-  });
-
   function printpage(){
     window.print()
   }

@@ -14,31 +14,31 @@
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.text_field :name, class: "form-control", placeholder: true %>
   </div>
 
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :category_id %>
-    <%= form.select(:category_id, Category.where(created_by: current_user.id).collect {|category| [category.name, category.id]}, {:prompt => t('form_action.select')}, { :class => 'form-control select2' }) %>
+    <%= form.select(:category_id, Category.where(created_by: current_user.id).collect {|category| [category.name, category.id]}, {:prompt => t('form_action.select_category')}, { :class => 'form-control select2' }) %>
   </div>
 
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :purchase_price %>
-    <%= form.number_field :purchase_price, step: :any, class: "form-control" %>
+    <%= form.number_field :purchase_price, step: :any, class: "form-control", placeholder: true %>
   </div>
 
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :sale_price %>
-    <%= form.number_field :sale_price, step: :any, class: "form-control" %>
+    <%= form.number_field :sale_price, step: :any, class: "form-control", placeholder: true %>
   </div>
 
   <div class="form-group">
     <span class="badge badge-danger"><%= t('form_action.required') %></span>
     <%= form.label :quantity %>
-    <%= form.number_field :quantity, class: "form-control" %>
+    <%= form.number_field :quantity, class: "form-control", placeholder: true %>
   </div>
 
   <div class="actions">

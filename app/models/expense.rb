@@ -1,6 +1,11 @@
 class Expense < ApplicationRecord
   include Filterable
 
+  validates :date, presence: true
+  validates :expense_category_id, presence: true
+  validates :amount, presence: true
+  validates :payment_mode_id, presence: true
+
   belongs_to :expense_category
   belongs_to :payment_mode
 
