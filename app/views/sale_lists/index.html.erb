@@ -33,7 +33,7 @@
           <td class="text-right"><%= business_type_total_price(sale_list.id) %></td>
           <td class="text-right"><%= sale_list.first_payment %></td>
           <td class="text-right"><%= business_type_total_price(sale_list.id) - sale_list.first_payment %></td>
-          <td><%= sale_list.note %></td>
+          <td><%= sale_list.note.length < 20 ? sale_list.note : sale_list.note[0..20] + "..." %></td>
           <td class="action">
             <%= link_to '<i class="fas fa-info-circle"></i>'.html_safe, sale_list, data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.detail") %>
             <%= link_to '<i class="fas fa-images"></i>'.html_safe, add_images_sale_list_path(sale_list), data: { toggle: 'tooltip', placement: 'bottom' }, title: t("action_button.add_image") %>
