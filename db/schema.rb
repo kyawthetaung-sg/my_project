@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_014922) do
+ActiveRecord::Schema.define(version: 2020_09_18_074118) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -99,6 +99,24 @@ ActiveRecord::Schema.define(version: 2020_09_07_014922) do
     t.index ["deleted_at"], name: "index_customers_on_deleted_at"
     t.index ["deleted_by"], name: "index_customers_on_deleted_by"
     t.index ["updated_by"], name: "index_customers_on_updated_by"
+  end
+
+  create_table "debt_capitals", force: :cascade do |t|
+    t.date "date"
+    t.integer "category_id", null: false
+    t.integer "amount"
+    t.text "note"
+    t.datetime "deleted_at"
+    t.integer "created_by", limit: 8
+    t.integer "updated_by", limit: 8
+    t.integer "deleted_by", limit: 8
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_debt_capitals_on_category_id"
+    t.index ["created_by"], name: "index_debt_capitals_on_created_by"
+    t.index ["deleted_at"], name: "index_debt_capitals_on_deleted_at"
+    t.index ["deleted_by"], name: "index_debt_capitals_on_deleted_by"
+    t.index ["updated_by"], name: "index_debt_capitals_on_updated_by"
   end
 
   create_table "expense_categories", force: :cascade do |t|
@@ -292,6 +310,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_014922) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "business_types", "categories"
+  add_foreign_key "debt_capitals", "categories"
   add_foreign_key "expenses", "expense_categories"
   add_foreign_key "expenses", "payment_modes"
   add_foreign_key "general_expenses", "categories"

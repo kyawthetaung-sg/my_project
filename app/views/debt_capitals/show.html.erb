@@ -1,0 +1,20 @@
+<table class="show-table">
+  <tr>
+    <th>Date:</th>
+    <td><%= @debt_capital.date.strftime("%d-%m-%Y") %></td>
+  </tr>
+  <tr>
+    <th>Category:</th>
+    <td><%= @debt_capital.category.name %></td>
+  </tr>
+  <tr>
+    <th>Amount:</th>
+    <td><%= @debt_capital.amount %></td>
+  </tr>
+  <tr>
+    <th>Note:</th>
+    <td><%= @debt_capital.note %></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_debt_capital_path(@debt_capital), class: "btn btn-info" %>
+<%= link_to 'Back', debt_capitals_path, class: "btn btn-secondary" %>

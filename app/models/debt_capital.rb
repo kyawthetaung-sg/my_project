@@ -1,4 +1,4 @@
-class GeneralExpense < ApplicationRecord
+class DebtCapital < ApplicationRecord
   include Filterable
 
   validates :date, presence: true

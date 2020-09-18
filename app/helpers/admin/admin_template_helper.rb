@@ -13,6 +13,7 @@ module Admin::AdminTemplateHelper
             {condition: true, path: sale_lists_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.sale_list")},
             {condition: true, path: product_sale_lists_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.product_sale_list")},
             {condition: true, path: capitals_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.capital")},
+            {condition: true, path: debt_capitals_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.debt_capital")},
             {condition: true, path: general_expenses_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.general_expense")},
             {condition: true, path: categories_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.category")},
             {condition: true, path: business_types_path, icon_class: "far fa-circle", label: t("sub_sidebar.business.product")},
