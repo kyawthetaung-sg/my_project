@@ -40,22 +40,89 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
+    function changeSalePrice(e){
+        var newSalePrice = $(e).val();
+        var id = $(e).data('id');
+
+        var cart=localStorage.getItem('cart');
+        var cartjson= JSON.parse(cart);
+
+        $.each(cartjson['itemList'],function(i,v) {
+            if(v){
+                var vid=v.id;
+                if(vid==id){
+                    sale_price=cartjson['itemList'][i].sale_price;
+                    sale_price=newSalePrice;
+                    cartjson['itemList'][i].sale_price=sale_price;
+                }
+            }
+        });
+        localStorage.setItem('cart',JSON.stringify(cartjson));
+        showTable();
+    }
+
+    function showTable() {
+        var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th class="text-right">Price</th><th class="text-right">Amount</th><th>Sale Price</th><th>Remove</th></tr>';
+
+        var cart=localStorage.getItem('cart');
+        var subtotal=0;
+        var discount=0;
+        var finalTotal=0;
+        if (cart) {
+            var cart=localStorage.getItem('cart');
+            var cartjson=JSON.parse(cart);
+
+            $.each(cartjson["itemList"],function(i,v){
+                if (v) {
+                    var vid=v.id;
+                    var vname=v.name;
+                    var vprice=v.price;
+                    var vsalePriceDis=v.sale_price;
+                    var vremain_quantity=v.remain_quantity
+                    var vqty=v.qty;
+                    var total=vprice*vqty;
+                    subtotal += total;
+                    disPrice = (vprice - vsalePriceDis) * vqty;
+                    discount += disPrice;
+
+                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td class="text-right">'+vprice+'</td><td class="text-right">'+total+'</td><td><input type="number" class="form-control" onfocusout="changeSalePrice(this)" value="'+parseInt(vsalePriceDis)+'" style="width: 100px;" name="sale_price" id="sale_price_'+vid+'" data-id="'+vid+'"></td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
+
+                }
+            });
+            finalTotal = subtotal - discount;
+
+            table +='<tr class="bg-secondary text-white"><td colspan=3>Total</td><td class="text-right">'+subtotal+'</td><td colspan=2></td></tr>';
+            table +='<tr><td colspan=3>Discount Price</td><td class="text-right">'+discount+'</td><td colspan=2></td></tr>';
+            table +='<tr><td colspan=3>Final Total</td><td class="text-right">'+finalTotal+'</td><td colspan=2></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">Customer :</td><td colspan=4><select id="customer_id" class="form-control select2"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=4><input id="date_time" type="datetime-local" name="date_time" placeholder="Select Date" class="form-control"></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=4><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">Note :</td><td colspan=4><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td></tr>';
+            table +='<tr><td colspan=6><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
+
+            table +='</table>';
+        }
+
+        $("#dataTable").html(table);
+        $('.select2').select2();
+    }
+
     $("document").ready(function(){
         localStorage.clear();
         $('.sale').click(function(){
-            showTable();
 
             var id= $(this).data('id');
             var name= $(this).data('name');
             var remain_quantity= $(this).data('remain_quantity');
             var price=$(this).data('price');
+            var salePrice=$(this).data('price');
             var cart=localStorage.getItem('cart');
 
             if(!cart){
                 var cart = '{"itemList":[]}';
             }
             var cartjson = JSON.parse(cart);
-            var list = {"id":id,"name":name,"remain_quantity":remain_quantity,"price":price,"qty":1,"remark":'',"sale_price":0};
+            var list = {"id":id,"name":name,"remain_quantity":remain_quantity,"price":price,"qty":1,"remark":'',"sale_price":salePrice};
             var status=0;
 
             $.each(cartjson["itemList"],function(i,v){
@@ -81,49 +148,6 @@
             localStorage.setItem('cart',JSON.stringify(cartjson));
             showTable();
         });
-
-        function showTable() {
-            var table='<table class="table table-striped"><tr><th>Name</th><th>Qty</th><th>Price</th><th>Amount</th><th>Sale Price</th><th>Remove</th></tr>';
-
-            var cart=localStorage.getItem('cart');
-            var subtotal=0;
-            var tax=0;
-            if (cart) {
-                var cart=localStorage.getItem('cart');
-                var cartjson=JSON.parse(cart);
-
-                $.each(cartjson["itemList"],function(i,v){
-                if (v) {
-                    var vid=v.id;
-                    var vname=v.name;
-                    var vprice=v.price;
-                    var vremain_quantity=v.remain_quantity
-                    var vqty=v.qty;
-                    var total=vprice*vqty;
-                    subtotal += total;
-
-                    table += '<tr><td>'+vname+'</td><td><button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-success plus btn-sm">+</button>['+vqty+']<button data-id="'+vid+'" data-remain_quantity="'+vremain_quantity+'" class="btn btn-danger minusbutton btn-sm">-</button></td><td>'+vprice+'</td><td>'+total+'</td><td><input type="number" class="form-control" style="width: 100px;" name="sale_price" id="sale_price_'+vid+'"></td><td ><button data-id="'+vid+'" class="btn btn-danger removebutton btn-sm">&times</ button></td></tr>';
-
-                }
-                });
-                    //tax = subtotal*0.05;
-                    //var taxtotal=subtotal+tax;
-
-                table +='<tr class="bg-secondary text-white"><td colspan=3>Total</td><td colspan=3>'+subtotal+'</td></tr>';
-                //table +='<tr><td colspan=3>tax</td><td>'+tax+'</td></tr>';
-                //table +='<tr><td colspan=3>Subtotal</td><td>'+taxtotal+'</td></tr>';
-                table +='<tr><td colspan=2 class="text-right">Customer :</td><td colspan=2><select id="customer_id" class="form-control select2"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td><td colspan=2></td></tr>';
-                table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=2><input id="date_time" type="datetime-local" name="date_time" placeholder="Select Date" class="form-control"></td><td colspan=2></td></tr>';
-                table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=2><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td><td colspan=2></td></tr>';
-                table +='<tr><td colspan=2 class="text-right">Note :</td><td colspan=2><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td><td colspan=2></td></tr>';
-                table +='<tr><td colspan=4><button class="btn btn-success btn-block order">Checkout</button></td><td colspan=2></td></tr>';
-
-                table +='</table>';
-            }
-
-            $("#dataTable").html(table);
-            $('.select2').select2();
-        }
 
         $('#dataTable').on('click','.plus',function() {
             var id=$(this).data('id');
@@ -225,7 +249,6 @@
                 }
             });
         });
-
     });
 
 </script>
