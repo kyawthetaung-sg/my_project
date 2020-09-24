@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery/src/jquery")
+require("chart.js")
 
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";

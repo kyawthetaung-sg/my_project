@@ -18,4 +18,21 @@ module SaleListsHelper
         end
         return @name
     end
+
+    def sale_list_with_day(day)
+        year = Date.current.year
+        month = Date.current.month
+        begin
+            date = DateTime.parse("#{year}/#{month}/#{day}")
+            SaleListBusinessType.where(created_by: current_user.id).joins(:sale_list).where(:sale_lists => { date: date..date.end_of_day }).sum(:sale_price)
+        rescue ArgumentError
+            0
+        end
+    end
+
+    def sale_list_with_month(month, year)
+        year = year == nil ? Date.current.year : year
+        date = DateTime.parse("#{year}/#{month}/01")
+        SaleListBusinessType.where(created_by: current_user.id).joins(:sale_list).where(:sale_lists => { date: date..date.end_of_month }).sum(:sale_price)
+    end
 end

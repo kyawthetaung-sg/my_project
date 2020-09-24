@@ -21,6 +21,10 @@
                                             <strong><%= business_type.sale_price %></strong>
                                         </button>
                                     </div>
+                                <% else %>
+                                    <div class="col-md-12 text-center">
+                                        <h5 class="text-secondary">Empty Products</h5>
+                                    </div>
                                 <% end %>
                             <% end %>
                         <% else %>
@@ -33,7 +37,7 @@
             <% end %>
         </div>
     </div>
-    <div class="col-md-6" id="dataTable">
+    <div class="col-md-6 table-responsive" id="dataTable" >
 
     </div>
 </div>

@@ -3,8 +3,8 @@
   <%= form_tag incomes_path, method: "get", class: "form-inline" do %>
     <%= select_tag "expense_category_id", options_from_collection_for_select(@expense_categories, "id", "name", selected: params[:expense_category_id]), prompt: "Select a category", class: "form-control mr-2 select2" %>
     <%= select_tag "payment_mode_id", options_from_collection_for_select(@payment_modes, "id", "name", selected: params[:payment_mode_id]), prompt: "Select a payment", class: "form-control mr-2 select2" %>
-    <%= text_field_tag 'start_date', params[:start_date], class: 'form-control bg-white mr-2 flatpickr js-flatpickr-dateTime', placeholder: "Select start date" %>
-    <%= text_field_tag 'end_date', params[:end_date], class: 'form-control bg-white mr-2 flatpickr js-flatpickr-dateTime', placeholder: "Select end date" %>
+    <%= text_field_tag 'start_date', params[:start_date], class: 'form-control bg-white mr-2', data: { behavior: "flatpickr" }, placeholder: "Select start date" %>
+    <%= text_field_tag 'end_date', params[:end_date], class: 'form-control bg-white mr-2', data: { behavior: "flatpickr" }, placeholder: "Select end date" %>
     <div class="input-group mr-2">
         <%= text_field_tag :note, params[:note], placeholder: "note", class: "form-control" %>
         <div class="input-group-append">

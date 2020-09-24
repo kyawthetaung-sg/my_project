@@ -195,4 +195,32 @@
             <% end %>
         </div>
     </div>
+    <div class="col-md-12 mt-3">
+        <div class="col-md-4 col-sm-6 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <%= t 'report.index.expense' %>
+                </div>
+                <div class="card-body">
+                    <table class="show-table">
+                        <tr>
+                            <th><%= t 'report.index.income' %>:</th>
+                            <td class="text-right"><%= number_with_precision_format(income_amount) %></td>
+                        </tr>
+                        <tr>
+                            <th><%= t 'report.index.expense' %>:</th>
+                            <td class="text-right"><%= number_with_precision_format(expense_amount) %></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-right">-</td>
+                        </tr>
+                        <tr class="bg-secondary text-white">
+                            <th><%= t 'report.index.remain_amount' %>:</th>
+                            <td class="text-right"><%= number_with_precision_format(income_amount - expense_amount) %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
