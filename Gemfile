@@ -28,6 +28,8 @@ gem 'devise'
 
 gem 'pry'
 gem 'kaminari'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
