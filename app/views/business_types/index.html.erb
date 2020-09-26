@@ -47,7 +47,7 @@
         <tr>
           <td colspan="7" class="text-center">Empty Datas</td>
         </tr>
-      <% else %>
+      <% elsif params[:category_id] && params[:category_id] != "" %>
         <tr class="bg-secondary text-white" id="print-footer">
           <td colspan="4" class="text-center">Total</td>
           <td class="text-right"><%= number_with_precision_format(@final_total) %></td>

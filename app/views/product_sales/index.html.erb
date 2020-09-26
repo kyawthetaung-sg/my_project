@@ -97,9 +97,9 @@
 
             table +='<tr class="bg-secondary text-white"><td colspan=3>Total</td><td class="text-right">'+subtotal+'</td><td colspan=2></td></tr>';
             table +='<tr><td colspan=3>Discount Price</td><td class="text-right">'+discount+'</td><td colspan=2></td></tr>';
-            table +='<tr><td colspan=3>Final Total</td><td class="text-right">'+finalTotal+'</td><td colspan=2></td></tr>';
+            table +='<tr class="bg-secondary text-white"><td colspan=3>Final Total</td><td class="text-right">'+finalTotal+'</td><td colspan=2></td></tr>';
             table +='<tr><td colspan=2 class="text-right">Customer :</td><td colspan=4><select id="customer_id" class="form-control select2"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
-            table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=4><input id="date_time" type="datetime-local" name="date_time" placeholder="Select Date" class="form-control"></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=4><input id="date_time" type="text" name="date_time" placeholder="Select Date & Time" class="form-control bg-white flatpickr-sale js-flatpickr-sale-dateTime"></td></tr>';
             table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=4><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
             table +='<tr><td colspan=2 class="text-right">Note :</td><td colspan=4><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td></tr>';
             table +='<tr><td colspan=6><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
@@ -109,6 +109,14 @@
 
         $("#dataTable").html(table);
         $('.select2').select2();
+
+        flatpickr(".flatpickr-sale.js-flatpickr-sale-dateTime", {
+            enableTime: true,
+            altInput: true,
+            altFormat: 'd-m-Y h:i K',
+            dateFormat: "Y-m-d H:i",
+            defaultDate: new Date()
+        });
     }
 
     $("document").ready(function(){
