@@ -1,6 +1,8 @@
 class SaleList < ApplicationRecord
   include Filterable
 
+  paginates_per 25
+
   belongs_to :customer
   has_many_attached :avatars
 

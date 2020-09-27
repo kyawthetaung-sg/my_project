@@ -45,21 +45,6 @@ nav.navbar-index-header {
     background-color: #667bd42b !important;
 }
 
-@media print {
-    div#sidebar-wrapper, nav.navbar-wrapper, td.action {
-        display: none;
-    }
-
-    div.main-content, nav.title-navbar-wrapper {
-        margin-left: -200px;
-    }
-
-    #print-header, #print-footer {
-        font-weight: bold !important;
-        color: #000 !important;
-    }
-}
-
 .page-item.active .page-link {
     background-color: #17a2b8;
     border-color: #17a2b8;

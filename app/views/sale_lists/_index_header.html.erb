@@ -1,5 +1,5 @@
 <nav class="navbar navbar-index-header">
-  <%= link_to '<i class="fas fa-print"></i>'.html_safe, '#', onclick: "printpage()", class: "btn btn-outline-info" %>
+  <%= link_to '<i class="fas fa-print"></i>'.html_safe, print_sale_lists_print_path(customer_id: params[:customer_id] || '', start_date: params[:start_date] || '', end_date: params[:end_date] || ''), class: "btn btn-info", target: "_blank" %>
   <%= form_tag sale_lists_path, method: "get", class: "form-inline" do %>
       <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "name", selected: params[:customer_id]), prompt: "Select a customer", class: "form-control mr-2 select2" %>
       <%= text_field_tag 'start_date', params[:start_date], class: 'form-control bg-white mr-2', data: { behavior: "flatpickr" }, placeholder: "Select start date" %>
@@ -14,10 +14,3 @@
       </div>
   <% end %>
 </nav>
-
-
-<script>
-  function printpage(){
-    window.print()
-  }
-</script>

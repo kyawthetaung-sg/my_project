@@ -1,0 +1,34 @@
+// Place all the styles related to the PrintTemplate controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.print-logo {
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.print-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.print-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.print-header, .header-space {
+  height: 150px;
+}
+
+.print-footer, .footer-space {
+    height: 50px;
+}
+
+.print-table {
+    width: 100%;
+}

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'print/sale_lists_print'
   resources :debt_capitals
   resources :product_sale_lists
   resources :general_expenses

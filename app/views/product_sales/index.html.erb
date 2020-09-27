@@ -16,7 +16,11 @@
                                 <% if business_type.quantity - sould_out_quantity(business_type.id) > 0 %>
                                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6" style="margin-top: 5px;">
                                         <button href="#" id="sale" data-id="<%= business_type.id %>" data-name="<%= business_type.name %>" data-remain_quantity="<%= business_type.quantity - sould_out_quantity(business_type.id) %>" data-price="<%= business_type.sale_price %>" class="btn sale btn-outline-info btn-block">
-                                            <h4><%= business_type.name %></h4>
+                                            <% if business_type.name.length > 10 %>
+                                                <p style="font-size: 12px;"><%= business_type.name %></p>
+                                            <% else %>
+                                                <h4><%= business_type.name %></h4>
+                                            <% end %>
                                             <span class="badge badge-success">Qty=<%= business_type.quantity - sould_out_quantity(business_type.id) %></span>
                                             <strong><%= business_type.sale_price %></strong>
                                         </button>

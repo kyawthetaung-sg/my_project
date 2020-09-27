@@ -58,3 +58,17 @@
     </tbody>
   </table>
 </div>
+<nav class="navbar navbar-index-header">
+  <%= form_tag sale_lists_path, method: :get do %>
+    <%= select_tag :limit, options_for_select([25, 50, 100], selected: params[:limit]) %>
+    <%= submit_tag "", :id => 'page-submit', :style => "display: none;" %>
+    <label>records per page</label>
+  <% end %>
+  <%= paginate @sale_lists %>
+</nav>
+
+<script>
+  $("#limit").change(function() {
+    $("#page-submit").click();
+  });
+</script>

@@ -6,13 +6,7 @@ class SaleListsController < Admin::AdminTemplateController
     @customers = Customer.where(created_by: current_user)
 
     @sale_lists = SaleList.filter(params.slice(:customer_id, :start_date, :end_date, :note))
-    @sale_lists = @sale_lists.where(created_by: current_user.id).order(date: :desc)
-
-    respond_to do |format|
-      format.html
-      format.json
-      format.pdf {render template: 'sale_lists/report', pdf: 'Report'}
-    end
+    @sale_lists = @sale_lists.where(created_by: current_user.id).order(date: :desc).page(params[:page]).per(params[:limit])
   end
 
   def destroy
