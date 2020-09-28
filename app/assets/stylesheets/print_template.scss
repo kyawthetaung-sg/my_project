@@ -3,10 +3,11 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .print-logo {
-    height: 100px;
+    height: 120px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 30px;
 }
 
 .print-header {
@@ -15,14 +16,19 @@
     top: 0;
 }
 
+.print-content {
+    padding: 0 30px;
+}
+
 .print-footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    padding-left: 30px;
 }
 
 .print-header, .header-space {
-  height: 150px;
+  height: 170px;
 }
 
 .print-footer, .footer-space {
@@ -31,4 +37,46 @@
 
 .print-table {
     width: 100%;
+}
+
+.slip-sub-header {
+    background: rgba(179, 178, 178, 0.438);
+    padding-top: 30px;
+}
+
+.slip-content {
+    padding: 25px;
+}
+
+.slip-logo {
+    height: 100px;
+    margin-left: 5%;
+    margin-top: -90px;
+}
+
+.slip-title {
+    margin-left: 20%;
+}
+
+.slip-ph {
+    background: #333;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+table.slip-table {
+    width: 100%;
+    border-collapse: separate;
+}
+
+table.slip-table th, table.slip-table td {
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+table.slip-table th {
+    background: #000;
+    color: #fff;
 }

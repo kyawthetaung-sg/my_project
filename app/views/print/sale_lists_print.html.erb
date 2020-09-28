@@ -9,7 +9,6 @@
   <tbody>
     <tr><td>
         <div class="print-content">
-            <h3><u>Sale Lists</u></h3>
             <div class="text-right d-block">
                 <% if params[:start_date] != '' && params[:end_date] != '' %>
                     <b>Date: </b><%= DateTime.parse(params[:start_date]).strftime("%d-%m-%Y") + " to " + DateTime.parse(params[:end_date]).strftime("%d-%m-%Y") %>
@@ -82,7 +81,8 @@
 
 <div class="print-header">
     <%= image_tag("bm.png", :alt => "rss feed", class: "text-center print-logo") %>
-    <h1 class="text-center">Believe Me</h1>
+    <h3 class="text-center">Believe Me</h3>
+    <hr>
 </div> 
 <div class="print-footer">
     <div class="row">

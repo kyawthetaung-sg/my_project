@@ -1,0 +1,96 @@
+<div class="slip-header">
+    <div class="slip-sub-header">
+        <%= image_tag("bm.png", :alt => "rss feed", class: "slip-logo") %>
+        <div class="d-inline-block slip-title">
+            <h3>Believe Me</h3>
+            <b class="ml-3">Online Shop</b><br>
+            <span class="ml-5">62nd Street, Mandalay.</span>
+        </div>
+    </di>
+    <div class="slip-ph">Tel : 09969769295</div>
+</div> 
+<div class="slip-content">
+    <div class="d-inline"><b>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </b><%= @sale_list.customer.name %></div>
+    <div class="float-right d-inline-block"><b>Date: </b><%= @sale_list.date.strftime("%d-%m-%Y") %></div>
+    <div class="mb-2"><b>Address : </b><%= @sale_list.customer.address %></div>
+    <table class="slip-table">
+        <thead id="print-header">
+            <tr>
+                <th class="text-center">No.</th>
+                <th class="text-center">Items</th>
+                <th class="text-center">Qty;</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Amount</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <%
+                @no = 0
+                @total_price = 0
+                @final_total = 0
+            %>
+            <% @sale_list_products.each do |sale_list_product| %>
+                <%
+                    @qty = total_qty_slip(@sale_list.id, sale_list_product.business_type_id)
+                    @total = @qty * sale_list_product.business_type.sale_price
+                    @total_price += @total
+                %>
+                <tr>
+                    <td class="text-center"><%= @no += 1 %></td>
+                    <td><%= sale_list_product.business_type.name %></td>
+                    <td class="text-center"><%= @qty %></td>
+                    <td class="text-right"><%= sale_list_product.business_type.sale_price %></td>
+                    <td class="text-right"><%= @total %></td>
+                </tr>
+            <% end %>
+            <% if @sale_list_products.length < 5 %>
+                <% (1..10).to_a.each do |t| %>
+                    <tr>
+                        <td style="height: 26px;"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            <% if @sale_list_products.length > 5 && @sale_list_products.length < 10 %>
+                <% (1..5).to_a.each do |t| %>
+                    <tr>
+                        <td style="height: 26px;"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            <tr>
+                <td colspan=3 class="border-0"></td>
+                <th class="text-center">Amount</th>
+                <td class="text-right"><%= @total_price %></td>
+            </tr>
+            <tr>
+                <td colspan=3 class="border-0"></td>
+                <th class="text-center">Discount</th>
+                <td class="text-right"><%= @total_price - total_price_slip(@sale_list.id) %></td>
+            </tr>
+            <tr>
+                <td colspan=3 class="border-0"></td>
+                <th class="text-center">Total</th>
+                <td class="text-right"><%= total_price_slip(@sale_list.id) %></td>
+            </tr>
+            <tr>
+                <td colspan=3 class="border-0"></td>
+                <th class="text-center">Payment</th>
+                <td class="text-right"><%= @sale_list.first_payment %></td>
+            </tr>
+            <tr>
+                <td colspan=3 class="border-0"></td>
+                <th class="text-center">Remain Price</th>
+                <td class="text-right"><%= total_price_slip(@sale_list.id) - @sale_list.first_payment %></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
