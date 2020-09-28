@@ -8,7 +8,7 @@
         </div>
     </di>
     <div class="slip-ph">Tel : 09969769295</div>
-</div> 
+</div>
 <div class="slip-content">
     <div class="d-inline"><b>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </b><%= @sale_list.customer.name %></div>
     <div class="float-right d-inline-block"><b>Date: </b><%= @sale_list.date.strftime("%d-%m-%Y") %></div>
@@ -44,19 +44,8 @@
                     <td class="text-right"><%= @total %></td>
                 </tr>
             <% end %>
-            <% if @sale_list_products.length < 5 %>
-                <% (1..10).to_a.each do |t| %>
-                    <tr>
-                        <td style="height: 26px;"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                <% end %>
-            <% end %>
-            <% if @sale_list_products.length > 5 && @sale_list_products.length < 10 %>
-                <% (1..5).to_a.each do |t| %>
+            <% if @sale_list_products.length < 12 %>
+                <% (1..12 - @sale_list_products.length).to_a.each do |t| %>
                     <tr>
                         <td style="height: 26px;"></td>
                         <td></td>
@@ -87,7 +76,7 @@
                 <td class="text-right"><%= @sale_list.first_payment %></td>
             </tr>
             <tr>
-                <td colspan=3 class="border-0"></td>
+                <td colspan=3 class="border-0">Signature ...................................</td>
                 <th class="text-center">Remain Price</th>
                 <td class="text-right"><%= total_price_slip(@sale_list.id) - @sale_list.first_payment %></td>
             </tr>
