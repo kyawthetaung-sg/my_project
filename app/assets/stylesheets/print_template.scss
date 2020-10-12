@@ -40,7 +40,6 @@
 }
 
 .slip-sub-header {
-    background: rgba(179, 178, 178, 0.438);
     padding-top: 30px;
 }
 
@@ -55,14 +54,13 @@
 }
 
 .slip-title {
-    margin-left: 20%;
+    margin-left: 30%;
 }
 
 .slip-ph {
-    background: #333;
+    background: rgba(179, 178, 178, 0.438);
     text-align: center;
     font-weight: bold;
-    color: #fff;
     margin-bottom: 10px;
 }
 
@@ -74,9 +72,4 @@ table.slip-table {
 table.slip-table th, table.slip-table td {
     border: 1px solid #000;
     border-radius: 3px;
-}
-
-table.slip-table th {
-    background: #000;
-    color: #fff;
 }

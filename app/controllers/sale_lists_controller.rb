@@ -4,8 +4,9 @@ class SaleListsController < Admin::AdminTemplateController
   def index
     @title = t("menu_title.business.sale_list.index")
     @customers = Customer.where(created_by: current_user)
+    @products = BusinessType.where(created_by: current_user)
 
-    @sale_lists = SaleList.filter(params.slice(:customer_id, :start_date, :end_date, :note))
+    @sale_lists = SaleList.filter(params.slice(:customer_id, :product_id, :start_date, :end_date, :note))
     @sale_lists = @sale_lists.where(created_by: current_user.id).order(date: :desc).page(params[:page]).per(params[:limit])
   end
 

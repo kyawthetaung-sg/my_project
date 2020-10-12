@@ -1,7 +1,8 @@
 <nav class="navbar navbar-index-header">
-    <%= link_to '<i class="fas fa-print"></i>'.html_safe, print_sale_lists_print_path(customer_id: params[:customer_id] || '', start_date: params[:start_date] || '', end_date: params[:end_date] || ''), class: "btn btn-outline-info", target: "_blank" %>
+    <%= link_to '<i class="fas fa-print"></i>'.html_safe, print_sale_lists_print_path(customer_id: params[:customer_id] || '', product_id: params[:product_id] || '', start_date: params[:start_date] || '', end_date: params[:end_date] || ''), class: "btn btn-outline-info", target: "_blank" %>
     <%= form_tag sale_lists_path, method: "get", class: "form-inline" do %>
         <%= select_tag "customer_id", options_from_collection_for_select(@customers, "id", "name", selected: params[:customer_id]), prompt: "Select a customer", class: "form-control mr-2 select2" %>
+        <%= select_tag "product_id", options_from_collection_for_select(@products, "id", "name", selected: params[:product_id]), prompt: "Select a product", class: "form-control select2" %>
         <%= text_field_tag 'start_date', params[:start_date], class: 'form-control bg-white mr-2', data: { behavior: "flatpickr" }, placeholder: "Select start date" %>
         <%= text_field_tag 'end_date', params[:end_date], class: 'form-control bg-white mr-2', data: { behavior: "flatpickr" }, placeholder: "Select end date" %>
         <div class="input-group  mr-2">

@@ -7,6 +7,10 @@ class SaleList < ApplicationRecord
   has_many_attached :avatars
 
   scope :filter_by_customer_id, -> (customer_id) { where customer_id: customer_id }
+  scope :filter_by_product_id, -> (product_id) do
+    ids = SaleListBusinessType.where(business_type_id: product_id).distinct.pluck(:sale_list_id)
+    where(id: ids)
+  end
   scope :filter_by_start_date, -> (date) { where "date >= (?)", DateTime.parse(date).beginning_of_day }
   scope :filter_by_end_date, -> (date) { where "date <= (?)", DateTime.parse(date).end_of_day }
   scope :filter_by_note, -> (note) { where("note LIKE ?", "%#{note}%")}
