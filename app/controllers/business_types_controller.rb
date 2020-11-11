@@ -5,7 +5,7 @@ class BusinessTypesController < Admin::AdminTemplateController
   # GET /business_types.json
   def index
     @title = "Product Lists"
-    @categories = Category.where(created_by: current_user.id)
+    @categories = Category.where(created_by: current_user.id).order("name ASC")
     @business_types = BusinessType.filter(params.slice(:category_id, :name))
     @business_types = @business_types.where(created_by: current_user.id).order(:category_id).page(params[:page]).per(params[:limit])
   end

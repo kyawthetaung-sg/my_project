@@ -4,7 +4,7 @@
   <ul class="main-navbar float-right">
     <li><a href="#"><i class="fas fa-user"></i><i id="navbar-lable"> <%= current_user.user_name %></i></a></li>
     <li><%= link_to '<i class="fas fa-cog"></i>'.html_safe, settings_path %></li>
-    <li><a href="http://mycapitalexpenses.herokuapp.com/" target="_blank"><i class="fas fa-wallet"></i></a></li>
+    <li><a href="http://believemecapital.herokuapp.com/" target="_blank"><i class="fas fa-wallet"></i></a></li>
     <li><%= link_to '<i class="fas fa-sign-out-alt"></i>'.html_safe, destroy_user_session_path, method: :delete %></li>
   </ul>
 
