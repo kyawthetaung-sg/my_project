@@ -1,6 +1,8 @@
 class Expense < ApplicationRecord
   include Filterable
 
+  paginates_per 25
+
   validates :date, presence: true
   validates :expense_category_id, presence: true
   validates :amount, presence: true

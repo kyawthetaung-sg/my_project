@@ -9,7 +9,7 @@ class ExpensesController < Admin::AdminTemplateController
     @payment_modes = PaymentMode.where(created_by: current_user.id).or(PaymentMode.where(created_by: nil))
 
     @expenses = Expense.filter(params.slice(:expense_category_id, :payment_mode_id, :note, :start_date, :end_date))
-    @expenses = @expenses.where(created_by: current_user.id)
+    @expenses = @expenses.where(created_by: current_user.id).order("date DESC").page(params[:page]).per(params[:limit])
   end
 
   # GET /expenses/1
