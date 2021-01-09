@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_074118) do
+ActiveRecord::Schema.define(version: 2021_01_09_072407) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_074118) do
     t.integer "deleted_by", limit: 8
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "debt", default: false
     t.index ["created_by"], name: "index_sale_lists_on_created_by"
     t.index ["customer_id"], name: "index_sale_lists_on_customer_id"
     t.index ["deleted_at"], name: "index_sale_lists_on_deleted_at"

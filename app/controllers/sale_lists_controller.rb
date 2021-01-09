@@ -6,7 +6,7 @@ class SaleListsController < Admin::AdminTemplateController
     @customers = Customer.where(created_by: current_user).order("name ASC")
     @products = BusinessType.where(created_by: current_user).order("name ASC")
 
-    @sale_lists = SaleList.filter(params.slice(:customer_id, :product_id, :start_date, :end_date, :note))
+    @sale_lists = SaleList.filter(params.slice(:debt, :customer_id, :product_id, :start_date, :end_date, :note))
     @sale_lists = @sale_lists.where(created_by: current_user.id).order(date: :desc).page(params[:page]).per(params[:limit])
   end
 
@@ -41,9 +41,15 @@ class SaleListsController < Admin::AdminTemplateController
     @second_payment = params.require(:sale_list).permit(:add_payment)[:add_payment].to_i
     @note = params.require(:sale_list).permit(:note)[:note]
     @total_payment = @first_payment + @second_payment
+    debt = false
+    total_price = SaleListBusinessType.where(sale_list_id: @sale_list.id, created_by: current_user.id).sum(:sale_price)
+    remain_price = total_price - @sale_list.first_payment
+    if remain_price > @second_payment
+      debt = true
+    end
 
     respond_to do |format|
-      if @sale_list.update(first_payment: @total_payment, note: @note)
+      if @sale_list.update(first_payment: @total_payment, note: @note, debt: debt)
         format.html { redirect_to sale_lists_path, notice: 'Payment was successfully added.' }
         format.json { render :show, status: :ok, location: @sale_list }
       else

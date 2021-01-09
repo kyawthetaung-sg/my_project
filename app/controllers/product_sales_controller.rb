@@ -8,7 +8,11 @@ class ProductSalesController < Admin::AdminTemplateController
 
   def checkout
     if params[:customer_id] != "Select a Customer" && params[:date] != ""
-      @sale_list = SaleList.new(date: params[:date], customer_id: params[:customer_id], first_payment: params[:first_payment], note: params[:note], created_by: current_user.id)
+      debt = false
+      if params[:final_total].to_i > params[:first_payment].to_i
+        debt = true
+      end
+      @sale_list = SaleList.new(date: params[:date], customer_id: params[:customer_id], first_payment: params[:first_payment], note: params[:note], created_by: current_user.id, debt: debt)
       if @sale_list.save
         @business_types = ActiveSupport::JSON.decode(params[:cartjson].to_json)
         @business_types["itemList"].each do |business_type|

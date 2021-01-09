@@ -100,7 +100,7 @@
             table +='<tr class="bg-secondary text-white"><td colspan=3>Final Total</td><td class="text-right">'+finalTotal+'</td><td colspan=2></td></tr>';
             table +='<tr><td colspan=2 class="text-right">Customer :</td><td colspan=4><select id="customer_id" class="form-control select2"><option>Select a Customer</option><% @customers.each do |customer| %><option value="<%= customer.id %>"><%= customer.name %></option><% end %></select></td></tr>';
             table +='<tr><td colspan=2 class="text-right">Date :</td><td colspan=4><input id="date_time" type="text" name="date_time" placeholder="Select Date & Time" class="form-control bg-white flatpickr-sale js-flatpickr-sale-dateTime"></td></tr>';
-            table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=4><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
+            table +='<tr><td colspan=2 class="text-right">First Payment :</td><td colspan=4><input id="final_total" type="hidden" value="'+finalTotal+'" name="final_total"><input id="first_payment" type="number" name="first_payment" placeholder="First Payment" class="form-control"></td></tr>';
             table +='<tr><td colspan=2 class="text-right">Note :</td><td colspan=4><textarea id="remark" name="remark" class="form-control" placeholder="Note"></textarea></td></tr>';
             table +='<tr><td colspan=6><button class="btn btn-success btn-block order">Checkout</button></td></tr>';
 
@@ -232,6 +232,7 @@
             var customer_id = $('#customer_id').val();
             var date_time = $('#date_time').val();
             var first_payment = $('#first_payment').val();
+            var final_total = $('#final_total').val();
             if(first_payment == "") {
                 first_payment = 0
             }
@@ -249,7 +250,7 @@
             $.ajax({
                 url: param+"/checkout",
                 type: "POST",
-                data: {"cartjson" : cartjson, "customer_id" : customer_id, "date" : date_time, "first_payment" : first_payment, "note" : remark},
+                data: {"cartjson" : cartjson, "customer_id" : customer_id, "date" : date_time, "final_total" : final_total, "first_payment" : first_payment, "note" : remark},
                 dataType: "json",
                 success: function(data) {
                     if(data.status) {
