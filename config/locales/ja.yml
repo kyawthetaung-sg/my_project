@@ -13,6 +13,10 @@ ja:
       product: "製品"
       product_sale: "製品販売"
       sale_list: "セール一覧"
+      product_sale_list: "商品販売リスト"
+      capital: "資本"
+      debt_capital: "債務資本"
+      general_expense: "一般経費"
       customer: "お客様"
     expense:
       category: "カテゴリー"
@@ -34,12 +38,12 @@ ja:
       sale_list:
         index: "セール一覧"
       general_expense:
-        index: "List of general expense"
-        new: "Make general expense"
-        create: "Make general expense"
-        edit: "Update general expense"
-        update: "Update general expense"
-        show: "Details of general expense"
+        index: "一般経費一覧"
+        new: "一般経費を稼ぐ"
+        create: "一般経費を稼ぐ"
+        edit: "一般経費を更新する"
+        update: "一般経費を更新する"
+        show: "一般経費の詳細"
     user_management:
       role:
         permission: "許可"
@@ -79,7 +83,11 @@ ja:
       category: "カテゴリーを選ぶ"
       product: "商品を選択してください"
     index:
+      capital: "資本"
+      debt_capital: "債務資本"
+      using_capital: "資本の使用"
       initial_capital: "当初の資本金"
+      product_capital: "製品資本"
       remain_capital: "残りの資本"
       sold_out_capital: "販売資本"
       total_capital: "総資本"
@@ -90,6 +98,14 @@ ja:
       profit: "利益"
       sold_out_amount: "売り切れ金額"
       total_profit: "利益総額"
+      general_expense: "一般経費"
+      current_amount: "現在の金額"
+      final_amount: "最終的な」金額"
+      total: "合計"
+      all: "すべて"
+      expense: "費用"
+      income: "所得"
+      remain_amount: "残額"
 
   customers:
     index:

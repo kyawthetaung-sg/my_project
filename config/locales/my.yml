@@ -13,6 +13,10 @@ my:
       product: "ထုတ်ကုန်"
       product_sale: "ကုန်ပစ္စည်းရောင်းချခြင်း"
       sale_list: "အရောင်းစာရင်း"
+      product_sale_list: "ထုတ်ကုန် အရောင်းစာရင်း"
+      capital: "အရင်းအနှီး"
+      debt_capital: "ပေးရန်ရှိသည့် အရင်းအနှီး"
+      general_expense: "အထွေအထွေ အသုံးစရိတ်"
       customer: "ဖောက်သည်"
     expense:
       category: "အမျိုးအစား"
@@ -100,7 +104,11 @@ my:
       category: "အမျိုးအစားရွေးပါ"
       product: "ထုတ်ကုန်တစ်ခုရွေးပါ"
     index:
+      capital: "အရင်းအနှီး"
+      debt_capital: "ပေးရန်ရှိသည့် အရင်းအနှီး"
+      using_capital: "အသုံးပြုထားသော အရင်းအနှီး"
       initial_capital: "ကန ဦး အရင်းအနှီး"
+      product_capital: "ထုတ်ကုန် အရင်းအနှီး"
       remain_capital: "ကျန်ရှိသောအရင်းအနှီး"
       sold_out_capital: "ရောင်းရသောအရင်းအနှီး"
       total_capital: "စုစုပေါင်းအရင်းအနှီး"
@@ -111,6 +119,14 @@ my:
       profit: "အမြတ်အစွန်း"
       sold_out_amount: "ရောင်းလိုက်သောပမာဏ"
       total_profit: "စုစုပေါင်းအမြတ်"
+      general_expense: "အထွေအထွေ အသုံးစရိတ်"
+      current_amount: "လက်ရှိငွေပမာဏ"
+      final_amount: "နောက်ဆုံးရှိမည့်ငွေပမာဏ"
+      total: "စုစုပေါင်း"
+      all: "အားလုံး"
+      expense: "အသုံးစရိတ်"
+      income: "ဝင်ငွေ"
+      remain_amount: "ကျန်ရှိသည့်ငွေပမာဏ"
 
   customers:
     index:

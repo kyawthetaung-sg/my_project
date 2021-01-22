@@ -1,58 +1,63 @@
 <div class="row">
-    <div class="col-lg-6 mb-3">
-        <div class="card">
-            <div class="card-header">
-                <nav class="navbar navbar-index-header">
-                    <div>
-                        <b class="mr-3">Sale Lists</b>
-                        <label>Daily <input type="radio" id="daily-sale" value="day" name="sale" /></label>
-                        <label class="ml-1">Monthly <input type="radio" id="monthly-sale" checked value="month" name="sale" /></label>
-                    </div>
-                    <div id="year-form-sale">
-                        <%= form_tag root_path, method: :get do |f| %>
-                            <%= select_tag :year_sale, options_for_select(@years, selected: params[:year_sale] || Date.current.year) %>
-                            <%= submit_tag "", :id => 'search-submit-sale', :style => "display: none;" %>
-                        <% end %>
-                    </div>
-                </nav>
-            </div>
-            <div class="card-body">
-                <div id="daily-chart-sale" class="table-responsive d-none">
-                    <canvas id="saleListDaily" width="800" height="400"></canvas>
+    <% if has_permission("product_sale_read") || has_permission("sale_list_read") || has_permission("product_read") %>
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <nav class="navbar navbar-index-header">
+                        <div>
+                            <b class="mr-3">Sale Lists</b>
+                            <label>Daily <input type="radio" id="daily-sale" value="day" name="sale" /></label>
+                            <label class="ml-1">Monthly <input type="radio" id="monthly-sale" checked value="month" name="sale" /></label>
+                        </div>
+                        <div id="year-form-sale">
+                            <%= form_tag root_path, method: :get do |f| %>
+                                <%= select_tag :year_sale, options_for_select(@years, selected: params[:year_sale] || Date.current.year) %>
+                                <%= submit_tag "", :id => 'search-submit-sale', :style => "display: none;" %>
+                            <% end %>
+                        </div>
+                    </nav>
                 </div>
-                <div id="monthly-chart-sale">
-                    <canvas id="saleListMonthly" width="400" height="400"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <nav class="navbar navbar-index-header">
-                    <div>
-                        <b class="mr-3">Expenses</b>
-                        <label>Daily <input type="radio" id="daily" value="day" name="show" /></label>
-                        <label class="ml-1">Monthly <input type="radio" id="monthly" checked value="month" name="show" /></label>
+                <div class="card-body">
+                    <div id="daily-chart-sale" class="table-responsive d-none">
+                        <canvas id="saleListDaily" width="800" height="400"></canvas>
                     </div>
-                    <div id="year-form">
-                        <%= form_tag root_path, method: :get do |f| %>
-                            <%= select_tag :year, options_for_select(@years, selected: params[:year] || Date.current.year) %>
-                            <%= submit_tag "", :id => 'search-submit', :style => "display: none;" %>
-                        <% end %>
+                    <div id="monthly-chart-sale">
+                        <canvas id="saleListMonthly" width="400" height="400"></canvas>
                     </div>
-                </nav>
-            </div>
-            <div class="card-body">
-                <div id="daily-chart" class="table-responsive d-none">
-                    <canvas id="expenseListDaily" width="800" height="400"></canvas>
-                </div>
-                <div id="monthly-chart">
-                    <canvas id="expenseListMonthly" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
-    </div>
+    <% end %>
+
+    <% if has_permission("income_read") || has_permission("expense_read") %>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <nav class="navbar navbar-index-header">
+                        <div>
+                            <b class="mr-3">Expenses</b>
+                            <label>Daily <input type="radio" id="daily" value="day" name="show" /></label>
+                            <label class="ml-1">Monthly <input type="radio" id="monthly" checked value="month" name="show" /></label>
+                        </div>
+                        <div id="year-form">
+                            <%= form_tag root_path, method: :get do |f| %>
+                                <%= select_tag :year, options_for_select(@years, selected: params[:year] || Date.current.year) %>
+                                <%= submit_tag "", :id => 'search-submit', :style => "display: none;" %>
+                            <% end %>
+                        </div>
+                    </nav>
+                </div>
+                <div class="card-body">
+                    <div id="daily-chart" class="table-responsive d-none">
+                        <canvas id="expenseListDaily" width="800" height="400"></canvas>
+                    </div>
+                    <div id="monthly-chart">
+                        <canvas id="expenseListMonthly" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
 
 <script>
@@ -88,258 +93,261 @@
         $("#year-form").removeClass("d-none");
     });
 
-    var sale_list_daily = document.getElementById('saleListDaily');
-    var saleListDaily = new Chart(sale_list_daily, {
-        type: 'bar',
-        data: {
-            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
-            datasets: [{
-                label: 'Sale List',
-                borderColor: 'rgb(8, 46, 93)',
-                backgroundColor: 'rgb(8, 46, 93)',
-                data: [
-                        <%= sale_list_with_day(1) %>,
-                        <%= sale_list_with_day(2) %>,
-                        <%= sale_list_with_day(3) %>,
-                        <%= sale_list_with_day(4) %>,
-                        <%= sale_list_with_day(5) %>,
-                        <%= sale_list_with_day(6) %>,
-                        <%= sale_list_with_day(7) %>,
-                        <%= sale_list_with_day(8) %>,
-                        <%= sale_list_with_day(9) %>,
-                        <%= sale_list_with_day(10) %>,
-                        <%= sale_list_with_day(11) %>,
-                        <%= sale_list_with_day(12) %>,
-                        <%= sale_list_with_day(13) %>,
-                        <%= sale_list_with_day(14) %>,
-                        <%= sale_list_with_day(15) %>,
-                        <%= sale_list_with_day(16) %>,
-                        <%= sale_list_with_day(17) %>,
-                        <%= sale_list_with_day(18) %>,
-                        <%= sale_list_with_day(19) %>,
-                        <%= sale_list_with_day(20) %>,
-                        <%= sale_list_with_day(21) %>,
-                        <%= sale_list_with_day(22) %>,
-                        <%= sale_list_with_day(23) %>,
-                        <%= sale_list_with_day(24) %>,
-                        <%= sale_list_with_day(25) %>,
-                        <%= sale_list_with_day(26) %>,
-                        <%= sale_list_with_day(27) %>,
-                        <%= sale_list_with_day(28) %>,
-                        <%= sale_list_with_day(29) %>,
-                        <%= sale_list_with_day(30) %>,
-                        <%= sale_list_with_day(31) %>,
-                ],
-                borderWidth: 1
-            }]
-        },
-        options : {
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Day'
-                    }
+    <% if has_permission("product_sale_read") || has_permission("sale_list_read") || has_permission("product_read") %>
+        var sale_list_daily = document.getElementById('saleListDaily');
+        var saleListDaily = new Chart(sale_list_daily, {
+            type: 'bar',
+            data: {
+                labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+                datasets: [{
+                    label: 'Sale List',
+                    borderColor: 'rgb(8, 46, 93)',
+                    backgroundColor: 'rgb(8, 46, 93)',
+                    data: [
+                            <%= sale_list_with_day(1) %>,
+                            <%= sale_list_with_day(2) %>,
+                            <%= sale_list_with_day(3) %>,
+                            <%= sale_list_with_day(4) %>,
+                            <%= sale_list_with_day(5) %>,
+                            <%= sale_list_with_day(6) %>,
+                            <%= sale_list_with_day(7) %>,
+                            <%= sale_list_with_day(8) %>,
+                            <%= sale_list_with_day(9) %>,
+                            <%= sale_list_with_day(10) %>,
+                            <%= sale_list_with_day(11) %>,
+                            <%= sale_list_with_day(12) %>,
+                            <%= sale_list_with_day(13) %>,
+                            <%= sale_list_with_day(14) %>,
+                            <%= sale_list_with_day(15) %>,
+                            <%= sale_list_with_day(16) %>,
+                            <%= sale_list_with_day(17) %>,
+                            <%= sale_list_with_day(18) %>,
+                            <%= sale_list_with_day(19) %>,
+                            <%= sale_list_with_day(20) %>,
+                            <%= sale_list_with_day(21) %>,
+                            <%= sale_list_with_day(22) %>,
+                            <%= sale_list_with_day(23) %>,
+                            <%= sale_list_with_day(24) %>,
+                            <%= sale_list_with_day(25) %>,
+                            <%= sale_list_with_day(26) %>,
+                            <%= sale_list_with_day(27) %>,
+                            <%= sale_list_with_day(28) %>,
+                            <%= sale_list_with_day(29) %>,
+                            <%= sale_list_with_day(30) %>,
+                            <%= sale_list_with_day(31) %>,
+                    ],
+                    borderWidth: 1
                 }]
-            }
-        }
-    });
-
-    var sale_list_monthly = document.getElementById('saleListMonthly');
-    var saleListMonthly = new Chart(sale_list_monthly, {
-        type: 'bar',
-        data: {
-            labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December'
-                ],
-            datasets: [{
-                label: 'Sale Lists',
-                borderColor: 'rgb(8, 46, 93)',
-                backgroundColor: 'rgb(8, 46, 93)',
-                data: [
-                        <%= sale_list_with_month(1, params[:year_sale]) %>,
-                        <%= sale_list_with_month(2, params[:year_sale]) %>,
-                        <%= sale_list_with_month(3, params[:year_sale]) %>,
-                        <%= sale_list_with_month(4, params[:year_sale]) %>,
-                        <%= sale_list_with_month(5, params[:year_sale]) %>,
-                        <%= sale_list_with_month(6, params[:year_sale]) %>,
-                        <%= sale_list_with_month(7, params[:year_sale]) %>,
-                        <%= sale_list_with_month(8, params[:year_sale]) %>,
-                        <%= sale_list_with_month(9, params[:year_sale]) %>,
-                        <%= sale_list_with_month(10, params[:year_sale]) %>,
-                        <%= sale_list_with_month(11, params[:year_sale]) %>,
-                        <%= sale_list_with_month(12, params[:year_sale]) %>,
-                    ],
-                borderWidth: 1
-            }]
-        },
-    });
-
-    var expense_list_daily = document.getElementById('expenseListDaily');
-    var expenseListDaily = new Chart(expense_list_daily, {
-        type: 'bar',
-        data: {
-            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
-            datasets: [{
-                label: 'Income',
-                borderColor: 'rgb(0, 225, 0)',
-                backgroundColor: 'rgba(40, 167, 69, 1)',
-                data: [
-                        <%= income_amount_with_day(1) %>,
-                        <%= income_amount_with_day(2) %>,
-                        <%= income_amount_with_day(3) %>,
-                        <%= income_amount_with_day(4) %>,
-                        <%= income_amount_with_day(5) %>,
-                        <%= income_amount_with_day(6) %>,
-                        <%= income_amount_with_day(7) %>,
-                        <%= income_amount_with_day(8) %>,
-                        <%= income_amount_with_day(9) %>,
-                        <%= income_amount_with_day(10) %>,
-                        <%= income_amount_with_day(11) %>,
-                        <%= income_amount_with_day(12) %>,
-                        <%= income_amount_with_day(13) %>,
-                        <%= income_amount_with_day(14) %>,
-                        <%= income_amount_with_day(15) %>,
-                        <%= income_amount_with_day(16) %>,
-                        <%= income_amount_with_day(17) %>,
-                        <%= income_amount_with_day(18) %>,
-                        <%= income_amount_with_day(19) %>,
-                        <%= income_amount_with_day(20) %>,
-                        <%= income_amount_with_day(21) %>,
-                        <%= income_amount_with_day(22) %>,
-                        <%= income_amount_with_day(23) %>,
-                        <%= income_amount_with_day(24) %>,
-                        <%= income_amount_with_day(25) %>,
-                        <%= income_amount_with_day(26) %>,
-                        <%= income_amount_with_day(27) %>,
-                        <%= income_amount_with_day(28) %>,
-                        <%= income_amount_with_day(29) %>,
-                        <%= income_amount_with_day(30) %>,
-                        <%= income_amount_with_day(31) %>,
-                ],
-                borderWidth: 1
             },
-            {
-                label: 'Expense',
-                borderColor: 'rgb(200, 0, 0)',
-                backgroundColor: 'rgba(220, 53, 69, 1)',
-                data: [
-                        <%= expense_amount_with_day(1) %>,
-                        <%= expense_amount_with_day(2) %>,
-                        <%= expense_amount_with_day(3) %>,
-                        <%= expense_amount_with_day(4) %>,
-                        <%= expense_amount_with_day(5) %>,
-                        <%= expense_amount_with_day(6) %>,
-                        <%= expense_amount_with_day(7) %>,
-                        <%= expense_amount_with_day(8) %>,
-                        <%= expense_amount_with_day(9) %>,
-                        <%= expense_amount_with_day(10) %>,
-                        <%= expense_amount_with_day(11) %>,
-                        <%= expense_amount_with_day(12) %>,
-                        <%= expense_amount_with_day(13) %>,
-                        <%= expense_amount_with_day(14) %>,
-                        <%= expense_amount_with_day(15) %>,
-                        <%= expense_amount_with_day(16) %>,
-                        <%= expense_amount_with_day(17) %>,
-                        <%= expense_amount_with_day(18) %>,
-                        <%= expense_amount_with_day(19) %>,
-                        <%= expense_amount_with_day(20) %>,
-                        <%= expense_amount_with_day(21) %>,
-                        <%= expense_amount_with_day(22) %>,
-                        <%= expense_amount_with_day(23) %>,
-                        <%= expense_amount_with_day(24) %>,
-                        <%= expense_amount_with_day(25) %>,
-                        <%= expense_amount_with_day(26) %>,
-                        <%= expense_amount_with_day(27) %>,
-                        <%= expense_amount_with_day(28) %>,
-                        <%= expense_amount_with_day(29) %>,
-                        <%= expense_amount_with_day(30) %>,
-                        <%= expense_amount_with_day(31) %>,
-                ],
-                borderWidth: 1
-            }]
-        },
-        options : {
-            scales: {
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Day'
-                    }
+            options : {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Day'
+                        }
+                    }]
+                }
+            }
+        });
+        var sale_list_monthly = document.getElementById('saleListMonthly');
+        var saleListMonthly = new Chart(sale_list_monthly, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                    ],
+                datasets: [{
+                    label: 'Sale Lists',
+                    borderColor: 'rgb(8, 46, 93)',
+                    backgroundColor: 'rgb(8, 46, 93)',
+                    data: [
+                            <%= sale_list_with_month(1, params[:year_sale]) %>,
+                            <%= sale_list_with_month(2, params[:year_sale]) %>,
+                            <%= sale_list_with_month(3, params[:year_sale]) %>,
+                            <%= sale_list_with_month(4, params[:year_sale]) %>,
+                            <%= sale_list_with_month(5, params[:year_sale]) %>,
+                            <%= sale_list_with_month(6, params[:year_sale]) %>,
+                            <%= sale_list_with_month(7, params[:year_sale]) %>,
+                            <%= sale_list_with_month(8, params[:year_sale]) %>,
+                            <%= sale_list_with_month(9, params[:year_sale]) %>,
+                            <%= sale_list_with_month(10, params[:year_sale]) %>,
+                            <%= sale_list_with_month(11, params[:year_sale]) %>,
+                            <%= sale_list_with_month(12, params[:year_sale]) %>,
+                        ],
+                    borderWidth: 1
                 }]
-            }
-        }
-    });
-
-    var expense_list_monthly = document.getElementById('expenseListMonthly');
-    var expenseListMonthly = new Chart(expense_list_monthly, {
-        type: 'bar',
-        data: {
-            labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December'
-                ],
-            datasets: [{
-                label: 'Income',
-                borderColor: 'rgb(0, 225, 0)',
-                backgroundColor: 'rgba(40, 167, 69, 1)',
-                data: [
-                        <%= income_amount_with_month(1, params[:year]) %>,
-                        <%= income_amount_with_month(2, params[:year]) %>,
-                        <%= income_amount_with_month(3, params[:year]) %>,
-                        <%= income_amount_with_month(4, params[:year]) %>,
-                        <%= income_amount_with_month(5, params[:year]) %>,
-                        <%= income_amount_with_month(6, params[:year]) %>,
-                        <%= income_amount_with_month(7, params[:year]) %>,
-                        <%= income_amount_with_month(8, params[:year]) %>,
-                        <%= income_amount_with_month(9, params[:year]) %>,
-                        <%= income_amount_with_month(10, params[:year]) %>,
-                        <%= income_amount_with_month(11, params[:year]) %>,
-                        <%= income_amount_with_month(12, params[:year]) %>,
-                    ],
-                borderWidth: 1
             },
-            {
-                label: 'Expense',
-                borderColor: 'rgb(200, 0, 0)',
-                backgroundColor: 'rgba(220, 53, 69, 1)',
-                data: [
-                        <%= expense_amount_with_month(1, params[:year]) %>,
-                        <%= expense_amount_with_month(2, params[:year]) %>,
-                        <%= expense_amount_with_month(3, params[:year]) %>,
-                        <%= expense_amount_with_month(4, params[:year]) %>,
-                        <%= expense_amount_with_month(5, params[:year]) %>,
-                        <%= expense_amount_with_month(6, params[:year]) %>,
-                        <%= expense_amount_with_month(7, params[:year]) %>,
-                        <%= expense_amount_with_month(8, params[:year]) %>,
-                        <%= expense_amount_with_month(9, params[:year]) %>,
-                        <%= expense_amount_with_month(10, params[:year]) %>,
-                        <%= expense_amount_with_month(11, params[:year]) %>,
-                        <%= expense_amount_with_month(12, params[:year]) %>,
+        });
+    <% end %>
+
+    <% if has_permission("income_read") || has_permission("expense_read") %>
+        var expense_list_daily = document.getElementById('expenseListDaily');
+        var expenseListDaily = new Chart(expense_list_daily, {
+            type: 'bar',
+            data: {
+                labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+                datasets: [{
+                    label: 'Income',
+                    borderColor: 'rgb(0, 225, 0)',
+                    backgroundColor: 'rgba(40, 167, 69, 1)',
+                    data: [
+                            <%= income_amount_with_day(1) %>,
+                            <%= income_amount_with_day(2) %>,
+                            <%= income_amount_with_day(3) %>,
+                            <%= income_amount_with_day(4) %>,
+                            <%= income_amount_with_day(5) %>,
+                            <%= income_amount_with_day(6) %>,
+                            <%= income_amount_with_day(7) %>,
+                            <%= income_amount_with_day(8) %>,
+                            <%= income_amount_with_day(9) %>,
+                            <%= income_amount_with_day(10) %>,
+                            <%= income_amount_with_day(11) %>,
+                            <%= income_amount_with_day(12) %>,
+                            <%= income_amount_with_day(13) %>,
+                            <%= income_amount_with_day(14) %>,
+                            <%= income_amount_with_day(15) %>,
+                            <%= income_amount_with_day(16) %>,
+                            <%= income_amount_with_day(17) %>,
+                            <%= income_amount_with_day(18) %>,
+                            <%= income_amount_with_day(19) %>,
+                            <%= income_amount_with_day(20) %>,
+                            <%= income_amount_with_day(21) %>,
+                            <%= income_amount_with_day(22) %>,
+                            <%= income_amount_with_day(23) %>,
+                            <%= income_amount_with_day(24) %>,
+                            <%= income_amount_with_day(25) %>,
+                            <%= income_amount_with_day(26) %>,
+                            <%= income_amount_with_day(27) %>,
+                            <%= income_amount_with_day(28) %>,
+                            <%= income_amount_with_day(29) %>,
+                            <%= income_amount_with_day(30) %>,
+                            <%= income_amount_with_day(31) %>,
                     ],
-                borderWidth: 1
-            }]
-        },
-    });
+                    borderWidth: 1
+                },
+                {
+                    label: 'Expense',
+                    borderColor: 'rgb(200, 0, 0)',
+                    backgroundColor: 'rgba(220, 53, 69, 1)',
+                    data: [
+                            <%= expense_amount_with_day(1) %>,
+                            <%= expense_amount_with_day(2) %>,
+                            <%= expense_amount_with_day(3) %>,
+                            <%= expense_amount_with_day(4) %>,
+                            <%= expense_amount_with_day(5) %>,
+                            <%= expense_amount_with_day(6) %>,
+                            <%= expense_amount_with_day(7) %>,
+                            <%= expense_amount_with_day(8) %>,
+                            <%= expense_amount_with_day(9) %>,
+                            <%= expense_amount_with_day(10) %>,
+                            <%= expense_amount_with_day(11) %>,
+                            <%= expense_amount_with_day(12) %>,
+                            <%= expense_amount_with_day(13) %>,
+                            <%= expense_amount_with_day(14) %>,
+                            <%= expense_amount_with_day(15) %>,
+                            <%= expense_amount_with_day(16) %>,
+                            <%= expense_amount_with_day(17) %>,
+                            <%= expense_amount_with_day(18) %>,
+                            <%= expense_amount_with_day(19) %>,
+                            <%= expense_amount_with_day(20) %>,
+                            <%= expense_amount_with_day(21) %>,
+                            <%= expense_amount_with_day(22) %>,
+                            <%= expense_amount_with_day(23) %>,
+                            <%= expense_amount_with_day(24) %>,
+                            <%= expense_amount_with_day(25) %>,
+                            <%= expense_amount_with_day(26) %>,
+                            <%= expense_amount_with_day(27) %>,
+                            <%= expense_amount_with_day(28) %>,
+                            <%= expense_amount_with_day(29) %>,
+                            <%= expense_amount_with_day(30) %>,
+                            <%= expense_amount_with_day(31) %>,
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options : {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Day'
+                        }
+                    }]
+                }
+            }
+        });
+
+        var expense_list_monthly = document.getElementById('expenseListMonthly');
+        var expenseListMonthly = new Chart(expense_list_monthly, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                    ],
+                datasets: [{
+                    label: 'Income',
+                    borderColor: 'rgb(0, 225, 0)',
+                    backgroundColor: 'rgba(40, 167, 69, 1)',
+                    data: [
+                            <%= income_amount_with_month(1, params[:year]) %>,
+                            <%= income_amount_with_month(2, params[:year]) %>,
+                            <%= income_amount_with_month(3, params[:year]) %>,
+                            <%= income_amount_with_month(4, params[:year]) %>,
+                            <%= income_amount_with_month(5, params[:year]) %>,
+                            <%= income_amount_with_month(6, params[:year]) %>,
+                            <%= income_amount_with_month(7, params[:year]) %>,
+                            <%= income_amount_with_month(8, params[:year]) %>,
+                            <%= income_amount_with_month(9, params[:year]) %>,
+                            <%= income_amount_with_month(10, params[:year]) %>,
+                            <%= income_amount_with_month(11, params[:year]) %>,
+                            <%= income_amount_with_month(12, params[:year]) %>,
+                        ],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Expense',
+                    borderColor: 'rgb(200, 0, 0)',
+                    backgroundColor: 'rgba(220, 53, 69, 1)',
+                    data: [
+                            <%= expense_amount_with_month(1, params[:year]) %>,
+                            <%= expense_amount_with_month(2, params[:year]) %>,
+                            <%= expense_amount_with_month(3, params[:year]) %>,
+                            <%= expense_amount_with_month(4, params[:year]) %>,
+                            <%= expense_amount_with_month(5, params[:year]) %>,
+                            <%= expense_amount_with_month(6, params[:year]) %>,
+                            <%= expense_amount_with_month(7, params[:year]) %>,
+                            <%= expense_amount_with_month(8, params[:year]) %>,
+                            <%= expense_amount_with_month(9, params[:year]) %>,
+                            <%= expense_amount_with_month(10, params[:year]) %>,
+                            <%= expense_amount_with_month(11, params[:year]) %>,
+                            <%= expense_amount_with_month(12, params[:year]) %>,
+                        ],
+                    borderWidth: 1
+                }]
+            },
+        });
+    <% end %>
 </script>

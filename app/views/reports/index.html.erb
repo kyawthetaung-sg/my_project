@@ -1,148 +1,70 @@
 <div class="row">
-    <div class="col-md-12">
-        <nav>
-            <div class="nav nav-tabs nav-fill " id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="tab-all" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">All</a>
-                <% @categories.each do |category| %>
-                    <a class="nav-item nav-link" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
-                <% end %>
-            </div>
-        </nav>
-        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="tab-all">
-                <%
-                    @sold_out_amount_debt = sold_out_price - sold_out_price_cash
-                    @profit = sold_out_price - (sould_out_capital + general_expense)
-                    @current_ammount = (initial_capital + debt_capital + @profit) - (using_capital + @sold_out_amount_debt)
-                    @final_ammount = (@current_ammount + @sold_out_amount_debt) - debt_capital
-                %>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 mb-5">
-                        <table class="show-table">
-                            <h4 class="report-title"><%= t 'report.index.capital' %></h4>
-                            <tr>
-                                <th><%= t 'report.index.initial_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(initial_capital) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.debt_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(debt_capital) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.profit' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@profit) %></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">+</td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.using_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(using_capital) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">-</td>
-                            </tr>
-                            <tr class="bg-secondary text-white">
-                                <th><%= t 'report.index.current_ammount' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@current_ammount) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">-</td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.debt_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(debt_capital) %></td>
-                            </tr>
-                            <tr class="bg-secondary text-white">
-                                <th><%= t 'report.index.final_ammount' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@final_ammount) %></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mb-5">
-                        <table class="show-table">
-                            <h4 class="report-title"><%= t 'report.index.sold_out_amount' %></h4>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_amount_cash' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(sold_out_price_cash) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">+</td>
-                            </tr>
-                            <tr class="bg-secondary text-white">
-                                <th><%= t 'report.index.total' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(sold_out_price) %></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-md-4 col-sm-6 mb-5">
-                        <table class="show-table">
-                            <h4 class="report-title"><%= t 'report.index.profit' %></h4>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_amount' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(sold_out_price) %></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">-</td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.sold_out_capital' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(sould_out_capital) %></td>
-                            </tr>
-                            <tr>
-                                <th><%= t 'report.index.general_expense' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(general_expense) %></td>
-                            </tr>
-                            <tr class="bg-secondary text-white">
-                                <th><%= t 'report.index.total_profit' %>:</th>
-                                <td class="text-right"><%= number_with_precision_format(@profit) %></td>
-                            </tr>
-                        </table>
-                    </div>
+    <% if has_permission("product_sale_read") || has_permission("sale_list_read") || has_permission("product_read") %>
+        <div class="col-md-12">
+            <nav>
+                <div class="nav nav-tabs nav-fill " id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="tab-all" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false"><%= t 'report.index.all' %></a>
+                    <% @categories.each do |category| %>
+                        <a class="nav-item nav-link" id="tab<%= category.id %>" data-toggle="tab" href="#nav<%= category.id %>" role="tab" aria-controls="nav<%= category.id %>" aria-selected="false"><%= category.name %></a>
+                    <% end %>
                 </div>
-            </div>
-            <% @categories.each do |category| %>
-                <%
-                    @sold_out_amount_debt = sold_out_price_with_category(category) - sold_out_price_cash_with_category(category)
-                    @remain_capital = (initial_capital_with_category(category) + sold_out_price_cash_with_category(category)) - (using_capital_with_category(category) + general_expense_with_category(category) + @sold_out_amount_debt)
-                    @total_capital = initial_capital_with_category(category) + general_expense_with_category(category) - debt_capital_with_category(category)
-                    @profit = (using_capital_with_category(category) + sold_out_price_with_category(category)) - (@total_capital + debt_capital_with_category(category))
-                %>
-                <div class="tab-pane fade" id="nav<%= category.id %>" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="tab-all">
+                    <%
+                        @sold_out_amount_debt = sold_out_price - sold_out_price_cash
+                        @profit = sold_out_price - (sould_out_capital + general_expense)
+                        @current_amount = (initial_capital + debt_capital + @profit) - (using_capital + @sold_out_amount_debt)
+                        @final_amount = (@current_amount + @sold_out_amount_debt) - debt_capital
+                    %>
                     <div class="row">
                         <div class="col-md-4 col-sm-6 mb-5">
                             <table class="show-table">
                                 <h4 class="report-title"><%= t 'report.index.capital' %></h4>
                                 <tr>
-                                    <th><%= t 'report.index.product_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(initial_capital_with_category(category)) %></td>
+                                    <th><%= t 'report.index.initial_capital' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(initial_capital) %></td>
                                 </tr>
                                 <tr>
-                                    <th><%= t 'report.index.general_expense' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(general_expense_with_category(category)) %></td>
+                                    <th><%= t 'report.index.debt_capital' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(debt_capital) %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.profit' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(@profit) %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">+</td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.using_capital' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(using_capital) %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">-</td>
+                                </tr>
+                                <tr class="bg-secondary text-white">
+                                    <th><%= t 'report.index.current_amount' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(@current_amount) %></td>
+                                </tr>
+                                <tr>
+                                    <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right">-</td>
                                 </tr>
                                 <tr>
                                     <th><%= t 'report.index.debt_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(debt_capital_with_category(category)) %></td>
+                                    <td class="text-right"><%= number_with_precision_format(debt_capital) %></td>
                                 </tr>
                                 <tr class="bg-secondary text-white">
-                                    <th><%= t 'report.index.total_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(@total_capital) %></td>
+                                    <th><%= t 'report.index.final_amount' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(@final_amount) %></td>
                                 </tr>
                             </table>
                         </div>
@@ -151,7 +73,7 @@
                                 <h4 class="report-title"><%= t 'report.index.sold_out_amount' %></h4>
                                 <tr>
                                     <th><%= t 'report.index.sold_out_amount_cash' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(sold_out_price_cash_with_category(category)) %></td>
+                                    <td class="text-right"><%= number_with_precision_format(sold_out_price_cash) %></td>
                                 </tr>
                                 <tr>
                                     <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
@@ -162,7 +84,7 @@
                                 </tr>
                                 <tr class="bg-secondary text-white">
                                     <th><%= t 'report.index.total' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(sold_out_price_with_category(category)) %></td>
+                                    <td class="text-right"><%= number_with_precision_format(sold_out_price) %></td>
                                 </tr>
                             </table>
                         </div>
@@ -170,23 +92,19 @@
                             <table class="show-table">
                                 <h4 class="report-title"><%= t 'report.index.profit' %></h4>
                                 <tr>
-                                    <th><%= t 'report.index.using_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(using_capital_with_category(category)) %></td>
-                                </tr>
-                                <tr>
                                     <th><%= t 'report.index.sold_out_amount' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(sold_out_price_with_category(category)) %></td>
+                                    <td class="text-right"><%= number_with_precision_format(sold_out_price) %></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right">-</td>
                                 </tr>
                                 <tr>
-                                    <th><%= t 'report.index.total_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(@total_capital) %></td>
+                                    <th><%= t 'report.index.sold_out_capital' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(sould_out_capital) %></td>
                                 </tr>
                                 <tr>
-                                    <th><%= t 'report.index.debt_capital' %>:</th>
-                                    <td class="text-right"><%= number_with_precision_format(debt_capital_with_category(category)) %></td>
+                                    <th><%= t 'report.index.general_expense' %>:</th>
+                                    <td class="text-right"><%= number_with_precision_format(general_expense) %></td>
                                 </tr>
                                 <tr class="bg-secondary text-white">
                                     <th><%= t 'report.index.total_profit' %>:</th>
@@ -196,35 +114,122 @@
                         </div>
                     </div>
                 </div>
-            <% end %>
+                <% @categories.each do |category| %>
+                    <%
+                        @sold_out_amount_debt = sold_out_price_with_category(category) - sold_out_price_cash_with_category(category)
+                        @remain_capital = (initial_capital_with_category(category) + sold_out_price_cash_with_category(category)) - (using_capital_with_category(category) + general_expense_with_category(category) + @sold_out_amount_debt)
+                        @total_capital = initial_capital_with_category(category) + general_expense_with_category(category) - debt_capital_with_category(category)
+                        @profit = (using_capital_with_category(category) + sold_out_price_with_category(category)) - (@total_capital + debt_capital_with_category(category))
+                    %>
+                    <div class="tab-pane fade" id="nav<%= category.id %>" role="tabpanel" aria-labelledby="tab<%= category.id %>">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <table class="show-table">
+                                    <h4 class="report-title"><%= t 'report.index.capital' %></h4>
+                                    <tr>
+                                        <th><%= t 'report.index.product_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(initial_capital_with_category(category)) %></td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.general_expense' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(general_expense_with_category(category)) %></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-right">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.debt_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(debt_capital_with_category(category)) %></td>
+                                    </tr>
+                                    <tr class="bg-secondary text-white">
+                                        <th><%= t 'report.index.total_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(@total_capital) %></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <table class="show-table">
+                                    <h4 class="report-title"><%= t 'report.index.sold_out_amount' %></h4>
+                                    <tr>
+                                        <th><%= t 'report.index.sold_out_amount_cash' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(sold_out_price_cash_with_category(category)) %></td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.sold_out_amount_debt' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(@sold_out_amount_debt) %></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-right">+</td>
+                                    </tr>
+                                    <tr class="bg-secondary text-white">
+                                        <th><%= t 'report.index.total' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(sold_out_price_with_category(category)) %></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-5">
+                                <table class="show-table">
+                                    <h4 class="report-title"><%= t 'report.index.profit' %></h4>
+                                    <tr>
+                                        <th><%= t 'report.index.using_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(using_capital_with_category(category)) %></td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.sold_out_amount' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(sold_out_price_with_category(category)) %></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-right">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.total_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(@total_capital) %></td>
+                                    </tr>
+                                    <tr>
+                                        <th><%= t 'report.index.debt_capital' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(debt_capital_with_category(category)) %></td>
+                                    </tr>
+                                    <tr class="bg-secondary text-white">
+                                        <th><%= t 'report.index.total_profit' %>:</th>
+                                        <td class="text-right"><%= number_with_precision_format(@profit) %></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
         </div>
-    </div>
-    <div class="col-md-12 mt-3">
-        <div class="col-md-4 col-sm-6 mb-5">
-            <div class="card">
-                <div class="card-header">
-                    <%= t 'report.index.expense' %>
-                </div>
-                <div class="card-body">
-                    <table class="show-table">
-                        <tr>
-                            <th><%= t 'report.index.income' %>:</th>
-                            <td class="text-right"><%= number_with_precision_format(income_amount) %></td>
-                        </tr>
-                        <tr>
-                            <th><%= t 'report.index.expense' %>:</th>
-                            <td class="text-right"><%= number_with_precision_format(expense_amount) %></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-right">-</td>
-                        </tr>
-                        <tr class="bg-secondary text-white">
-                            <th><%= t 'report.index.remain_amount' %>:</th>
-                            <td class="text-right"><%= number_with_precision_format(income_amount - expense_amount) %></td>
-                        </tr>
-                    </table>
+    <% end %>
+
+    <% if has_permission("income_read") || has_permission("expense_read") %>
+        <div class="col-md-12 mt-3">
+            <div class="col-md-4 col-sm-6 mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <%= t 'report.index.expense' %>
+                    </div>
+                    <div class="card-body">
+                        <table class="show-table">
+                            <tr>
+                                <th><%= t 'report.index.income' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(income_amount) %></td>
+                            </tr>
+                            <tr>
+                                <th><%= t 'report.index.expense' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(expense_amount) %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right">-</td>
+                            </tr>
+                            <tr class="bg-secondary text-white">
+                                <th><%= t 'report.index.remain_amount' %>:</th>
+                                <td class="text-right"><%= number_with_precision_format(income_amount - expense_amount) %></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <% end %>
 </div>

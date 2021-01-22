@@ -44,6 +44,10 @@ en:
       product: "Product"
       product_sale: "Product Sale"
       sale_list: "Sale List"
+      product_sale_list: "Product Sale List"
+      capital: "Capital"
+      debt_capital: "Debt Capital"
+      general_expense: "General Expense"
       customer: "Customer"
     expense:
       capital: "Capital"
@@ -132,7 +136,11 @@ en:
       category: "Select a categroy"
       product: "Select a product"
     index:
+      capital: "Capital"
+      debt_capital: "Debt Capital"
+      using_capital: "Using Capital"
       initial_capital: "Initial Capital"
+      product_capital: "Product Capital"
       remain_capital: "Remain Capital"
       sold_out_capital: "Capital for sale"
       total_capital: "Total Capital"
@@ -143,6 +151,14 @@ en:
       profit: "Profit"
       sold_out_amount: "Amount of sales"
       total_profit: "Total Profit"
+      general_expense: "General Expense"
+      current_amount: "Current Amount"
+      final_amount: "Final Amount"
+      total: "Total"
+      all: "All"
+      expense: "Expense"
+      income: "Income"
+      remain_amount: "Remain Amount"
 
   customers:
     index:
