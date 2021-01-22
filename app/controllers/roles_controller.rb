@@ -1,6 +1,22 @@
 class RolesController < Admin::AdminTemplateController
   before_action :set_role, only: [:show, :edit, :update, :destroy, :permission]
+  before_action :permission_role
+  # check direct accept url has permission or not
+  def permission_role
+    unless has_permission("role_read")
+      @title = "Accept Deny"
+      render template: "layouts/error_page"
+    end
+  end
 
+  def has_permission(name)
+    role = current_user.role
+    if role.id == 1
+        return true
+    else
+        role.permissions.pluck(:name).include? name
+    end
+  end
   # GET /roles
   # GET /roles.json
   def index

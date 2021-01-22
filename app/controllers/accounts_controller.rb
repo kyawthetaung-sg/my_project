@@ -1,6 +1,22 @@
 class AccountsController < Admin::AdminTemplateController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :permission_account
+  # check direct accept url has permission or not
+  def permission_account
+    unless has_permission("account_read")
+      @title = "Accept Deny"
+      render template: "layouts/error_page"
+    end
+  end
 
+  def has_permission(name)
+    role = current_user.role
+    if role.id == 1
+        return true
+    else
+        role.permissions.pluck(:name).include? name
+    end
+  end
   # GET /accounts
   # GET /accounts.json
   def index
